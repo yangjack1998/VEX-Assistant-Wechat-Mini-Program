@@ -1,11 +1,14 @@
 {
   "pages": [
+    "mainPage/main",
+    "ruleQuiz/ruleQuiz",
     "index/index"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "navigationBarTitleText": "web-view",
+    "navigationBarTitleText": "VEX Change Up助手",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"

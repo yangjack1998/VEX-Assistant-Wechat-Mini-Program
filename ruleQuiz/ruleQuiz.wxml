@@ -1,0 +1,16 @@
+<!--ruleQuiz/ruleQuiz.wxml-->
+<view class="container">
+
+<view>{{question}}</view>
+<button bindtap="choose">option1</button>
+<button bindtap="choose">option2</button>
+<button bindtap="choose">option3</button>
+<button bindtap="choose">option4</button>
+
+
+
+
+
+
+</view>
+

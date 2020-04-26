@@ -1,0 +1,15 @@
+<view class="container">
+  <view class='row1' style="flex-direction:row;">
+    <navigator class="tool" id="t1" url='../score/score' open-type='navigate'>
+      <text>{{socringTool}}</text>
+    </navigator>
+    <navigator class="tool" id="t2" url='../ruleQuiz/ruleQuiz' open-type='navigate'>
+      <text>{{ruleQuiz}}</text>
+      </navigator>
+  </view>
+  <view class='row2' style="flex-direction:row;">
+  <navigator class="tool" id="t3" url='../search/search' open-type='navigate'>
+      <text>{{matchHelper}}</text>
+      </navigator>
+  </view>
+</view>

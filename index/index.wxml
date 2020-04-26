@@ -1,5 +1,5 @@
 <view class="page-body">
   <view class="page-section page-section-gap">
-    <web-view src="https://mp.weixin.qq.com/"></web-view>
+    <view>Hello World</view>
   </view>
 </view>
