@@ -66,7 +66,7 @@ Page({
 
   choose(event) {
     this.setData({
-      question:"赵笑影"
+      question:"KnowledgeCheck01"
     })
     
   }
