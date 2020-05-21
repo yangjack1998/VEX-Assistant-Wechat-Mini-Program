@@ -18,7 +18,7 @@ Page({
     options:[],
     answers:[],
 
-
+    hints:[],
     pictures:[],
     picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/1.jpg",
     status:""
@@ -48,7 +48,8 @@ Page({
         questions:this.data.questions.concat(element.question),
         options:this.data.options.concat(element.options),
         answers:this.data.answers.concat(element.answer),
-        pictures:this.data.pictures.concat(element.picture)
+        hints:this.data.hints.concat(element.hint),
+        pictures:this.data.pictures.concat(element.picture),
       })
     });
    console.log(this.data.questions)
@@ -105,7 +106,6 @@ Page({
 
   update(){
     this.setData({
-      index:this.index+1,
       picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
     })
   },
@@ -114,38 +114,58 @@ Page({
   choose0(event1) {
     if(this.data.options[this.data.index*4]==this.data.answers[this.data.index]){
       this.setData({
-        score:this.data.score+5,
+        correct:this.data.correct+1,
+        status:"回答正确！"   
       })
-    }
-    this.update()
+    }else{
+      this.setData({
+        wrong:this.data.wrong+1,
+        status:this.data.hints[this.data.index]       
+      })
+      }
   },
 
   choose1(event1) {
     if(this.data.options[this.data.index*4+1]==this.data.answers[this.data.index]){
       this.setData({
-        score:this.data.score+5,
+        correct:this.data.correct+1,
+        status:"回答正确！"   
       })
-    }
-    this.update()
+    }else{
+      this.setData({
+        wrong:this.data.wrong+1,
+        status:this.data.hints[this.data.index]       
+      })
+      }
   },
 
   choose2(event1) {
     if(this.data.options[this.data.index*4+2]==this.data.answers[this.data.index]){
       this.setData({
-        score:this.data.score+5,
+        correct:this.data.correct+1,
+        status:"回答正确！"   
       })
-    }
-    this.update()
+    } else{
+      this.setData({
+        wrong:this.data.wrong+1,
+        status:this.data.hints[this.data.index]       
+      })
+      }
     
   },
 
   choose3(event) {
     if(this.data.options[this.data.index*4+3]==this.data.answers[this.data.index]){
       this.setData({
-        score:this.data.score+5,
+        correct:this.data.correct+1,
+        status:"回答正确！"   
+      }) 
+    }  else{
+      this.setData({
+        wrong:this.data.wrong+1,
+        status:this.data.hints[this.data.index]       
       })
-    }
-    this.update()
+      }
   },
 
   next(){

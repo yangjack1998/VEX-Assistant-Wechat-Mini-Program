@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/ruleQuiz/ruleQuiz",
+    "pages/rulePractice/rulePractice",
     "pages/mainPage/main",
     "pages/dataSet/dataSet",
     "pages/test/test",
