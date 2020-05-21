@@ -1,0 +1,5 @@
+<!--miniprogram/pages/test.wxml-->
+<text>看看能不能看pdf</text>
+<view>
+<button bindtap="showPDF">显示</button></view>
+

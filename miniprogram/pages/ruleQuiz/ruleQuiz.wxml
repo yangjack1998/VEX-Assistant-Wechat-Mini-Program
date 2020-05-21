@@ -1,0 +1,21 @@
+<!--ruleQuiz/ruleQuiz.wxml-->
+<view class="container">
+
+<view style="text-align: center; font-size: 35rpx;font-weight: bold;">{{question[index]}}</view>
+<image  style="width:100%;" mode="aspectFit" src="{{picPath}}"></image>
+<button plain="true" bindtap="choose0">{{options[index*4]}}</button>
+<button plain="true" bindtap="choose1">{{options[index*4+1]}}</button>
+<button plain="true" bindtap="choose2">{{options[index*4+2]}}</button>
+<button plain="true" bindtap="choose3">{{options[index*4+3]}}</button>
+<view style="text-align: center; font-size: 32rpx;color: red;">{{status}}</view>
+
+  <view class='row1' style="flex-direction:row;">
+    <button bindtap="last">上一题</button>
+    <button bindtap="next">{{nextQuestion}}</button>
+  </view>
+<view style="margin-top:20rpx; text-align: center; font-size: 32rpx;color: red;">{{result}}</view>
+
+
+
+</view>
+

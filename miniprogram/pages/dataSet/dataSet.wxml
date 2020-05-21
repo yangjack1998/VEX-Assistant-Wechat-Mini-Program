@@ -1,0 +1,7 @@
+<!--pages/dataSet/dataSet.wxml-->
+<view class="container">
+<button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="0" disabled="{{disable}}" >竞赛手册（英文）</button>
+<button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="1" disabled="{{disable}}">竞赛手册（中文）</button>
+<button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="2" disabled="{{disable}}">技能赛规则（英文）</button>
+<button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="3" disabled="{{disable}}">技能赛规则（中文）</button>
+</view>

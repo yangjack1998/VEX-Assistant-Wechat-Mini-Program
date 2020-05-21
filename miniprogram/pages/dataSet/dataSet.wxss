@@ -1,0 +1,15 @@
+/* pages/dataSet/dataSet.wxss */
+
+.container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  justify-content: center;
+  padding: 0;
+}
+
+.pdf{
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+
