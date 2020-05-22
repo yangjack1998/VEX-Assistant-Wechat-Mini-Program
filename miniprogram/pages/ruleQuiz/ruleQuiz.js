@@ -7,7 +7,6 @@ Page({
    * Page initial data
    */
   data: {
-    nextQuestion:"下一题",
     result:"",
     index:0,
     correct:1,
@@ -17,20 +16,21 @@ Page({
     questions:[],
     options:[],
     answers:[],
-
-
     pictures:[],
     picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/1.jpg",
     status:""
-   
-
+  
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: async function (options) {
-    
+    wx.showToast({
+      title: '加载中...',
+      icon:"loading",
+      duration: 2000
+    })
     let quiz = await db.collection("quiz")
     .get()
 
@@ -39,7 +39,6 @@ Page({
       const random = Math.floor(Math.random() * (i + 1));
       [quizData[i], quizData[random]] = [quizData[random], quizData[i]];
     }
-
 
     console.log(quiz);
 
@@ -51,7 +50,11 @@ Page({
         pictures:this.data.pictures.concat(element.picture)
       })
     });
-   console.log(this.data.questions)
+
+    this.setData({
+      picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
+    })
+   console.log(this.data.pictures)
   },
 
   /**
@@ -104,10 +107,16 @@ Page({
   },
 
   update(){
+    if(this.data.index+1==this.data.questions.length){
+      this.end()
+    } else{
     this.setData({
-      index:this.index+1,
-      picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
+      index:this.data.index+1,
     })
+    this.setData({
+      picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
+    })
+  }
   },
 
 
@@ -136,7 +145,6 @@ Page({
       })
     }
     this.update()
-    
   },
 
   choose3(event) {
@@ -148,52 +156,6 @@ Page({
     this.update()
   },
 
-  next(){
-    if(this.data.index<this.data.questions.length-1){
-    this.setData({
-      index: this.data.index+1,
-      status:"",
-      nextQuestion:"下一题"
-    })
-   } 
-   else if(this.data.index==this.data.questions.length-1&&this.data.lookResult==0){
-    this.setData({
-      nextQuestion:"查看结果",
-      lookResult:1
-    })
-   } else{
-    this.setData({
-      lookResult:0
-    })
-    
-    if(this.data.correct-this.data.wrong>5){
-    this.setData({
-      result:"恭喜！看上去你已经很了解规则了"
-    })
-  }  else if(this.data.correct-this.data.wrong>0){
-    this.setData({
-      result:"恭喜！看上去你对规则掌握的还不错"
-    })} else{
-      this.setData({
-      result:"恭喜完成！但你看上去还需要再多研究研究规则"
-      })
-    }
-  
-   }
-   this.update()
-  },
-
-  last(){  
-  if(this.data.index>0){
-    this.setData({
-      index: this.data.index-1,
-      status:"",
-      nextQuestion:"下一题",
-      result:""
-    })
-  }
-  this.update()
-  },
 
   clickImg: function(e){
     var imgUrl = this.data.picPath;
@@ -203,6 +165,24 @@ Page({
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },
+    })
+  },
+
+  end(){
+    let that = this
+    console.log("end")
+    wx.navigateTo({
+      url: '../leaderboard/leaderboard',
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function(data) {
+          console.log(data)
+        }
+      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data:that.data.score})
+      }
     })
   }
 
