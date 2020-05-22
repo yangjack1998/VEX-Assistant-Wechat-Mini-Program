@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/mainPage/main",
+    "pages/ruleChoose/ruleChoose",
     "pages/leaderboard/leaderboard",
     "pages/ruleQuiz/ruleQuiz",
     "pages/rulePractice/rulePractice",
-    "pages/mainPage/main",
     "pages/dataSet/dataSet",
     "pages/test/test",
     "pages/index/index",

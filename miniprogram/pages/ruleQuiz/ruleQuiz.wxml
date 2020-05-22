@@ -7,6 +7,5 @@
 <button plain="true" bindtap="choose1">{{options[index*4+1]}}</button>
 <button plain="true" bindtap="choose2">{{options[index*4+2]}}</button>
 <button plain="true" bindtap="choose3">{{options[index*4+3]}}</button>
-<view style="text-align: center; font-size: 32rpx;color: red;">{{score}}</view>
 </view>
 

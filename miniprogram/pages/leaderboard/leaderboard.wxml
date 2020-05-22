@@ -1,7 +1,7 @@
 <!--pages/leaderboard/leaderboard.wxml-->
 <text style="font-size:80rpx">你的分数是:</text>
 <text style="text-align: center; font-size: 150rpx; font-weight: bold;">{{score}}</text>
-<input bindinput="bindKeyInput" auto-focus placeholder="你的昵称/队伍编号" maxlength="10" value="{{inputValue}}" disabled="{{disInput}}" />
+<input bindinput="bindKeyInput" placeholder="你的昵称/队伍编号" maxlength="10" value="{{inputValue}}" disabled="{{disInput}}" />
 <button bindtap="submit" disabled="{{disable}}">查看排名</button>
 
 <view class="{{showView?'header_view_show':'header_view_hide'}}">

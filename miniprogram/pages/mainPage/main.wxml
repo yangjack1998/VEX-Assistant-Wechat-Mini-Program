@@ -3,7 +3,7 @@
     <navigator class="tool" id="t1" url='../score/score' open-type='navigate'>
       <text>{{socringTool}}</text>
     </navigator>
-    <navigator class="tool" id="t2" url='../ruleQuiz/ruleQuiz' open-type='navigate'>
+    <navigator class="tool" id="t2" url='../ruleChoose/ruleChoose' open-type='navigate'>
       <text>{{ruleQuiz}}</text>
       </navigator>
   </view>
