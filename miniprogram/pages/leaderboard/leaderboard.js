@@ -14,6 +14,7 @@ Page({
     disInput:false,
     old:false,
     id:"",
+    recordID:"",
     rank:[]
   },
 
@@ -21,6 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     let that = this
     console.log(options.query)
     const eventChannel = this.getOpenerEventChannel()
@@ -39,21 +41,9 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: async function () {
+  onReady:  function () {
     this.onGetOpenid()
-    let old = await db.collection("rank").where({
-      _openid:app.globalData.openid
-    }).get()
-    console.log(old)
-    if(old.data.length>0){
-      this.setData({
-        inputValue:old.data[0].name,
-        disInput:true,
-        disable:false,
-        old:true,
-        id:old.data[0]._id
-      })
-    }
+
   },
 
   /**
@@ -100,12 +90,17 @@ Page({
 
   onGetOpenid: function() {
     // 调用云函数
+    let that = this
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
+        that.setData({
+          id:res.result.openid
+        })
+        that.checkOld()
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
@@ -131,10 +126,10 @@ Page({
       }
   },
 
-  submit : async function (e){
+  submit :async function (e){
     let that = this
     if(!this.data.old){
-      db.collection('rank')
+      await db.collection('rank')
         .add({
           data:
             {
@@ -144,10 +139,18 @@ Page({
         
         })
     } else{
-      db.collection('rank').doc(this.data.id).update({
+      console.log("update: "+this.data.id)
+      await db.collection('rank').doc(this.data.recordID).update({
         data:{
           score:that.data.score
+        },
+        success: function(res) {
+          console.log(res.data)
+        },
+        fail: function(res){
+          console.log("fail")
         }
+
       })
     }
     this.printRank()
@@ -158,11 +161,37 @@ Page({
     this.setData({
       showView: true
     })
+   
     let that = this
     let all = await db.collection('rank').get()
-    all = all.data.sort((a, b) => (a.score > b.score) ? 1 : -1)
+    console.log(all)
+    all = all.data.sort((a, b) => (a.score < b.score) ? 1 : -1)
+    console.log(all)
     this.setData({
-      rank:all
+      rank:all,
+      disable:true,
+      disInput:true
+
     })
-  }
+  },
+
+  checkOld: async function () {
+    let old = await db.collection("rank").where({
+      _openid: this.data.id
+    }).get()
+    
+  
+    if(old.data.length>0){
+      this.setData({
+        inputValue:old.data[0].name,
+        disInput:true,
+        disable:false,
+        old:true,
+        recordID:old.data[0]._id
+      })
+      this.submit()
+    }
+  },
+
+  
 })
