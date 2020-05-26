@@ -1,0 +1,14 @@
+<!--pages/scoreTool/scoreTool.wxml-->
+<view class="container">
+  <view class='row1' style="flex-direction:row;" wx:for="{{row}}" wx:for-item="item">
+    <view class="col" wx:for="{{item}}">
+        <radio-group  bindchange="radioChange">
+          <radio value="6" checked="false" color="blue"/>
+          <radio value="-6" checked="false" color="red"/>
+          <radio value="0" checked="true" color="grey"/>
+        </radio-group>
+    </view>
+  </view>
+</view>
+
+
