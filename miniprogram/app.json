@@ -1,10 +1,12 @@
 {
   "pages": [ 
+    
+    
     "pages/mainPage/main",
-    "pages/scoreTool/scoreTool",
+    "pages/ruleQuiz/ruleQuiz",
     "pages/ruleChoose/ruleChoose",
     "pages/leaderboard/leaderboard",
-    "pages/ruleQuiz/ruleQuiz",
+    "pages/scoreTool/scoreTool",
     "pages/rulePractice/rulePractice",
     "pages/dataSet/dataSet",
     "pages/test/test",

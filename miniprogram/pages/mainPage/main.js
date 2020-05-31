@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    socringTool: "计分工具\n(开发中)",
+    socringTool: "计分工具",
     ruleQuiz: "规则测验",
     information: "资料查询"
   },
