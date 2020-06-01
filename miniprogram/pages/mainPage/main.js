@@ -10,8 +10,6 @@ Page({
     active: 'home',
     current: 'mainpage',
     activeKey: 0,
-
-
     row:[[1,2,3],[1,2,3],[1,2,3]],
     auto: [{
       name: 'red',
@@ -45,7 +43,9 @@ Page({
     ],
     autoBackRed:0.2,
     autoBackBlue:0.2,
-    autoWinner:"none"
+    autoWinner:"none",
+    path:[],
+    disable:true
   },
 
   /**
