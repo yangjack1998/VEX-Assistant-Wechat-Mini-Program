@@ -7,6 +7,6 @@
 <button wx:if="{{options[index*4+1].length>0}}" plain="true" bindtap="choose1">{{options[index*4+1]}}</button>
 <button wx:if="{{options[index*4+2].length>0}}" plain="true" bindtap="choose2">{{options[index*4+2]}}</button>
 <button wx:if="{{options[index*4+3].length>0}}" plain="true" bindtap="choose3">{{options[index*4+3]}}</button>
-<view>{{countDownNum}}</view>
+<view>{{timecount}}</view>
 </view>
 
