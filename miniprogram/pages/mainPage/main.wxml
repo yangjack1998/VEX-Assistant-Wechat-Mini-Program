@@ -22,24 +22,26 @@
     <view class="container">
     <view class='row_0'>
       <view class="title" >
-        <view>红方总球数</view>
-        <view>蓝方总球数</view>
+        <view style="color: rgba(250, 0, 0, 0.6)">红方总球数</view>
+        <view style="color: rgba(0, 0, 250, 0.6)">蓝方总球数</view>
       </view>
     </view>
 
     <view class='row_1'>
-      <view class="col" >
-          <button  bindtap="changeBallNum" id="redSub"> - </button>
-          <text style="font-weight: bold;color:red;">{{redBall}}</text>
-          <button  bindtap="changeBallNum" id="redAdd"> + </button>
-
-          <button  bindtap="changeBallNum" id="blueSub"> - </button>
-          <text style="font-weight: bold;color:blue;">{{blueBall}}</text>
-          <button  bindtap="changeBallNum" id="blueAdd"> + </button>
+      <view class="cols" >
+        <button  bindtap="changeBallNum" id="redSub" size="mini"> - </button>
+        <button size="mini" hover-class="none">{{redBall}}</button>
+        <button  bindtap="changeBallNum" id="redAdd" size="mini"> + </button>
+      </view>
+      <view class="cols" >
+          <button  bindtap="changeBallNum" id="blueSub" size="mini"> - </button>
+          <button size="mini" hover-class="none">{{blueBall}}</button>
+          <button  bindtap="changeBallNum" id="blueAdd" size="mini"> + </button>
         </view>
     </view>
 
-      <view class='row_1' style="flex-direction:row;" wx:for="{{row}}" wx:for-item="item" wx:for-index="idx">
+    <view class='site'>
+      <view class='rows' style="flex-direction:row;" wx:for="{{row}}" wx:for-item="item" wx:for-index="idx">
         <view class="col" wx:for="{{item}}" wx:for-index="idx2">
             <radio-group  bindchange="radioChange">
               <radio class="redGoal" value="{{idx}}{{idx2}}r"  color="red"/>
@@ -48,15 +50,15 @@
             </radio-group>
         </view>
       </view>
-
+    </view>
 
     <view class='row_2' style="flex-direction:row;">
-      <text style="background-color: rgba(255, 0, 0, 0.8);" class='Score'>{{redScore}}
+      <text class='redScore'>{{redScore}}
       </text>
-      <text style="background-color: rgba(0, 0, 255, 0.8);" class='Score'>{{blueScore}}
+      <text class='blueScore'>{{blueScore}}
       </text>
     </view>
-    <view class='row_2' style="flex-direction:row;margin: 0rpx;padding:0;height:auto;">
+    <view class='row_2' style="flex-direction:row">
       <button style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
       <button style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
     </view>
