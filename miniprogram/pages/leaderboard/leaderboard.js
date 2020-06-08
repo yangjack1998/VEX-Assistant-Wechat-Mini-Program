@@ -13,27 +13,35 @@ Page({
     disable:true,
     disInput:false,
     old:false,
-    id:"",
+    id:'',
     recordID:"",
-    rank:[]
+    rank:[],
+    time:0,
+    timeShow:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    let that = this
-    console.log(options.query)
-    const eventChannel = this.getOpenerEventChannel()
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', function(data) {
-      console.log(data)
-      that.setData({
-        score:data.data
-      })
+    this.setData({
+      score:app.globalData.score,
+      id:app.globalData.openid,
+      time:app.globalData.time,
+      timeShow:app.globalData.timeShow,
     })
-
+    //let that = this
+    // console.log(options.query)
+    // const eventChannel = this.getOpenerEventChannel()
+    // // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    // eventChannel.on('acceptDataFromOpenerPage', function(data) {
+    //   console.log(data)
+    //   that.setData({
+    //     score:data.data,
+    //     time:data.time
+    //   })
+    // })
+    this.checkOld()
 
 
   },
@@ -42,8 +50,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady:  function () {
-    this.onGetOpenid()
-
+   
   },
 
   /**
@@ -88,25 +95,6 @@ Page({
 
   },
 
-  onGetOpenid: function() {
-    // 调用云函数
-    let that = this
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        that.setData({
-          id:res.result.openid
-        })
-        that.checkOld()
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-      }
-    })
-  },
 
   bindKeyInput: function (e) {
     let input = this.data.inputValue
@@ -134,26 +122,41 @@ Page({
           data:
             {
             name:that.data.inputValue,
-            score:that.data.score
+            score:that.data.score,
+            time:that.data.time,
+            timeShow:that.data.timeShow
+          },
+          success:function(res) {
+            that.printRank()
           }
         
         })
     } else{
       console.log("update: "+this.data.id)
-      await db.collection('rank').doc(this.data.recordID).update({
-        data:{
-          score:that.data.score
-        },
-        success: function(res) {
-          console.log(res.data)
-        },
-        fail: function(res){
-          console.log("fail")
-        }
+      let oldScore = await (await db.collection('rank').doc(this.data.recordID).get()).data.score
+      let oldTime = await (await db.collection('rank').doc(this.data.recordID).get()).data.time
+      console.log("oldScore: "+oldScore)
+      if(this.data.score>oldScore||(this.data.score==oldScore&&this.data.time<oldTime)){
+        await db.collection('rank').doc(this.data.recordID).update({
+          data:{
+            score:that.data.score,
+            time:that.data.time,
+            timeShow:that.data.timeShow
+          },
+          success: function(res) {
+            console.log(res.data)
+            that.printRank()
+          },
+          fail: function(res){
+            console.log("fail")
+          }
 
-      })
+        })
+      }  else{
+        this.printRank()
+      }
     }
-    this.printRank()
+    //this.printRank()
   },
 
 
@@ -165,7 +168,14 @@ Page({
     let that = this
     let all = await db.collection('rank').get()
     console.log(all)
-    all = all.data.sort((a, b) => (a.score < b.score) ? 1 : -1)
+    all = all.data.sort(function(a,b){
+      var value1 = a.score,
+          value2 = b.score;
+      if(value1 === value2){
+          return a.time - b.time;
+      }
+      return value2 - value1;
+  })
     console.log(all)
     this.setData({
       rank:all,
@@ -176,6 +186,7 @@ Page({
   },
 
   checkOld: async function () {
+    console.log("tt"+this.data.id)
     let old = await db.collection("rank").where({
       _openid: this.data.id
     }).get()

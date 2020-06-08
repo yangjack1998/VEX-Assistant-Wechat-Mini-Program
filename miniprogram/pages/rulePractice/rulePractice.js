@@ -1,6 +1,7 @@
 // ruleQuiz/ruleQuiz.js
 const db = wx.cloud.database()
 const _ =db.command
+const app = getApp()
 Page({
   
   /**
@@ -59,7 +60,7 @@ Page({
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    //console.log(app.globalData.openid)
   },
 
   /**

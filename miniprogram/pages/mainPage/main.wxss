@@ -1,6 +1,142 @@
 /* pages/main/main.wxss */
+@import "../../icon/css/font-awesome.min.wxss";
 
-.row1,.row2 {
+.totalcontainer {
+  height: 100%;
+  width: 100%;
+}
+.container {
+  margin-top: 50rpx;
+  height: 100%;
+  width: 100%;
+  /* position: absolute; */
+  justify-content: center;
+  padding: 0;
+}
+.tabs{
+  height: 100%;
+}
+.row1 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.tool {
+  font-size: 50rpx;
+  margin: 15%;
+}
+
+
+.content{
+  width:90%;
+  padding: 10rpx;
+}
+
+/* pages/scoreTool/scoreTool.wxss */
+.site{
+  width: 90%;
+  /* padding-bottom: 90%;
+  height: 0;
+  justify-content:center;
+  align-items: center; */
+}
+
+.rows{
+  display: flex;
+}
+
+.row_1 {
+  display: flex;
+  height: 10%;
+  width: 100%;
+}
+
+.row_0{
+  display: flex;
+  height: 5%;
+  width: 100%;
+}
+
+.row_2 {
+  width: 100%;
+  display: flex;
+  margin-top: 30rpx;
+  text-align: center;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+.auto{
+  color: white;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.col {
+  font-size:40rpx;
+  font-stretch: wider;
+  width: 100%;
+  height: 100%;
+
+  display:flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.cols {
+  font-size:40rpx;
+  font-stretch: wider;
+  width: 50%;
+  height: 100%;
+  margin:40rpx;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+}
+
+button {
+  background-color: rgb(245, 245, 245);
+  font-weight: bold;
+  color: black;
+}
+
+.redScore {
+  font-size: 85rpx;
+  color: rgba(250, 0, 0, 0.6);
+  border-radius: 25rpx;
+  border: 3px solid rgba(250, 0, 0, 0.6);
+  width: 50%;
+  height: 100%;
+  margin: 17px;
+}
+
+.blueScore {
+  font-size: 85rpx;
+  color: rgba(0, 0, 250, 0.6);
+  border-radius: 25rpx;
+  border: 3px solid rgba(0, 0, 250, 0.6);
+  width: 50%;
+  height: 100%;
+  margin: 17px;
+}
+
+.title{
+  font-stretch: wider;
+  width: 100%;
+  height: 100%;
+  font-size: large;
+  font-weight: bold;
+  display:flex;
+  justify-content:space-around;
+}
+
+.pdf{
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+/* .row1,.row2 {
   display: flex;
     width: 100%;
   height: 100%;
@@ -30,14 +166,10 @@ button {
   height: 100%;
   width: 100%;
   position: absolute;
-  justify-content: center;
+  justify-content: top;
   padding: 0;
-}
+} */
 
-#t1{
-  
-
-}
 
 
 /* pages/main/main.wxss

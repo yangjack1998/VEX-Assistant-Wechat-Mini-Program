@@ -1,7 +1,7 @@
 <!--ruleQuiz/ruleQuiz.wxml-->
 <view class="container">
 
-<view style="text-align: center; font-size: 35rpx;font-weight: bold;">{{questions[index]}}</view>
+<view class="question">{{questions[index]}}</view>
 <image bindtap="clickImg" style="width:100%;" mode="aspectFit" src="{{picPath}}"></image>
 <button wx:if="{{options[index*4].length>0}}" plain="true" bindtap="choose0">{{options[index*4]}}</button>
 <button wx:if="{{options[index*4+1].length>0}}" plain="true" bindtap="choose1">{{options[index*4+1]}}</button>

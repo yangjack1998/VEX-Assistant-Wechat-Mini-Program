@@ -1,6 +1,8 @@
 // ruleQuiz/ruleQuiz.js
 const db = wx.cloud.database()
 const _ =db.command
+const app = getApp()
+var intt
 Page({
   
   /**
@@ -17,9 +19,15 @@ Page({
     options:[],
     answers:[],
     pictures:[],
-    picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/1.jpg",
+    picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/0.jpg",
     status:"",
-    countDownNum: '60'
+    time:{
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond:0
+    },
+    timecount:''
   
   },
 
@@ -62,7 +70,11 @@ Page({
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-    this.countDown();
+    //this.start();
+    let that = this
+    setTimeout(function () {
+      that.start();
+     }, 2000) //延迟时间 这里是1秒
   },
 
   /**
@@ -170,50 +182,77 @@ Page({
   },
 
   end(){
+    clearInterval(intt);
     let that = this
     console.log("end")
+    app.globalData.score=that.data.score
+    app.globalData.time=that.data.time.millisecond
+    app.globalData.timeShow=that.data.timecount
     wx.navigateTo({
-      url: '../leaderboard/leaderboard',
-      events: {
-        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-        acceptDataFromOpenedPage: function(data) {
-          console.log(data)
-        }
-      },
-      success: function(res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data:that.data.score})
-      }
+      url: '../leaderboard/leaderboard'
+      // events: {
+      //   // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+      //   acceptDataFromOpenedPage: function(data) {
+      //     console.log(data)
+      //   }
+      // },
+      // success: function(res) {
+      //   // 通过eventChannel向被打开页面传送数据
+      //   res.eventChannel.emit('acceptDataFromOpenerPage', { data:that.data.score})
+      //   res.eventChannel.emit('acceptDataFromOpenerPage', { time:that.data.time.millisecond})
+      // }
     })
   },
 
-  countDown: function () {
-    let that = this;
-    let countDownNum = that.data.countDownNum;//获取倒计时初始值
-    //如果将定时器设置在外面，那么用户就看不到countDownNum的数值动态变化，所以要把定时器存进data里面
+  start: function () {
+    var that = this;
+    //停止（暂停）
+    clearInterval(intt);
+    //时间重置
     that.setData({
-      timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
-        //每隔一秒countDownNum就减一，实现同步
-        countDownNum--;
-        //然后把countDownNum存进data，好让用户知道时间在倒计着
-        that.setData({
-          countDownNum: countDownNum
-        })
-        //在倒计时还未到0时，这中间可以做其他的事情，按项目需求来
-        if (countDownNum == 0) {
-          //这里特别要注意，计时器是始终一直在走的，如果你的时间为0，那么就要关掉定时器！不然相当耗性能
-          //因为timer是存在data里面的，所以在关掉时，也要在data里取出后再关闭
-          clearInterval(that.data.timer);
-          wx.navigateTo({
-            url: '../mainPage/main',
-          })
-          //关闭定时器之后，可作其他处理codes go here
-        }
-      }, 1000)
+      time:{
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0
+      }
     })
-  }
+    intt = setInterval(function () { that.timer() }, 50);
+  },
 
+  timer: function () {
+    var that = this;
+    that.setData({
+      'time.millisecond': that.data.time.millisecond + 5
+    })
+    if (that.data.time.millisecond%100==0) {
+      that.setData({
+        'time.second': that.data.time.second + 1
+      })
+    }
+    if (that.data.time.second >= 60) {
+      that.setData({
+        'time.second': 0,
+        'time.minute': that.data.time.minute + 1
+      })
+    }
 
+    if (that.data.time.minute >= 60) {
+      that.setData({
+        'time.minute': 0,
+        'time.hour': that.data.time.hour + 1
+      })
+    }
+    let hourSpace = '0'
+    let minSpace = '0'
+    let secSpace = '0'
+    if(that.data.time.second>9) secSpace=''
+    if(that.data.time.minute>9) minSpace=''
+    if(that.data.time.hour>9) hourSpace=''
+    that.setData({
+      timecount: hourSpace+that.data.time.hour + ":" + minSpace+that.data.time.minute + ":" +secSpace+ that.data.time.second
+    })
+  },
 
 
 
