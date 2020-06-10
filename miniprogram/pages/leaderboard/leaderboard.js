@@ -17,7 +17,8 @@ Page({
     recordID:"",
     rank:[],
     time:0,
-    timeShow:''
+    timeShow:'',
+    af:true
   },
 
   /**
@@ -97,10 +98,12 @@ Page({
 
 
   bindKeyInput: function (e) {
-    let input = this.data.inputValue
     this.setData({
       inputValue: e.detail.value
     })
+    let input = this.data.inputValue
+
+
     if(input.length>0){
       this.setData({
         disable:false
@@ -116,7 +119,22 @@ Page({
 
   submit :async function (e){
     let that = this
+    let old = await db.collection("rank").where({
+      name: this.data.inputValue
+    }).get()
+
     if(!this.data.old){
+      if(old.data.length>0){
+        wx.showToast({
+          title: '该昵称已被他人使用,请重新输入昵称',
+          icon:"none",
+          duration: 2000
+        })
+        this.setData({
+          inputValue:''
+        })
+        return
+      }
       await db.collection('rank')
         .add({
           data:
@@ -162,6 +180,9 @@ Page({
 
   async printRank(){
     this.setData({
+      username:this.data.inputValue
+    })
+    this.setData({
       showView: true
     })
    
@@ -198,7 +219,8 @@ Page({
         disInput:true,
         disable:false,
         old:true,
-        recordID:old.data[0]._id
+        recordID:old.data[0]._id,
+        af:false
       })
       this.submit()
     }

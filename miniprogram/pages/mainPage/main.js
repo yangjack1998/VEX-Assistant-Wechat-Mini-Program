@@ -45,7 +45,8 @@ Page({
     autoBackBlue:0.2,
     autoWinner:"none",
     path:[],
-    disable:true
+    disable:true,
+    check:true
   },
 
   /**
@@ -127,11 +128,10 @@ Page({
 
   },
 
-  radioChange(e) {
-    e.detail.value
-  },
+
   onChange(event) {
     this.setData({ active: event.detail });
+    console.log(event.detail)
   },
 
   changeBallNum: function (e){
@@ -219,12 +219,20 @@ Page({
 
   radioChange(e){
     const goals = this.data.goals
+    let red = 0
+    let blue = 0
     for (let i = 0, len = goals.length; i < len; ++i) {
       if(goals[i].name === e.detail.value.substring(0,2))
       goals[i].color = e.detail.value.substring(2,3)
     }
+    for (let i = 0, len = goals.length; i < len; ++i) {
+      if(goals[i].color ==='r') red++
+      else if(goals[i].color ==='b') blue++
+    }
     this.setData({
-      goals
+      goals,
+      blueBall: this.data.blueBall<blue? blue:this.data.blueBall,
+      redBall:this.data.redBall<red? red:this.data.redBall
     })
     
     this.updateRow()
@@ -300,6 +308,32 @@ Page({
       title: '请检查网络链接并重试',
       icon:"none",
       duration: 2000
+    })
+  },
+
+  refresh(){
+    this.setData({
+      redScore: 0,
+      blueScore: 0,
+      redBall:0,
+      blueBall:0,
+      redRow:0,
+      blueRow:0,
+      goals:[
+        {name:'00', color:""},
+        {name:'01', color:""},
+        {name:'02', color:""},
+        {name:'10', color:""},
+        {name:'11', color:""},
+        {name:'12', color:""},
+        {name:'20', color:""},
+        {name:'21', color:""},
+        {name:'22', color:""}
+      ],
+      autoBackRed:0.2,
+      autoBackBlue:0.2,
+      autoWinner:"none",
+      check:true
     })
   }
 
