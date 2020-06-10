@@ -40,16 +40,7 @@
   <button style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
   <button style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
 </view>
-   <!-- <view style='font-size:40rpx;align-items: center;padding:10rpx'>自动阶段</view>
-  <view class='row1' style="flex-direction:row;">
-      <label class="col" >
-        <radio-group  class="radio-group" bindchange="addAuto">
-            <radio value="1"  color="red"/>
-            <radio value="0" checked="true" color="grey"/>  
-            <radio value="-1"  color="blue"/>
-        </radio-group>
-      </label>
-    </view> -->
+  
 </view>
 
 

@@ -16,6 +16,9 @@
           <button type="default" plain="true">测验</button>
         </navigator>
       </view>
+      <navigator  url='../leaderboard2/leaderboard2' open-type='navigate'>
+          <button style="background-color:white;">查看排行</button>
+        </navigator>
     </view>
   </van-tab>
   <van-tab title="{{socringTool}}">
@@ -45,7 +48,7 @@
         <view class="col" wx:for="{{item}}" wx:for-index="idx2">
             <radio-group  bindchange="radioChange">
               <radio class="redGoal" value="{{idx}}{{idx2}}r"  color="red"/>
-              <radio value="{{idx}}{{idx2}}n" checked="true" color="grey"/>  
+              <radio value="{{idx}}{{idx2}}n" checked="{{check}}" color="grey"/>  
               <radio class="blueGoal" value="{{idx}}{{idx2}}b"  color="blue"/>
             </radio-group>
         </view>
@@ -62,16 +65,7 @@
       <button style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
       <button style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
     </view>
-      <!-- <view style='font-size:40rpx;align-items: center;padding:10rpx'>自动阶段</view>
-      <view class='row1' style="flex-direction:row;">
-          <label class="col" >
-            <radio-group  class="radio-group" bindchange="addAuto">
-                <radio value="1"  color="red"/>
-                <radio value="0" checked="true" color="grey"/>  
-                <radio value="-1"  color="blue"/>
-            </radio-group>
-          </label>
-        </view> -->
+      <button bindtap="refresh" style="background-color:white;margin-top:20rpx">刷新</button>
     </view>
   </van-tab>
   <van-tab title="{{information}}">
@@ -96,9 +90,9 @@
       <text>{{information}}</text>
       </navigator>
   </view> -->
-  <van-tabbar active="{{ active }}" bind:change="onChange" active-color="#d02222" inactive-color="rgba(200, 200, 200)">
+  <!-- <van-tabbar active="{{ active }}" bind:change="onChange" active-color="#d02222" inactive-color="rgba(200, 200, 200)">
   <van-tabbar-item name="home" icon="home-o">首页</van-tabbar-item>
-  <van-tabbar-item icon="search">排行查询</van-tabbar-item>
+  <van-tabbar-item icon="search">查看排行</van-tabbar-item>
   <van-tabbar-item icon="setting-o">设置</van-tabbar-item>
-</van-tabbar>
+  </van-tabbar> -->
 </view>

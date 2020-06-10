@@ -87,7 +87,7 @@
 .cols {
   font-size:40rpx;
   font-stretch: wider;
-  width: 50%;
+  width: 40%;
   height: 100%;
   margin:40rpx;
   display:flex;
