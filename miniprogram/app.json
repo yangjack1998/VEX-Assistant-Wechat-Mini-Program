@@ -1,11 +1,12 @@
 {
   "pages": [ 
     
- 
+    "pages/main/index",
     "pages/mainPage/main",
-    "pages/leaderboard/leaderboard",
-    "pages/ruleQuiz/ruleQuiz",
     "pages/ruleChoose/ruleChoose",
+    "pages/leaderboard/leaderboard",
+    "pages/leaderboard2/leaderboard2",
+    "pages/ruleQuiz/ruleQuiz",
     
     "pages/scoreTool/scoreTool",
     "pages/rulePractice/rulePractice",
@@ -25,6 +26,16 @@
     "pages/im/im",
     "pages/im/room/room"    
   ],
+  "tabBar": {
+    "custom": true,
+    "list": [{
+      "pagePath": "pages/mainPage/main",
+      "text": "组件"
+    }, {
+      "pagePath": "pages/ruleChoose/ruleChoose",
+      "text": "接口"
+    }]
+  },
   "window": {
     "backgroundColor": "#fff",
     "backgroundTextStyle": "light",

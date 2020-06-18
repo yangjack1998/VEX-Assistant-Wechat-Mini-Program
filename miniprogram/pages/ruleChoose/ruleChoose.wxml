@@ -1,14 +1,2 @@
 <!--pages/ruleChoose/ruleChoose.wxml-->
-<view class="container">
-<text class="title">规则小测验</text>
-<text class="content">点击左侧进入练习模式，系统会即时反馈正确与否并进行提示。</text>
-<text class="content">点击右侧进入测验模式，系统会根据回答的正确与否进行加分，最终成绩可提交至排行榜进行排名。</text>
-  <view class='row1' style="flex-direction:row;">
-    <navigator class="tool" id="t1" url='../rulePractice/rulePractice' open-type='navigate'>
-      <text>练习</text>
-    </navigator>
-    <navigator class="tool" id="t2" url='../ruleQuiz/ruleQuiz' open-type='navigate'>
-      <text>测验</text>
-      </navigator>
-  </view>
-</view>
+<text>pages/ruleChoose/ruleChoose.wxml</text>

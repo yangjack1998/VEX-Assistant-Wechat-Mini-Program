@@ -1,0 +1,76 @@
+<!-- <view class="container">
+  <view class='row1' style="flex-direction:row;">
+    <navigator class="tool" id="t1" url='../scoreTool/scoreTool' open-type='navigate'> -->
+<view class="totalcontainer">
+<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" style="background-color:white;">
+  <van-tab title="{{socringTool}}">
+    <view class="container">
+    <view class='row_0'>
+      <view class="title" >
+        <view style="color: rgba(250, 0, 0, 0.6)">红方总球数</view>
+        <view style="color: rgba(0, 0, 250, 0.6)">蓝方总球数</view>
+      </view>
+    </view>
+
+    <view class='row_1'>
+      <view class="cols" >
+        <button  bindtap="changeBallNum" id="redSub" size="mini"> - </button>
+        <button size="mini" hover-class="none">{{redBall}}</button>
+        <button  bindtap="changeBallNum" id="redAdd" size="mini"> + </button>
+      </view>
+      <view class="cols" >
+          <button  bindtap="changeBallNum" id="blueSub" size="mini"> - </button>
+          <button size="mini" hover-class="none">{{blueBall}}</button>
+          <button  bindtap="changeBallNum" id="blueAdd" size="mini"> + </button>
+        </view>
+    </view>
+
+    <view class='site'>
+      <view class='rows' style="flex-direction:row;" wx:for="{{row}}" wx:for-item="item" wx:for-index="idx">
+        <view class="col" wx:for="{{item}}" wx:for-index="idx2">
+            <radio-group  bindchange="radioChange">
+              <radio class="redGoal" value="{{idx}}{{idx2}}r"  color="red"/>
+              <radio value="{{idx}}{{idx2}}n" checked="{{check}}" color="grey"/>  
+              <radio class="blueGoal" value="{{idx}}{{idx2}}b"  color="blue"/>
+            </radio-group>
+        </view>
+      </view>
+    </view>
+
+    <view class='row_2' style="flex-direction:row;">
+      <text class='redScore'>{{redScore}}
+      </text>
+      <text class='blueScore'>{{blueScore}}
+      </text>
+    </view>
+    <view class='row_2' style="flex-direction:row">
+      <button style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
+      <button style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
+    </view>
+      <button bindtap="refresh" style="background-color:white;margin-top:20rpx">刷新</button>
+    </view>
+  </van-tab>
+  <van-tab title="{{information}}">
+    <view class="container">
+      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="0" >竞赛手册（英文）</button>
+      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="1" >竞赛手册（中文）</button>
+      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="2" >技能赛规则（英文）</button>
+      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="3" >技能赛规则（中文）</button>
+    </view>
+  </van-tab>
+</van-tabs>
+  <!-- <view class='row1' style="flex-direction:row;">
+    <navigator class="tool" id="t1" url='../score/score' open-type='navigate'>
+      <text>{{socringTool}}</text>
+    </navigator>
+    <navigator class="tool" id="t2" url='../ruleChoose/ruleChoose' open-type='navigate'>
+      <text>{{ruleQuiz}}</text>
+      </navigator>
+  </view>
+  <view class='row2' style="flex-direction:row;">
+  <navigator class="tool" id="t3" url='../dataSet/dataSet' open-type='navigate'>
+      <text>{{information}}</text>
+      </navigator>
+  </view> -->
+  
+</view>
