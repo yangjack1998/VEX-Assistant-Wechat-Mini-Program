@@ -6,7 +6,7 @@
   width: 100%;
 }
 .container {
-  margin-top: 50rpx;
+  margin-top: 100rpx;
   height: 100%;
   width: 100%;
   /* position: absolute; */

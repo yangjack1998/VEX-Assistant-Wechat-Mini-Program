@@ -16,13 +16,10 @@
           <button type="default" plain="true">测验</button>
         </navigator>
       </view>
-      <navigator  url='../leaderboard2/leaderboard2' open-type='navigate'>
-          <button style="background-color:white;">查看排行</button>
-        </navigator>
     </view>
   </van-tab>
   <van-tab title="{{leaderboard}}">
-    <view class="container">
+    <view class="table_container">
       <!-- <view style="margin:10rpx" class="{{showView?'header_view_show':'header_view_hide'}}"> -->
         <view class="table_header">
           <view class="th th1">用户</view>

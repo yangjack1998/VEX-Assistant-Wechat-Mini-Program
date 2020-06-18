@@ -6,7 +6,7 @@
   width: 100%;
 }
 .container {
-  margin-top: 50rpx;
+  margin-top: 100rpx;
   height: 100%;
   width: 100%;
   /* position: absolute; */
@@ -134,6 +134,13 @@ button {
 .pdf{
   margin-top: 30rpx;
   margin-bottom: 30rpx;
+}
+
+.refresh{
+  margin-top: 250rpx;
+  background-color: white;
+  border: 1rpx solid rgb(154, 160, 166);
+  color: rgb(95, 99, 104);
 }
 
 /* .row1,.row2 {

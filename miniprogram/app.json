@@ -38,11 +38,9 @@
   },
   "window": {
     "backgroundColor": "#fff",
-    "backgroundTextStyle": "light",
     "navigationBarTitleText": "VEX Change Up 助手",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#d02222",
-    "enablePullDownRefresh": true
+    "navigationBarBackgroundColor": "#d02222"
   },
   "sitemapLocation": "sitemap.json"
 }
