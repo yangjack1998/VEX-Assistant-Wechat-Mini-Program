@@ -34,7 +34,7 @@ Page({
     
     let quiz = await db.collection("quiz")
     .get()
-
+    console.log(quiz);
     let quizData = quiz.data
     for (let i = 1; i < quizData.length; i++) {
       const random = Math.floor(Math.random() * (i + 1));
@@ -42,7 +42,7 @@ Page({
     }
 
 
-    console.log(quiz);
+   
 
     quizData.forEach(element => {
       this.setData({

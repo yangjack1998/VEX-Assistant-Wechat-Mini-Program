@@ -65,7 +65,7 @@
       <button style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
       <button style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
     </view>
-      <button bindtap="refresh" style="background-color:white;margin-top:20rpx">刷新</button>
+      <button bindtap="refresh" style="background-color:white;margin-top:20rpx">重置</button>
     </view>
   </van-tab>
   <van-tab title="{{information}}">

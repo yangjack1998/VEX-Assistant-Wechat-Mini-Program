@@ -204,8 +204,11 @@ Page({
         else if(goals[i].color=="b") blueRow++
       }
     }
-    if((goals[0].color===goals[4].color&&goals[0].color===goals[8].color)
-    ||(goals[2].color===goals[4].color&&goals[2].color===goals[6].color)){
+    if(goals[2].color===goals[4].color&&goals[2].color===goals[6].color){
+      if(goals[4].color=="r") redRow++
+      else if(goals[4].color=="b") blueRow++
+    }
+    if(goals[0].color===goals[4].color&&goals[0].color===goals[8].color){
       if(goals[4].color=="r") redRow++
       else if(goals[4].color=="b") blueRow++
     }

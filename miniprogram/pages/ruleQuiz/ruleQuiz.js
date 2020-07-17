@@ -40,16 +40,23 @@ Page({
       icon:"loading",
       duration: 2000
     })
-    let quiz = await db.collection("quiz")
+    let quiz = await db.collection("quiz_comp")
     .get()
 
-    let quizData = quiz.data
+    let quiz2 = await db.collection("quiz_comp")
+    .skip(20)
+    .get()
+
+   
+
+    let quizData = quiz.data.concat(quiz2.data)
     for (let i = 1; i < quizData.length; i++) {
       const random = Math.floor(Math.random() * (i + 1));
       [quizData[i], quizData[random]] = [quizData[random], quizData[i]];
     }
 
-    console.log(quiz);
+    quizData = quizData.slice(0,20)
+    console.log(quizData)
 
     quizData.forEach(element => {
       this.setData({
@@ -63,7 +70,7 @@ Page({
     this.setData({
       picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
     })
-   console.log(this.data.pictures)
+  
   },
 
   /**
