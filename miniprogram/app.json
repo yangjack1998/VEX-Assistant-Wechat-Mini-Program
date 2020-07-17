@@ -1,10 +1,15 @@
 {
   "pages": [ 
     
+<<<<<<< HEAD
+=======
+    "pages/main/index",
+>>>>>>> ab06f32d01e5c2249753198df311b7b61aaffc54
     "pages/mainPage/main",
-    "pages/leaderboard/leaderboard",
-    "pages/ruleQuiz/ruleQuiz",
     "pages/ruleChoose/ruleChoose",
+    "pages/leaderboard/leaderboard",
+    "pages/leaderboard2/leaderboard2",
+    "pages/ruleQuiz/ruleQuiz",
     
     "pages/scoreTool/scoreTool",
     "pages/rulePractice/rulePractice",
@@ -24,13 +29,21 @@
     "pages/im/im",
     "pages/im/room/room"    
   ],
+  "tabBar": {
+    "custom": true,
+    "list": [{
+      "pagePath": "pages/mainPage/main",
+      "text": "组件"
+    }, {
+      "pagePath": "pages/ruleChoose/ruleChoose",
+      "text": "接口"
+    }]
+  },
   "window": {
     "backgroundColor": "#fff",
-    "backgroundTextStyle": "light",
     "navigationBarTitleText": "VEX Change Up 助手",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#d02222",
-    "enablePullDownRefresh": true
+    "navigationBarBackgroundColor": "#d02222"
   },
   "sitemapLocation": "sitemap.json"
 }

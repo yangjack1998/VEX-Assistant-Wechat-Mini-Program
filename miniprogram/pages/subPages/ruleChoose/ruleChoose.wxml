@@ -1,0 +1,43 @@
+<!-- <view class="container">
+  <view class='row1' style="flex-direction:row;">
+    <navigator class="tool" id="t1" url='../scoreTool/scoreTool' open-type='navigate'> -->
+<view class="totalcontainer">
+<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" style="background-color:white;">
+  <van-tab class="tab" title="{{ruleQuiz}}">
+    <view class="container">
+      <text class="title">规则小测验</text>
+      <text class="content">点击左侧进入练习模式，系统会即时反馈正确与否并进行提示。</text>
+      <text class="content">点击右侧进入测验模式，系统会根据回答的正确与否进行加分，最终成绩可提交至排行榜进行排名。</text>
+      <view class='row1' style="flex-direction:row;">
+        <navigator class="tool" id="t1" url='../rulePractice/rulePractice' open-type='navigate'>
+          <button type="default" plain="true">练习</button>
+        </navigator>
+        <navigator class="tool" id="t2" url='../ruleQuiz/ruleQuiz' open-type='navigate'>
+          <button type="default" plain="true">测验</button>
+        </navigator>
+      </view>
+    </view>
+  </van-tab>
+  <van-tab title="{{leaderboard}}">
+    <view class="table_container">
+      <!-- <view style="margin:10rpx" class="{{showView?'header_view_show':'header_view_hide'}}"> -->
+        <view class="table_header">
+          <view class="th th1">用户</view>
+          <view class="th th2">得分</view>
+          <view class="th th2">时间</view>
+        </view>
+        <!-- <block> 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。 -->
+        <block wx:for="{{rank}}" wx:for-item="i" >
+          <view class="table_cell">
+
+            <view wx:if="{{username==i.name}}" style="text-decoration:underline;" class="td td1">{{i.name}}</view>
+            <view wx:else class="td td1">{{i.name}}</view>
+            <view class="td td2">{{i.score}}</view>
+            <view class="td td2">{{i.timeShow}}</view>
+          </view>
+        </block>
+      <!-- </view> -->
+    </view>
+  </van-tab>
+</van-tabs>
+</view>
