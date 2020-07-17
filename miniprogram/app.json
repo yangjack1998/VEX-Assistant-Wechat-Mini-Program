@@ -1,10 +1,7 @@
 {
   "pages": [ 
     
-<<<<<<< HEAD
-=======
     "pages/main/index",
->>>>>>> ab06f32d01e5c2249753198df311b7b61aaffc54
     "pages/mainPage/main",
     "pages/ruleChoose/ruleChoose",
     "pages/leaderboard/leaderboard",

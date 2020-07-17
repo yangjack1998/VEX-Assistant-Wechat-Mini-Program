@@ -60,7 +60,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-<<<<<<< HEAD
+
   onShareAppMessage: function() {
 
   },
@@ -204,9 +204,9 @@ Page({
     this.updateTotalScore()
 
   },
-=======
+
   onShareAppMessage: function () {
->>>>>>> ab06f32d01e5c2249753198df311b7b61aaffc54
+
 
   }
 })
