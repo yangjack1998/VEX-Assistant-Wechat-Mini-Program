@@ -1,129 +1,66 @@
+// pages/mainPage/main.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    socringTool: "计分工具",
-    ruleQuiz: "规则测验",
-    information: "资料查询",
-    active: 'home',
-    current: 'mainpage',
-    activeKey: 0,
-    row:[[1,2,3],[1,2,3],[1,2,3]],
-    auto: [{
-      name: 'red',
-      value: '红胜'
-      },
-      {
-        name: 'blue',
-        value: '蓝胜'
-      },
-      {
-        name: 'black',
-        value: '打平'
-      }
-    ],
-    redScore: 0,
-    blueScore: 0,
-    redBall:0,
-    blueBall:0,
-    redRow:0,
-    blueRow:0,
-    goals:[
-      {name:'00', color:""},
-      {name:'01', color:""},
-      {name:'02', color:""},
-      {name:'10', color:""},
-      {name:'11', color:""},
-      {name:'12', color:""},
-      {name:'20', color:""},
-      {name:'21', color:""},
-      {name:'22', color:""}
-    ],
-    autoBackRed:0.2,
-    autoBackBlue:0.2,
-    autoWinner:"none",
-    path:[],
-    disable:true,
-    check:true
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    let that = this
-    wx.cloud.getTempFileURL({
-      fileList:['cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/GameManual-04252020.pdf',
-                'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/VRC Change Up - CN 20200511.pdf',
-                'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/AppendixB.pdf',
-                'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/VRC Change Up AppendixB - CN 20200511.pdf'
-              ],
-      success:res=>{
-        
-        res.fileList.forEach(element => {
-          console.log(element)
-              that.setData({
-                path:that.data.path.concat(element.tempFileURL)
-              })  
-        });
-        this.setData({
-          disable:false
-        })
-      },
-      fail:function (res){
-        console.log(res)
-        this.showError()
-      }
-  }) 
+  onLoad: function (options) {
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
+
   onShareAppMessage: function() {
 
   },
@@ -204,8 +141,11 @@ Page({
         else if(goals[i].color=="b") blueRow++
       }
     }
-    if((goals[0].color===goals[4].color&&goals[0].color===goals[8].color)
-    ||(goals[2].color===goals[4].color&&goals[2].color===goals[6].color)){
+    if(goals[2].color===goals[4].color&&goals[2].color===goals[6].color){
+      if(goals[4].color=="r") redRow++
+      else if(goals[4].color=="b") blueRow++
+    }
+    if(goals[0].color===goals[4].color&&goals[0].color===goals[8].color){
       if(goals[4].color=="r") redRow++
       else if(goals[4].color=="b") blueRow++
     }
@@ -265,77 +205,8 @@ Page({
 
   },
 
-  openPdf: function(event){
-    console.log(this.data.path)
-    console.log(event.target.id)
-    this.showBusy()
-    wx.downloadFile({
-      url: this.data.path[event.target.id] ,
-      success: function (res) {
-        wx.openDocument({
-          filePath: res.tempFilePath,
-          success: function (res) {
-            console.log('打开文档成功')
-            wx.hideLoading({
-              complete: (res) => {},
-            })
-          }
-        })
-        console.log(res.tempFilePath)
-       
-      },            
-      fail:function (res){
-        console.log("failToDownload")
-        wx.hideLoading({
-          complete: (res) => {},
-        })
-        this.showError()
-      }
-    })
-  },
+  onShareAppMessage: function () {
 
-  showBusy: function () {
-    wx.showLoading({
-    title: '加载中...',
-    mask: true,
-    icon: 'loading',
-    
-    })
-    },
-  
-  showError:function(){
-    wx.showToast({
-      title: '请检查网络链接并重试',
-      icon:"none",
-      duration: 2000
-    })
-  },
 
-  refresh(){
-    this.setData({
-      redScore: 0,
-      blueScore: 0,
-      redBall:0,
-      blueBall:0,
-      redRow:0,
-      blueRow:0,
-      goals:[
-        {name:'00', color:""},
-        {name:'01', color:""},
-        {name:'02', color:""},
-        {name:'10', color:""},
-        {name:'11', color:""},
-        {name:'12', color:""},
-        {name:'20', color:""},
-        {name:'21', color:""},
-        {name:'22', color:""}
-      ],
-      autoBackRed:0.2,
-      autoBackBlue:0.2,
-      autoWinner:"none",
-      check:true
-    })
   }
-
-
 })

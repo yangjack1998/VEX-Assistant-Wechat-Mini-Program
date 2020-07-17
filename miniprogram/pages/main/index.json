@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-tabbar": "../../miniprogram_npm/vant-weapp/tabbar/index",
+    "van-tabbar-item": "../../miniprogram_npm/vant-weapp/tabbar-item/index",
+    "page1":"../subPages/mainPage/main",
+    "page2": "../subPages/ruleChoose/ruleChoose"
+    }
+}

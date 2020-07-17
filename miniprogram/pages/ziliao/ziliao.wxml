@@ -1,0 +1,7 @@
+<!--pages/ziliao/ziliao.wxml-->
+<text>pages/ziliao/ziliao.wxml</text>
+<scroll-view wx:for="{{}}" wx:for-item="i" >
+ 
+
+
+</scroll-view>

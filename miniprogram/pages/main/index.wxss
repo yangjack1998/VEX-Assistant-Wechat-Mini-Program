@@ -1,0 +1,4 @@
+/* pages/main/index.wxss */
+.main-wrapper{
+  width: 100%;
+}

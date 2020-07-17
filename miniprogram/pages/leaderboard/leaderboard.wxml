@@ -2,8 +2,8 @@
 <view class="container">
   <text style="font-size:80rpx">你的分数是:</text>
   <text style="text-align: center; font-size: 150rpx; font-weight: bold;">{{score}}</text>
-
-  <input type='text' auto-focus="{{af}}" maxlength="12" bindinput="bindKeyInput" placeholder="你的昵称/队伍编号" maxlength="10" value="{{inputValue}}" disabled="{{disInput}}" />
+  <text>你还有{{chance}}次机会</text>
+  <input type='text' auto-focus="{{af}}"  bindinput="bindKeyInput" placeholder="你的昵称/队伍编号" maxlength="10" value="{{inputValue}}" disabled="{{disInput}}" />
 
   <button style="margin-bottom:10rpx;" bindtap="submit" disabled="{{disable}}">查看排名</button>
 
