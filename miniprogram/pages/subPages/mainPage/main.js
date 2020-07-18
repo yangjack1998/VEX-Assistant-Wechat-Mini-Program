@@ -1,10 +1,12 @@
 const app = getApp()
+
 Page({
     
     onShow: {
       type: Boolean,
       value: false,
       observer: 'onShowHideChange'
+      
     },
 
   /**
@@ -87,6 +89,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log("load")
     let that = this
     wx.cloud.getTempFileURL({
       fileList:['cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/GameManual-04252020.pdf',
@@ -94,8 +97,7 @@ Page({
                 'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/AppendixB.pdf',
                 'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/VRC Change Up AppendixB - CN 20200511.pdf'
               ],
-      success:res=>{
-        
+      success:res=>{        
         res.fileList.forEach(element => {
           console.log(element)
               that.setData({
@@ -232,8 +234,11 @@ Page({
         else if(goals[i].color=="b") blueRow++
       }
     }
-    if((goals[0].color===goals[4].color&&goals[0].color===goals[8].color)
-    ||(goals[2].color===goals[4].color&&goals[2].color===goals[6].color)){
+    if(goals[2].color===goals[4].color&&goals[2].color===goals[6].color){
+      if(goals[4].color=="r") redRow++
+      else if(goals[4].color=="b") blueRow++
+    }
+    if(goals[0].color===goals[4].color&&goals[0].color===goals[8].color){ 
       if(goals[4].color=="r") redRow++
       else if(goals[4].color=="b") blueRow++
     }
