@@ -1,7 +1,7 @@
 const app = getApp()
 const db = wx.cloud.database()
 const _ =db.command
-Page({
+Component({
 
   /**
    * 页面的初始数据
@@ -41,105 +41,27 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad:  async function (options) {
-    this.setData({
-      id:app.globalData.openid,
-    })
-    console.log(this.data.id)
-    let name = await db.collection("rank").where({
-      _openid: app.globalData.openid
-    }).get()
-    console.log(name)
-    if(name.data.length>0){
+ lifetimes:{
+   attached:async function(){
       this.setData({
-        username:name.data[0].name
+        id:app.globalData.openid,
       })
+      console.log(this.data.id)
+      let name = await db.collection("rank").where({
+        _openid: app.globalData.openid
+      }).get()
+      console.log(name)
+      if(name.data.length>0){
+        this.setData({
+          username:name.data[0].name
+        })
+      }
+      this.printRank()
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-    this.printRank()
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
-
-
-  onChange(event) {
-    this.setData({ active: event.detail });
-    console.log(event.detail)
-  },
-
-  openPdf: function(event){
-    console.log(this.data.path)
-    console.log(event.target.id)
-    this.showBusy()
-    wx.downloadFile({
-      url: this.data.path[event.target.id] ,
-      success: function (res) {
-        wx.openDocument({
-          filePath: res.tempFilePath,
-          success: function (res) {
-            console.log('打开文档成功')
-            wx.hideLoading({
-              complete: (res) => {},
-            })
-          }
-        })
-        console.log(res.tempFilePath)
-       
-      },            
-      fail:function (res){
-        console.log("failToDownload")
-        wx.hideLoading({
-          complete: (res) => {},
-        })
-        this.showError()
-      }
-    })
-  },
+  methods:{
 
   showBusy: function () {
     wx.showLoading({
@@ -164,9 +86,22 @@ Page({
     })
    
     let that = this
-    let all = await db.collection('rank').get()
+    const MAX_LIMIT = 20
+    const countResult = await db.collection('rank').count()
+    const total = countResult.total
+    // 计算需分几次取
+    const batchTimes = Math.ceil(total / 20)
+    let all = await (await db.collection('rank').get()).data
+    for (let i = 1; i < batchTimes; i++) {
+      const temp = db.collection('rank').skip(i * MAX_LIMIT).get()
+      all=all.concat((await temp).data)
+    }
+
+
     console.log(all)
-    all = all.data.sort(function(a,b){
+
+
+    all = all.sort(function(a,b){
       var value1 = a.score,
           value2 = b.score;
       if(value1 === value2){
@@ -182,6 +117,6 @@ Page({
 
     })
   }
-
+}
 
 })

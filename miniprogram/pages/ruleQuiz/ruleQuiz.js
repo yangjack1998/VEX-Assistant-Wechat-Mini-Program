@@ -9,6 +9,7 @@ Page({
    * Page initial data
    */
   data: {
+    fileName:"no",
     result:"",
     index:0,
     correct:1,
@@ -40,10 +41,10 @@ Page({
       icon:"loading",
       duration: 2000
     })
-    let quiz = await db.collection("quiz_comp")
+    let quiz = await db.collection("qc")
     .get()
 
-    let quiz2 = await db.collection("quiz_comp")
+    let quiz2 = await db.collection("qc")
     .skip(20)
     .get()
 
@@ -56,8 +57,7 @@ Page({
     }
 
     quizData = quizData.slice(0,20)
-    console.log(quizData)
-
+    
     quizData.forEach(element => {
       this.setData({
         questions:this.data.questions.concat(element.question),
@@ -68,9 +68,11 @@ Page({
     });
 
     this.setData({
+      fileName:this.data.pictures[this.data.index],
       picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
     })
-  
+
+
   },
 
   /**
@@ -134,8 +136,10 @@ Page({
       index:this.data.index+1,
     })
     this.setData({
+      fileName:this.data.pictures[this.data.index],
       picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
     })
+    console.log(this.data.fileName)
   }
   },
 
@@ -195,7 +199,7 @@ Page({
     app.globalData.score=that.data.score
     app.globalData.time=that.data.time.millisecond
     app.globalData.timeShow=that.data.timecount
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../leaderboard/leaderboard'
       // events: {
       //   // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据

@@ -216,9 +216,19 @@ Page({
     })
    
     let that = this
-    let all = await db.collection('rank').get()
+    const MAX_LIMIT = 20
+    const countResult = await db.collection('rank').count()
+    const total = countResult.total
+    // 计算需分几次取
+    const batchTimes = Math.ceil(total / 20)
+    let all = await (await db.collection('rank').get()).data
+    for (let i = 1; i < batchTimes; i++) {
+      const temp = db.collection('rank').skip(i * MAX_LIMIT).get()
+      all=all.concat((await temp).data)
+    }
     console.log(all)
-    all = all.data.sort(function(a,b){
+
+    all = all.sort(function(a,b){
       var value1 = a.score,
           value2 = b.score;
       if(value1 === value2){

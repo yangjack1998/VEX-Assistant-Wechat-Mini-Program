@@ -34,8 +34,13 @@ Page({
     
     let quiz = await db.collection("quiz")
     .get()
-    console.log(quiz);
-    let quizData = quiz.data
+
+    
+    let quiz2 = await db.collection("quiz")
+    .skip(20)
+    .get()
+
+    let quizData = quiz.data.concat(quiz2.data)
     for (let i = 1; i < quizData.length; i++) {
       const random = Math.floor(Math.random() * (i + 1));
       [quizData[i], quizData[random]] = [quizData[random], quizData[i]];

@@ -10,7 +10,7 @@
 <view style="text-align: center; font-size: 32rpx;color: red;">{{status}}</view>
 
   <view class='row1' style="flex-direction:row;">
-    <button bindtap="last">上一题</button>
+    <button wx:if="{{index!=0}}" bindtap="last">上一题</button>
     <button bindtap="next">{{nextQuestion}}</button>
   </view>
 <view style="margin-top:20rpx; text-align: center; font-size: 32rpx;color: red;">{{result}}</view>

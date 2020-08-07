@@ -17,11 +17,11 @@ Page({
         iconPath: "records",
         selected: false
       },
-      {
-        name: "设置",
-        iconPath: "setting-o",
-        selected: false
-      }
+      // {
+      //   name: "设置",
+      //   iconPath: "setting-o",
+      //   selected: false
+      // }
     ],
     activeIndex: 0,  // 选中的tab
     scrollTopArray: [], // 记录每个页面的滚动位置
@@ -59,6 +59,9 @@ Page({
       duration: 0,
       scrollTop: this.data.scrollTopArray[event.detail]
     })
+
+    
+
   },
   // 记录每个子页面的滚动位置
   onPageScroll(e) {

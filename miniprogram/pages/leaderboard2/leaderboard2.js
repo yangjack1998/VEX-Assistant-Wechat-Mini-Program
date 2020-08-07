@@ -18,10 +18,20 @@ Page({
     this.setData({
       id:app.globalData.openid,
     })
-    console.log(this.data.id)
+    
+    let total = await db.collection("rank").count/20
+    console.log(total)
     let name = await db.collection("rank").where({
       _openid: app.globalData.openid
     }).get()
+    let count = 1
+    while(count<total){
+      let temp = await db.collection("rank").where({
+        _openid: app.globalData.openid
+      }).skip(20*count).get
+      name = await name.concat(temp)
+      count++
+    }
     console.log(name)
     if(name.data.length>0){
       this.setData({

@@ -35,7 +35,7 @@
 
 /* pages/scoreTool/scoreTool.wxss */
 .site{
-  width: 90%;
+  width: 100%;
   /* padding-bottom: 90%;
   height: 0;
   justify-content:center;
@@ -137,7 +137,8 @@ button {
 }
 
 .refresh{
-  margin-top: 250rpx;
+  margin-top: 120rpx;
+  width: 200rpx;
   background-color: white;
   border: 1rpx solid rgb(154, 160, 166);
   color: rgb(95, 99, 104);

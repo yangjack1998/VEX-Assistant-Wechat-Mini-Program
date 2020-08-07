@@ -1,7 +1,29 @@
 <!--pages/ziliao/ziliao.wxml-->
-<text>pages/ziliao/ziliao.wxml</text>
-<scroll-view wx:for="{{}}" wx:for-item="i" >
- 
+<view class="page-body">
+  <view class="page-section">
+    <view class="weui-cells__title">文件名称：</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input" >
+           <input class="weui-input" auto-focus maxlength="15" bindinput="checkEmpty"/>
+          </view>
+        </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells__title">文件类别：</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input" bindinput="updateType"/>
+          </view>
+        </view>
+  </view>
+  <view class="page-section">
+  <view class="weui-cells__title">文件描述：</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" bindinput="updateDes"/>
+        </view>
+      </view>
+  </view>
+  <button bindtap="chooseFile" disabled="{{disable}}">提交文件</button>
 
-
-</scroll-view>
+</view>

@@ -1,1 +1,17 @@
 /* pages/ziliao/ziliao.wxss */
+@import "../../style/weui.wxss";
+
+.page-section{
+  margin-bottom: 20rpx;
+}
+
+page {
+  background-color: #F8F8F8;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+}
+
+.page-body {
+  padding: 20rpx 0;
+}

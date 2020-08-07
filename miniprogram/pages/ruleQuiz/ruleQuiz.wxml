@@ -3,7 +3,7 @@
 <button class="time" size="mini" hover-class="none">计时：{{timecount}}</button>
 
 <view class="question">{{questions[index]}}</view>
-<image bindtap="clickImg" style="width:100%;" mode="aspectFit" src="{{picPath}}"></image>
+<image  wx:if="{{fileName!='no'}}" bindtap="clickImg" style="width:100%;" mode="aspectFit" src="{{picPath}}"></image>
 <button wx:if="{{options[index*4].length>0}}" plain="true" bindtap="choose0">{{options[index*4]}}</button>
 <button wx:if="{{options[index*4+1].length>0}}" plain="true" bindtap="choose1">{{options[index*4+1]}}</button>
 <button wx:if="{{options[index*4+2].length>0}}" plain="true" bindtap="choose2">{{options[index*4+2]}}</button>

@@ -5,17 +5,33 @@
   height: 100%;
   width: 100%;
 }
+
 .container {
-  margin-top: 100rpx;
+  margin-top: 40rpx;
   height: 100%;
   width: 100%;
-  /* position: absolute; */
   justify-content: center;
   padding: 0;
 }
+
+.table_container {
+  margin-bottom: 200rpx;
+}
+
+
+.title{
+  width: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 42rpx;
+  font-weight: 900;
+}
+
 .tabs{
   height: 100%;
 }
+
 .row1 {
   display: flex;
   width: 100%;
@@ -27,45 +43,19 @@
   margin: 15%;
 }
 
+.tt{
+  padding: 5%;
+  align-items:center;
+  justify-content:center;
+}
 
 .content{
-  width:90%;
-  padding: 10rpx;
+  line-height: 50rpx;
+  width:100%;
+  font-size: small;
 }
 
 /* pages/scoreTool/scoreTool.wxss */
-.site{
-  width: 90%;
-  /* padding-bottom: 90%;
-  height: 0;
-  justify-content:center;
-  align-items: center; */
-}
-
-.rows{
-  display: flex;
-}
-
-.row_1 {
-  display: flex;
-  height: 10%;
-  width: 100%;
-}
-
-.row_0{
-  display: flex;
-  height: 5%;
-  width: 100%;
-}
-
-.row_2 {
-  width: 100%;
-  display: flex;
-  margin-top: 30rpx;
-  text-align: center;
-  vertical-align: middle;
-  justify-content: center;
-}
 
 .auto{
   color: white;
@@ -103,19 +93,6 @@ button {
 
 /* pages/leaderboard/leaderboard.wxss */
 
-input{
-  text-align: center;
-  margin: 10rpx;
-
-}
-
-.title{
-  width: 100%;
-  text-align: center;
-  font-size: 50rpx;
-  font-weight: 900;
-}
-
 /* 表头 */
 .table_header{
   display: flex;
@@ -133,6 +110,8 @@ input{
   justify-content: center;
   height: 80rpx;
   color: #ffffff;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
 }
 .th1,.th2{
   width: 50%
@@ -152,7 +131,12 @@ input{
   align-items: center;
   justify-content: center;
   height: auto;
-  
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  /* border-bottom: ;
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
+  border-top: 1px solid #000; */
 } 
 .td1,.td2{
   width: 50%
@@ -163,6 +147,7 @@ input{
 }
 
 .header_view_show{
+  border:1px solid #000;
   border-right:0;
   border-bottom: 0;
   width: 98%;

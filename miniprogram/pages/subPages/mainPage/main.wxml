@@ -52,10 +52,15 @@
   </van-tab>
   <van-tab title="{{information}}">
     <view class="container">
-      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="0" >竞赛手册（英文）</button>
+       <button wx:for="{{ziliao}}" wx:for-item="i" wx:if="{{i.reviewd}}" type="primary" style="width:70%" plain="true" class="pdf" bindtap="open" id="{{i.cloudPath}}">{{i.name}}</button>
+
+      <!-- <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="0" >竞赛手册（英文）</button>
       <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="1" >竞赛手册（中文）</button>
       <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="2" >技能赛规则（英文）</button>
-      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="3" >技能赛规则（中文）</button>
+      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="3" >技能赛规则（中文）</button> -->
+      <navigator class="tool" id="t1" url="../ziliao/ziliao" open-type='navigate'>
+          <button type="default" plain="true">上传资料</button>
+      </navigator>
     </view>
   </van-tab>
 </van-tabs>

@@ -5,9 +5,15 @@
 <van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" style="background-color:white;">
   <van-tab class="tab" title="{{ruleQuiz}}">
     <view class="container">
-      <text class="title">规则小测验</text>
+      <text class="title">VEX Change Up 规则知识竞赛</text>
+      <view class="tt">
+        <text class="content" style="font-weight:bold">竞赛时间:\n</text>
+        <text class="content">2020年7月31日晚7点-2020年8月7日晚11点59分\n</text>
+        <text class="content" style="font-weight:bold">竞赛规则：\n</text>
+        <text class="content">每次答题系统将会从题库中随机抽出20道题，答对得5分，答错不得分。最终成绩将由总得分和总用时组成，排名将优先根据总得分排序。当多个用户的得分相同时，则会根据总用时由短到长进行排名。每一用户最多可以有三次回答机会，三次过后虽然依旧可以答题，但是分数不会被记入排行榜。\n\n</text>
       <text class="content">点击左侧进入练习模式，系统会即时反馈正确与否并进行提示。</text>
-      <text class="content">点击右侧进入测验模式，系统会根据回答的正确与否进行加分，最终成绩可提交至排行榜进行排名。</text>
+      <text class="content">点击右侧进入进入 VEX Change Up 规则知识竞赛</text>
+      </view>
       <view class='row1' style="flex-direction:row;">
         <navigator class="tool" id="t1" url='../rulePractice/rulePractice' open-type='navigate'>
           <button type="default" plain="true">练习</button>
@@ -20,7 +26,7 @@
   </van-tab>
   <van-tab title="{{leaderboard}}">
     <view class="table_container">
-      <!-- <view style="margin:10rpx" class="{{showView?'header_view_show':'header_view_hide'}}"> -->
+      <view style="margin:10rpx" class="{{showView?'header_view_show':'header_view_hide'}}"> 
         <view class="table_header">
           <view class="th th1">用户</view>
           <view class="th th2">得分</view>
@@ -29,14 +35,13 @@
         <!-- <block> 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。 -->
         <block wx:for="{{rank}}" wx:for-item="i" >
           <view class="table_cell">
-
-            <view wx:if="{{username==i.name}}" style="text-decoration:underline;" class="td td1">{{i.name}}</view>
+            <view wx:if="{{username===i.name}}" style="text-decoration:underline;" class="td td1">{{i.name}}</view>
             <view wx:else class="td td1">{{i.name}}</view>
             <view class="td td2">{{i.score}}</view>
             <view class="td td2">{{i.timeShow}}</view>
           </view>
         </block>
-      <!-- </view> -->
+      </view> 
     </view>
   </van-tab>
 </van-tabs>

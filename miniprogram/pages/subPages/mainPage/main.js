@@ -1,6 +1,8 @@
 const app = getApp()
+const db = wx.cloud.database()
+const _ =db.command
 
-Page({
+Component({
     
     onShow: {
       type: Boolean,
@@ -88,77 +90,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    console.log("load")
-    let that = this
-    wx.cloud.getTempFileURL({
-      fileList:['cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/GameManual-04252020.pdf',
-                'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/VRC Change Up - CN 20200511.pdf',
-                'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/AppendixB.pdf',
-                'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/VRC Change Up AppendixB - CN 20200511.pdf'
-              ],
-      success:res=>{        
-        res.fileList.forEach(element => {
-          console.log(element)
-              that.setData({
-                path:that.data.path.concat(element.tempFileURL)
-              })  
-        });
+
+  lifetimes:{
+    attached:async function(){
+        let all = await db.collection('ziliao').get()
         this.setData({
-          disable:false
+          ziliao:all.data
         })
-      },
-      fail:function (res){
-        console.log(res)
-        this.showError()
-      }
-  }) 
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-      
-    },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
-
-
+  methods:{
   onChange(event) {
     this.setData({ active: event.detail });
     console.log(event.detail)
@@ -298,12 +240,12 @@ Page({
 
   },
 
-  openPdf: function(event){
-    console.log(this.data.path)
-    console.log(event.target.id)
+  open:async function(event){
+    let downloadPath = 'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/'+ event.target.id;
+
     this.showBusy()
-    wx.downloadFile({
-      url: this.data.path[event.target.id] ,
+    wx.cloud.downloadFile({
+      fileID: downloadPath,
       success: function (res) {
         wx.openDocument({
           filePath: res.tempFilePath,
@@ -315,7 +257,6 @@ Page({
           }
         })
         console.log(res.tempFilePath)
-       
       },            
       fail:function (res){
         console.log("failToDownload")
@@ -326,6 +267,7 @@ Page({
       }
     })
   },
+
 
   showBusy: function () {
     wx.showLoading({
@@ -369,4 +311,5 @@ Page({
       check:true
     })
   }
+}
 })

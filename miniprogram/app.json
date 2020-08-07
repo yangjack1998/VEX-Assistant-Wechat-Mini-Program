@@ -1,7 +1,8 @@
 {
   "pages": [ 
-    
+   
     "pages/main/index",
+    "pages/ziliao/ziliao",
     "pages/mainPage/main",
     "pages/ruleChoose/ruleChoose",
     "pages/leaderboard/leaderboard",
