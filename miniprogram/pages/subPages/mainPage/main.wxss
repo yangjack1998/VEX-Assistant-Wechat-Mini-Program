@@ -137,11 +137,19 @@ button {
 }
 
 .refresh{
-  margin-top: 120rpx;
+  margin-top: 100rpx;
   width: 200rpx;
   background-color: white;
   border: 1rpx solid rgb(154, 160, 166);
   color: rgb(95, 99, 104);
+}
+
+switch{
+  margin-top: 50rpx;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 /* .row1,.row2 {

@@ -37,18 +37,22 @@
       </view>
     </view>
 
-    <view class='row_2' style="flex-direction:row;">
-      <text class='redScore'>{{redScore}}
-      </text>
-      <text class='blueScore'>{{blueScore}}
-      </text>
-    </view>
-    <view class='row_2' style="flex-direction:row">
-      <button style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
-      <button style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
-    </view>
+      <view class='row_2' style="flex-direction:row;">
+        <text wx:if="{{!skillMode}}" class='redScore'>{{redScore}}
+        </text>
+        <text wx:if="{{!skillMode}}" class='blueScore'>{{blueScore}}
+        </text>
+        <text wx:if="{{skillMode}}" class='redScore'>{{skillScore}}
+        </text>
+      </view>
+      <view class='row_2' style="flex-direction:row">
+        <button wx:if="{{!skillMode}}" style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
+        <button wx:if="{{!skillMode}}" style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
+      </view>
       <button bindtap="refresh" class="refresh" >重置 <van-icon name="replay" /></button>
+      <switch id="skillMode" bindchange="switch1Change">技能赛计分</switch>
     </view>
+    
   </van-tab>
   <van-tab title="{{information}}">
     <view class="container">

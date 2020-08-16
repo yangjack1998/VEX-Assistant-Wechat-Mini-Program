@@ -25,6 +25,7 @@ Component({
    * 页面的初始数据
    */
   data: {
+    skillMode:false,
     socringTool: "计分工具",
     ruleQuiz: "规则测验",
     information: "资料查询",
@@ -47,6 +48,7 @@ Component({
     ],
     redScore: 0,
     blueScore: 0,
+    skillScore: 63,
     redBall:0,
     blueBall:0,
     redRow:0,
@@ -156,7 +158,10 @@ Component({
     }
     this.setData({
       redScore:this.data.redBall+this.data.redRow*6+autoRed,
-      blueScore:this.data.blueBall+this.data.blueRow*6+autoBlue
+      blueScore:this.data.blueBall+this.data.blueRow*6+autoBlue,
+    })
+    this.setData({
+      skillScore:this.data.redScore-this.data.blueScore+63
     })
   },
 
@@ -286,10 +291,20 @@ Component({
     })
   },
 
+
+  switch1Change:function(e){
+    console.log(e.detail.value)
+    this.refresh()
+    this.setData({
+      skillMode:e.detail.value
+    })
+  },
+
   refresh:function(){
     this.setData({
       redScore: 0,
       blueScore: 0,
+      skillScore: 63,
       redBall:0,
       blueBall:0,
       redRow:0,
