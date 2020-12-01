@@ -86,7 +86,10 @@ Component({
       pagePath: "/pages/",
       icon: "setting-o",
       text: "设置"
-    }]
+    }],
+    list1: ['机器人、遥控器电池电量', '对应颜色机器人号码牌', '易损零件(橡筋、轧带、履带等)','参赛证'],
+    list2: ['预装', '机器人尺寸', '自动程序选择', '场控连接是否正常', '比赛场地是否摆放正确'],
+    checked: []
   },
 
   /**
@@ -103,8 +106,15 @@ Component({
   },
 
   methods:{
+    toggle(event) {
+      const { index } = event.currentTarget.dataset;
+      const checkbox = this.selectComponent(`.checkboxes-${index}`);
+      checkbox.toggle();
+    },
+  
+    noop() {},
   onChange(event) {
-    this.setData({ active: event.detail });
+    this.setData({ active: event.detai, checked: event.detail });
     console.log(event.detail)
   },
 
