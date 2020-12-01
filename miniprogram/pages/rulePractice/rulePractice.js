@@ -8,6 +8,7 @@ Page({
    * Page initial data
    */
   data: {
+    fileName:"no",
     nextQuestion:"下一题",
     result:"",
     index:0,
@@ -35,29 +36,26 @@ Page({
     let quiz = await db.collection("quiz")
     .get()
 
-    
     let quiz2 = await db.collection("quiz")
     .skip(20)
     .get()
 
     let quizData = quiz.data.concat(quiz2.data)
-    for (let i = 1; i < quizData.length; i++) {
-      const random = Math.floor(Math.random() * (i + 1));
-      [quizData[i], quizData[random]] = [quizData[random], quizData[i]];
-    }
-
-
-   
-
+    
     quizData.forEach(element => {
       this.setData({
         questions:this.data.questions.concat(element.question),
         options:this.data.options.concat(element.options),
         answers:this.data.answers.concat(element.answer),
-        hints:this.data.hints.concat(element.hint),
         pictures:this.data.pictures.concat(element.picture),
+        hints:this.data.hints.concat(element.hint)
       })
     });
+
+    this.setData({
+      fileName:this.data.pictures[this.data.index],
+      picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
+    })
    console.log(this.data.questions)
   },
 
@@ -112,7 +110,8 @@ Page({
 
   update(){
     this.setData({
-      picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
+      fileName:this.data.pictures[this.data.index],
+      picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
     })
   },
 

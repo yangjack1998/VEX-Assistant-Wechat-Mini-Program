@@ -18,7 +18,7 @@ Page({
         selected: false
       },
       // {
-      //   name: "设置",
+      //   name: "好听的名字",
       //   iconPath: "setting-o",
       //   selected: false
       // }

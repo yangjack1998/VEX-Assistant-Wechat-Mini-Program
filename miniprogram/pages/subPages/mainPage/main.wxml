@@ -54,6 +54,25 @@
     </view>
     
   </van-tab>
+
+  <van-tab title="检查单">
+    <view class="container">
+      <text class="title">VEX赛前检查单</text>
+      <view class="cl_title">候场时:</view>
+      <view class="cl_item">机器人、遥控器电池电量</view>
+      <view class="cl_item">对应颜色机器人号码牌</view>
+      <view class="cl_item">易损零件(橡筋、轧带、履带等)</view>
+      <view class="cl_item">参赛证</view>
+      <view class="cl_title">放置机器人时:</view>
+      <view class="cl_item">预装</view>
+      <view class="cl_item">机器人尺寸</view>
+      <view class="cl_item">自动程序选择</view>
+      <view class="cl_item">场控连接是否正常</view>
+      <view class="cl_item">比赛场地是否摆放正确</view>
+
+
+    </view>
+  </van-tab>
   <van-tab title="{{information}}">
     <view class="container">
        <button wx:for="{{ziliao}}" wx:for-item="i" wx:if="{{i.reviewd}}" type="primary" style="width:70%" plain="true" class="pdf" bindtap="open" id="{{i.cloudPath}}">{{i.name}}</button>
@@ -67,6 +86,7 @@
       </navigator>
     </view>
   </van-tab>
+
 </van-tabs>
   <!-- <view class='row1' style="flex-direction:row;">
     <navigator class="tool" id="t1" url='../score/score' open-type='navigate'>

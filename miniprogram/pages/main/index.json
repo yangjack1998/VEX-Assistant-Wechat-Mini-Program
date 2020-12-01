@@ -3,6 +3,7 @@
     "van-tabbar": "../../miniprogram_npm/vant-weapp/tabbar/index",
     "van-tabbar-item": "../../miniprogram_npm/vant-weapp/tabbar-item/index",
     "page1":"../subPages/mainPage/main",
-    "page2": "../subPages/ruleChoose/ruleChoose"
+    "page2": "../subPages/ruleChoose/ruleChoose",
+    "page3": "../subPages/ins/ins"
     }
 }

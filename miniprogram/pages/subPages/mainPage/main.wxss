@@ -215,3 +215,16 @@ button {
   justify-content: center;
   padding: 0;
 } */
+
+.cl_title{
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-left: 20rpx;
+  margin-top: 40rpx;
+}
+
+.cl_item{
+  font-size: 32rpx;
+  margin-left: 50rpx;
+  margin-top: 20rpx;
+}
