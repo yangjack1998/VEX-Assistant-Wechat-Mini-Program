@@ -89,7 +89,8 @@ Component({
     }],
     list1: ['机器人、遥控器电池电量', '对应颜色机器人号码牌', '易损零件(橡筋、轧带、履带等)','参赛证'],
     list2: ['预装', '机器人尺寸', '自动程序选择', '场控连接是否正常', '比赛场地是否摆放正确'],
-    checked: []
+    checked: [],
+    checked2: []
   },
 
   /**
@@ -114,7 +115,7 @@ Component({
   
     noop() {},
   onChange(event) {
-    this.setData({ active: event.detai, checked: event.detail });
+    this.setData({ active: event.detai, checked: event.detail, checked2: event.detail });
     console.log(event.detail)
   },
 

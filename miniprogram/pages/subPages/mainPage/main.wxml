@@ -80,7 +80,7 @@
           </van-cell-group>
         </van-checkbox-group>
 
-        <van-checkbox-group value="{{ checked }}" bind:change="onChange">
+        <van-checkbox-group value="{{ checked2 }}" bind:change="onChange">
           <van-cell-group title="放置机器人时:">
             <van-cell
               wx:for="{{ list2 }}"
