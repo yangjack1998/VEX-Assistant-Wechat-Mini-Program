@@ -109,13 +109,21 @@ Component({
   methods:{
     toggle(event) {
       const { index } = event.currentTarget.dataset;
-      const checkbox = this.selectComponent(`.checkboxes-${index}`);
+      console.log(event.currentTarget.dataset)
+      const checkbox = this.selectComponent(`#checkboxes-${index}`);
       checkbox.toggle();
     },
+    toggle2(event) {
+      const { index } = event.currentTarget.dataset;
+      console.log(event.currentTarget.dataset)
+      const checkbox = this.selectComponent(`#checkboxes2-${index}`);
+      checkbox.toggle();
+    },
+
   
     noop() {},
   onChange(event) {
-    this.setData({ active: event.detai, checked: event.detail, checked2: event.detail });
+    this.setData({ active: event.detail, checked: event.detail });
     console.log(event.detail)
   },
 
