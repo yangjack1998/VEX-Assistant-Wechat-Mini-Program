@@ -1,3 +1,4 @@
-# VEX-CHANGE-UP-Mini-Program
+# VEX-Assistant-Wechat-Mini-Program
 ## Goal:
-The goal of this project is to develop a helpful tool for students and coaches who participate in 2020-2021 VEX Robotics Competition.
+The goal of this project is to develop a helpful tool for students and coaches who participate in VEX Robotics Competition.  
+The functions includes: score calculating, document upload/view and quiz system.
