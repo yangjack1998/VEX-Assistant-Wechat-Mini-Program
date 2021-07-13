@@ -2,40 +2,76 @@
   <view class='row1' style="flex-direction:row;">
     <navigator class="tool" id="t1" url='../scoreTool/scoreTool' open-type='navigate'> -->
 <view class="totalcontainer">
-<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" style="background-color:white;">
+<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#55218f" style="background-color:white;">
   <van-tab title="{{socringTool}}">
     <view class="container">
     <view class='row_0'>
       <view class="title" >
-        <view style="color: rgba(250, 0, 0, 0.6)">红方总球数</view>
-        <view style="color: rgba(0, 0, 250, 0.6)">蓝方总球数</view>
+        <view style="color: rgba(250, 0, 0, 0.6)">红方</view>
+        <view style="color: rgba(0, 0, 250, 0.6)">蓝方</view>
       </view>
     </view>
 
-    <view class='row_1'>
-      <view class="cols" >
-        <button  bindtap="changeBallNum" id="redSub" size="mini"> - </button>
-        <button size="mini" hover-class="none">{{redBall}}</button>
-        <button  bindtap="changeBallNum" id="redAdd" size="mini"> + </button>
+    <view class='row_0'>
+      <view class="title" >
+        <view >Ring</view>
       </view>
-      <view class="cols" >
-          <button  bindtap="changeBallNum" id="blueSub" size="mini"> - </button>
-          <button size="mini" hover-class="none">{{blueBall}}</button>
-          <button  bindtap="changeBallNum" id="blueAdd" size="mini"> + </button>
-        </view>
     </view>
 
-    <view class='site'>
-      <view class='rows' style="flex-direction:row;" wx:for="{{row}}" wx:for-item="item" wx:for-index="idx">
-        <view class="col" wx:for="{{item}}" wx:for-index="idx2">
-            <radio-group  bindchange="radioChange">
-              <radio class="redGoal" value="{{idx}}{{idx2}}r"  color="red"/>
-              <radio value="{{idx}}{{idx2}}n" checked="{{check}}" color="grey"/>  
-              <radio class="blueGoal" value="{{idx}}{{idx2}}b"  color="blue"/>
-            </radio-group>
+    <view class='row_1' style="flex-direction:row;">
+    <view class="cols" style="display:block;">      
+        <view style = "margin-top:35rpx;" wx:for="{{ring}}" wx:for-item="item" wx:for-index="idx">
+          <view style="display:flex; flex-direction:row;">
+            <button class="sign_btn" bindtap="changeRingNum" id="redSub{{idx}}" size="mini"> - </button>
+            <button class="num_show" size="mini" hover-class="none">{{redRing[idx]}}</button>
+            <button class="sign_btn" bindtap="changeRingNum" id="redAdd{{idx}}" size="mini"> + </button>
+            <view style="width:180rpx; text-align: center;">{{item}}</view>
+            <button class="sign_btn" bindtap="changeRingNum" id="bluSub{{idx}}" size="mini"> - </button>
+            <button class="num_show" size="mini" hover-class="none">{{blueRing[idx]}}</button>
+            <button class="sign_btn" bindtap="changeRingNum" id="bluAdd{{idx}}" size="mini"> + </button>
+          </view>
         </view>
+      </view>  
+
+    </view>
+
+    <view class='row_0'>
+      <view class="title" >
+        <view style = "margin-top:35rpx;">Mobile Goal</view>
       </view>
     </view>
+
+      <view class="cols" style="display:block;">      
+        <view style = "margin-top:35rpx;" wx:for="{{mobileGoal}}" wx:for-item="item" wx:for-index="idx">
+          <view  style="display:flex; flex-direction:row;">
+            <button class="sign_btn" bindtap="changeMG" id="redSub{{idx}}" size="mini" > - </button>
+            <button class="num_show" size="mini" hover-class="none">{{redMG[idx]}}</button>
+            <button class="sign_btn" bindtap="changeMG" id="redAdd{{idx}}" size="mini"> + </button>
+            <view style="width:180rpx; text-align: center;">{{item}}</view>
+            <button class="sign_btn" bindtap="changeMG" id="bluSub{{idx}}" size="mini"> - </button>
+            <button class="num_show" size="mini" hover-class="none">{{blueMG[idx]}}</button>
+            <button class="sign_btn" bindtap="changeMG" id="bluAdd{{idx}}" size="mini"> + </button>
+          </view>
+        </view>
+      </view>  
+
+    <view class='row_0'>
+      <view class="title" >
+        <view style = "margin-top:35rpx;">机器人</view>
+      </view>
+    </view>  
+
+     <view style = "margin-top:35rpx;">
+          <view style="display:flex; flex-direction:row;">
+            <button class="sign_btn" bindtap="changeRobot" id="redSub" size="mini"> - </button>
+            <button class="num_show" size="mini" hover-class="none">{{redRobot}}</button>
+            <button class="sign_btn" bindtap="changeRobot" id="redAdd" size="mini"> + </button>
+            <view style="width:180rpx; text-align: center;">高抬</view>
+            <button class="sign_btn" bindtap="changeRobot" id="bluSub" size="mini"> - </button>
+            <button class="num_show" size="mini" hover-class="none">{{blueRobot}}</button>
+            <button class="sign_btn" bindtap="changeRobot" id="bluAdd" size="mini"> + </button>
+          </view>
+        </view>
 
       <view class='row_2' style="flex-direction:row;">
         <text wx:if="{{!skillMode}}" class='redScore'>{{redScore}}
@@ -53,6 +89,16 @@
       <switch id="skillMode" bindchange="switch1Change">技能赛计分</switch>
     </view>
     
+  </van-tab>
+
+    <van-tab title="{{information}}">
+    <view class="container">
+       <button wx:for="{{ziliao}}" wx:for-item="i" wx:if="{{i.reviewd}}" type="primary" style="width:70%" plain="true" class="pdf" bindtap="open" id="{{i.cloudPath}}">{{i.name}}</button>
+
+      <navigator class="tool" id="t1" url="../ziliao/ziliao" open-type='navigate'>
+          <button type="default" plain="true">上传资料</button>
+      </navigator>
+    </view>
   </van-tab>
 
   <van-tab title="检查单">
@@ -103,19 +149,7 @@
       </view>
     </view>
   </van-tab>
-  <van-tab title="{{information}}">
-    <view class="container">
-       <button wx:for="{{ziliao}}" wx:for-item="i" wx:if="{{i.reviewd}}" type="primary" style="width:70%" plain="true" class="pdf" bindtap="open" id="{{i.cloudPath}}">{{i.name}}</button>
 
-      <!-- <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="0" >竞赛手册（英文）</button>
-      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="1" >竞赛手册（中文）</button>
-      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="2" >技能赛规则（英文）</button>
-      <button type="primary" style="width:70%" plain="true" class="pdf" bindtap="openPdf" id="3" >技能赛规则（中文）</button> -->
-      <navigator class="tool" id="t1" url="../ziliao/ziliao" open-type='navigate'>
-          <button type="default" plain="true">上传资料</button>
-      </navigator>
-    </view>
-  </van-tab>
 
 </van-tabs>
   <!-- <view class='row1' style="flex-direction:row;">

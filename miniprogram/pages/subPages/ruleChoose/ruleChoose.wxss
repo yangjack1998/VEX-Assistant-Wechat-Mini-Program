@@ -12,6 +12,8 @@
   width: 100%;
   justify-content: center;
   padding: 0;
+  align-items: center;
+  display: block;
 }
 
 .table_container {
@@ -37,6 +39,7 @@
   width: 100%;
   height: 100%;
   justify-content: center;
+  flex-direction:row;
 }
 .tool {
   font-size: 50rpx;
@@ -122,25 +125,28 @@ button {
   display: flex;
   justify-content: space-between; /* 项目位于各行之间留有空白的容器内。 */
   width: 100%;
-  font-size: 40rpx;
-  color: #330e0e;
+  font-size: 35rpx;
+  color: #000000;
   text-align: center;
+  margin-top: 10rpx;
 }
 .td{
   display: flex;
-  align-items: center;
-  justify-content: center;
+  
   height: auto;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
-  /* border-bottom: ;
-  border-right: 1px solid #000;
-  border-left: 1px solid #000;
-  border-top: 1px solid #000; */
+  
 } 
-.td1,.td2{
+.td1{
+  align-items: left;
+  justify-content: left;
   width: 50%
 } 
+
+.td2{
+  align-items: center;
+  justify-content: center;
+  width: 50%
+}
 
 .header_view_hide{
   display: none;
@@ -153,4 +159,48 @@ button {
   width: 98%;
   margin-left: 1%;
   display: block;
+}
+
+.userinfo-avatar { 
+  overflow: hidd; 
+  display: block; 
+  width: 160rpx; 
+  height: 160rpx; 
+  margin: 20rpx; 
+  margin-top: 50rpx; 
+  border-radius: 50%; 
+  border: 2px solid #fff; 
+  box-shadow: 3px 3px 10px 
+  rgba(0, 0, 0, 0.2); 
+}
+  
+
+.first-child{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+}
+
+.sec-child{
+  float: left;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  margin-left: 35rpx;
+}
+
+.third-child{
+  float: right;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  margin-right: 35rpx;
+}
+
+.rank{
+  width: 20rpx;
 }

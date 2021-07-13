@@ -1,5 +1,6 @@
 // pages/main/index.js
 const app = getApp()
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -25,6 +26,7 @@ Page({
     ],
     activeIndex: 0,  // 选中的tab
     scrollTopArray: [], // 记录每个页面的滚动位置
+    
   },
 
   /**
@@ -35,12 +37,14 @@ Page({
       this.data.scrollTopArray[index] = 0;
       // item.isFirstLoad = true
     })
+
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     this.updateSubPageShowHide(this.data.activeIndex);
+    
   },
   /**
  * 生命周期函数--监听页面隐藏
@@ -104,14 +108,37 @@ Page({
   /**
    * 用户点击右上角分享
    */
-    onShareAppMessage: function (res) {
+  onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
-    }
+        console.log("111")
+      } else {
+      //来自右上角转发
+        this.addChance();
+      }
     return {
-      title: '自定义转发标题',
-      path: '/pages/main/index'
+      title: 'VEX Tipping Point 助手',
+      path: '/pages/main/index',
+      
+    
+  }
+},
+
+  async addChance(){
+
+    console.log(app.globalData.openid)
+    let old = await db.collection("rank").where({
+      _openid: app.globalData.openid
+    }).get()
+    let recordID = old.data[0]._id
+    if(old.data.length>0){
+      console.log(old.data[0].chance)
+      await db.collection('rank').doc(recordID).update({
+        data:{
+          chance:old.data[0].chance+1
+        }
+      })
     }
   }
+
 })
