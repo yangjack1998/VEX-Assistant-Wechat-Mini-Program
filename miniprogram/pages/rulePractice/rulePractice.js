@@ -33,15 +33,15 @@ Page({
    */
   onLoad: async function (options) {
     
-    let quiz = await db.collection("quiz")
+    let quiz = await db.collection("tp_quiz_prac")
     .get()
 
-    let quiz2 = await db.collection("quiz")
-    .skip(20)
-    .get()
+    // let quiz2 = await db.collection("quiz")
+    // .skip(20)
+    // .get()
 
-    let quizData = quiz.data.concat(quiz2.data)
-    
+    //let quizData = quiz.data.concat(quiz2.data)
+    let quizData = quiz.data
     quizData.forEach(element => {
       this.setData({
         questions:this.data.questions.concat(element.question),

@@ -4,24 +4,7 @@
   <text style="text-align: center; font-size: 150rpx; font-weight: bold;">{{score}}</text>
   <text>你还有{{chance}}次机会</text>
   <input type='text' auto-focus="{{af}}"  bindinput="bindKeyInput" placeholder="你的昵称/队伍编号" maxlength="10" value="{{inputValue}}" disabled="{{disInput}}" />
+  <input type='text'  bindinput="bindKeyInput2" placeholder="一句想对大家说的话" maxlength="10" value="{{quote}}" disabled="{{disInput}}" />
+  <button style="margin-bottom:10rpx;" bindtap="submit" disabled="{{disable}}">提交</button>
 
-  <button style="margin-bottom:10rpx;" bindtap="submit" disabled="{{disable}}">查看排名</button>
-
-  <view class="{{showView?'header_view_show':'header_view_hide'}}">
-    <view class="table_header">
-      <view class="th th1">用户</view>
-      <view class="th th2">得分</view>
-      <view class="th th2">时间</view>
-    </view>
-    <!-- <block> 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。 -->
-    <block wx:for="{{rank}}" wx:for-item="i" >
-      <view class="table_cell">
-        <view wx:if="{{username==i.name}}" style="text-decoration:underline;" class="td td1">{{i.name}}</view>
-          <view wx:else class="td td1">{{i.name}}</view>
-        <view class="td td2">{{i.score}}</view>
-        <view class="td td2">{{i.timeShow}}</view>
-      </view>
-    </block>
-
-  </view>
 </view>

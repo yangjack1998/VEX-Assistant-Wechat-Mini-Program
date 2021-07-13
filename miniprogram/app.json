@@ -1,6 +1,5 @@
 {
   "pages": [ 
-    
     "pages/main/index",
     "pages/ziliao/ziliao",
     "pages/mainPage/main",
@@ -9,7 +8,6 @@
     "pages/leaderboard2/leaderboard2",
     "pages/ruleQuiz/ruleQuiz",
     "pages/index/index",
-    "pages/scoreTool/scoreTool",
     "pages/rulePractice/rulePractice",
     "pages/dataSet/dataSet",
     "pages/test/test",
@@ -38,9 +36,9 @@
   },
   "window": {
     "backgroundColor": "#fff",
-    "navigationBarTitleText": "VEX Change Up 助手",
+    "navigationBarTitleText": "VEX Tipping Point 助手",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#d02222"
+    "navigationBarBackgroundColor": "#55218f"
   },
   "sitemapLocation": "sitemap.json"
 }

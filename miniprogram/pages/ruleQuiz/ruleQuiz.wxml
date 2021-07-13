@@ -1,6 +1,6 @@
 <!--ruleQuiz/ruleQuiz.wxml-->
 <view class="container">
-<button class="time" size="mini" hover-class="none">计时：{{timecount}}</button>
+<button class="time" size="mini" hover-class="none">计时：{{time_rest}}</button>
 
 <view class="question">{{questions[index]}}</view>
 <image  wx:if="{{fileName!='no'}}" bindtap="clickImg" style="width:100%;" mode="aspectFit" src="{{picPath}}"></image>

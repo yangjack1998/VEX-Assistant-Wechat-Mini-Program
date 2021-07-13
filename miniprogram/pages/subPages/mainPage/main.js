@@ -32,7 +32,8 @@ Component({
     active: 'home',
     current: 'mainpage',
     activeKey: 0,
-    row:[[1,2,3],[1,2,3],[1,2,3]],
+    ring:["高","中","低"],
+    mobileGoal:["本方区","高抬"],
     auto: [{
       name: 'red',
       value: '红胜'
@@ -48,22 +49,16 @@ Component({
     ],
     redScore: 0,
     blueScore: 0,
-    skillScore: 63,
-    redBall:0,
-    blueBall:0,
-    redRow:0,
-    blueRow:0,
-    goals:[
-      {name:'00', color:""},
-      {name:'01', color:""},
-      {name:'02', color:""},
-      {name:'10', color:""},
-      {name:'11', color:""},
-      {name:'12', color:""},
-      {name:'20', color:""},
-      {name:'21', color:""},
-      {name:'22', color:""}
-    ],
+    redRing:[0,0,0],
+    blueRing:[0,0,0],
+    redMG:[0,0],
+    blueMG:[0,0],  
+    redRobot:0,
+    blueRobot:0,
+    totalRing:0,
+    totalMG:0,
+    ringLimit:72,
+    MGLimit:7,
     autoBackRed:0.2,
     autoBackBlue:0.2,
     autoWinner:"none",
@@ -74,19 +69,7 @@ Component({
     selected: 0,
     color: "rgba(200, 200, 200)",
     selectedColor: "#d02222",
-    list: [{
-      pagePath: "/pages/mainPage/main",
-      icon: "home-o",
-      text: "首页"
-    }, {
-      pagePath: "/pages/ruleChoose/ruleChoose",
-      icon: "search",
-      text: "查看排行"
-    }, {
-      pagePath: "/pages/",
-      icon: "setting-o",
-      text: "设置"
-    }],
+
     list1: ['机器人、遥控器电池电量', '对应颜色机器人号码牌', '易损零件(橡筋、轧带、履带等)','参赛证'],
     list2: ['预装', '机器人尺寸', '自动程序选择', '场控连接是否正常', '比赛场地是否摆放正确'],
     checked: [],
@@ -127,31 +110,104 @@ Component({
     console.log(event.detail)
   },
 
-  changeBallNum: function (e){
-    console.log(e.currentTarget.id)
-    switch(e.currentTarget.id) {
+  changeRingNum: function (e){
+    let targetCase = e.currentTarget.id.substring(0,6)
+    let num = e.currentTarget.id.substring(6)
+    switch(targetCase) {
       case "redSub":
-        if(this.data.redBall>0)
+        if(this.data.redRing[num]>0)
+        this.data.redRing[num] = this.data.redRing[num] - 1
         this.setData({
-          redBall:this.data.redBall-1
+          redRing:this.data.redRing
         })
         break;
       case "redAdd":
-        if(this.data.redBall<16)
+        if(this.data.totalRing<this.data.ringLimit)
+        this.data.redRing[num] = this.data.redRing[num] + 1
         this.setData({
-          redBall:this.data.redBall+1
+          redRing:this.data.redRing
         })
         break;
-      case "blueSub":
-        if(this.data.blueBall>0)
+      case "bluSub":
+        if(this.data.blueRing[num]>0)
+        this.data.blueRing[num] = this.data.blueRing[num] - 1
         this.setData({
-          blueBall:this.data.blueBall-1
+          blueRing:this.data.blueRing
         })
         break;
-      case "blueAdd":
-        if(this.data.blueBall<16)
+      case "bluAdd":
+        if(this.data.totalRing<this.data.ringLimit)
+        this.data.blueRing[num] = this.data.blueRing[num] + 1
         this.setData({
-          blueBall:this.data.blueBall+1
+          blueRing:this.data.blueRing
+        })
+        break;
+    }
+    this.updateTotalScore()
+  },
+
+  changeMG: function (e){
+    let targetCase = e.currentTarget.id.substring(0,6)
+    let num = e.currentTarget.id.substring(6)
+    switch(targetCase) {
+      case "redSub":
+        if(this.data.redMG[num]>0)
+        this.data.redMG[num] = this.data.redMG[num] - 1
+        this.setData({
+          redMG:this.data.redMG
+        })
+        break;
+      case "redAdd":
+        if(this.data.totalMG<this.data.MGLimit && this.data.redMG[0]+this.data.redMG[1]<5)
+        this.data.redMG[num] = this.data.redMG[num] + 1
+        this.setData({
+          redMG:this.data.redMG
+        })
+        break;
+      case "bluSub":
+        if(this.data.blueMG[num]>0)
+        this.data.blueMG[num] = this.data.blueMG[num] - 1
+        this.setData({
+          blueMG:this.data.blueMG
+        })
+        break;
+      case "bluAdd":
+        if(this.data.totalMG<this.data.MGLimit && this.data.blueMG[0]+this.data.blueMG[1]<5)
+        this.data.blueMG[num] = this.data.blueMG[num] + 1
+        this.setData({
+          blueMG:this.data.blueMG
+        })
+        break;
+    }
+    this.updateTotalScore()
+  },
+
+  changeRobot: function (e){
+    let targetCase = e.currentTarget.id.substring(0,6)
+
+    switch(targetCase) {
+      case "redSub":
+        if(this.data.redRobot>0)
+        this.setData({
+          redRobot:this.data.redRobot-1
+        })
+        break;
+      case "redAdd":
+        if(this.data.redRobot<2)
+        this.setData({
+          redRobot:this.data.redRobot+1
+        })
+        break;
+      case "bluSub":
+        if(this.data.blueRobot>0)
+        this.setData({
+          blueRobot:this.data.blueRobot-1
+        })
+        break;
+      case "bluAdd":
+        if(this.data.blueRobot<2)
+        this.setData({
+          blueRobot:this.data.blueRobot+1
         })
         break;
     }
@@ -163,58 +219,47 @@ Component({
     let autoBlue = 0
     switch(this.data.autoWinner) {
       case "red":
-        autoRed = 6
+        autoRed = 20
         break;
       
       case "blue":
-        autoBlue = 6
+        autoBlue = 20
         break;
       
       case "both":
-        autoRed = 3
-        autoBlue = 3
+        autoRed = 10
+        autoBlue = 10
         break;
     }
     this.setData({
-      redScore:this.data.redBall+this.data.redRow*6+autoRed,
-      blueScore:this.data.blueBall+this.data.blueRow*6+autoBlue,
+      totalRing: this.data.redRing[0] + 
+      this.data.redRing[1] + 
+      this.data.redRing[2] +
+      this.data.blueRing[0] + 
+      this.data.blueRing[1] + 
+      this.data.blueRing[2],
+      totalMG: this.data.redMG[0] +
+      this.data.redMG[1] +
+      this.data.blueMG[0] +
+      this.data.blueMG[1],
+
+      redScore:this.data.redRing[0]*10 + 
+      this.data.redRing[1]*3 + 
+      this.data.redRing[2]*1 + 
+      this.data.redMG[0]*20 +
+      this.data.redMG[1]*40 +
+      this.data.redRobot*30+autoRed,
+      blueScore:this.data.blueRing[0]*10 + 
+      this.data.blueRing[1]*3 + 
+      this.data.blueRing[2]*1 + 
+      this.data.blueMG[0]*20 +
+      this.data.blueMG[1]*40 +
+      this.data.blueRobot*30+autoBlue
     })
-    this.setData({
-      skillScore:this.data.redScore-this.data.blueScore+63
-    })
+
   },
 
-  updateRow(){
-    const goals = this.data.goals
-    let redRow = 0
-    let blueRow = 0
-    for(let i=0;i<goals.length;i+=3){
-      if(goals[i].color===goals[i+1].color && goals[i].color===goals[i+2].color){
-        if(goals[i].color=="r") redRow++
-        else if(goals[i].color=="b") blueRow++
-      }
-    }
-    for(let i=0;i+6<goals.length;i++){
-      if(goals[i].color===goals[i+3].color && goals[i].color===goals[i+6].color){
-        if(goals[i].color=="r") redRow++
-        else if(goals[i].color=="b") blueRow++
-      }
-    }
-    if(goals[2].color===goals[4].color&&goals[2].color===goals[6].color){
-      if(goals[4].color=="r") redRow++
-      else if(goals[4].color=="b") blueRow++
-    }
-    if(goals[0].color===goals[4].color&&goals[0].color===goals[8].color){ 
-      if(goals[4].color=="r") redRow++
-      else if(goals[4].color=="b") blueRow++
-    }
-    console.log(redRow)
-    this.setData({
-      redRow,
-      blueRow
-    })
-    
-  },
+
 
   radioChange(e){
     const goals = this.data.goals
@@ -323,22 +368,14 @@ Component({
     this.setData({
       redScore: 0,
       blueScore: 0,
-      skillScore: 63,
-      redBall:0,
-      blueBall:0,
-      redRow:0,
-      blueRow:0,
-      goals:[
-        {name:'00', color:""},
-        {name:'01', color:""},
-        {name:'02', color:""},
-        {name:'10', color:""},
-        {name:'11', color:""},
-        {name:'12', color:""},
-        {name:'20', color:""},
-        {name:'21', color:""},
-        {name:'22', color:""}
-      ],
+      redRing:[0,0,0],
+      blueRing:[0,0,0],
+      redMG:[0,0],
+      blueMG:[0,0],  
+      redRobot:0,
+      blueRobot:0,
+      totalRing:0,
+      totalMG:0,
       autoBackRed:0.2,
       autoBackBlue:0.2,
       autoWinner:"none",

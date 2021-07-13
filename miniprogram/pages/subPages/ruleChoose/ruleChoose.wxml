@@ -2,37 +2,76 @@
   <view class='row1' style="flex-direction:row;">
     <navigator class="tool" id="t1" url='../scoreTool/scoreTool' open-type='navigate'> -->
 <view class="totalcontainer">
-<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" style="background-color:white;">
+<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#55218f" style="background-color:white;">
   <van-tab class="tab" title="{{ruleQuiz}}">
     <view class="container">
-      <text class="title">VEX Change Up 规则知识竞赛</text>
+      <text class="title">VRC Tipping Point 规则知识竞赛</text>
       <view class="tt">
         <text class="content" style="font-weight:bold">竞赛时间:\n</text>
-        <text class="content">2020年7月31日晚7点-2020年8月7日晚11点59分\n</text>
+        <text class="content">2021年6月30日 - 2021年7月15日 \n</text>
         <text class="content" style="font-weight:bold">竞赛规则：\n</text>
-        <text class="content">每次答题系统将会从题库中随机抽出20道题，答对得5分，答错不得分。最终成绩将由总得分和总用时组成，排名将优先根据总得分排序。当多个用户的得分相同时，则会根据总用时由短到长进行排名。每一用户最多可以有三次回答机会，三次过后虽然依旧可以答题，但是分数不会被记入排行榜。\n\n</text>
-      <text class="content">点击左侧进入练习模式，系统会即时反馈正确与否并进行提示。</text>
-      <text class="content">点击右侧进入进入 VEX Change Up 规则知识竞赛</text>
+        <text class="content">每次答题限时一分钟，答对一题得5分，答错不得分。排名将优先根据总得分排序。当多个用户的得分相同时，则会根据完成的先后顺序进行排名。每一用户初始有三次回答机会，分享小程序将获得额外机会，没有机会的情况下可以继续答题，但是分数不会被记入排行榜。\n\n</text>
+        <text class="content">排名第一的同学将获得小程序排行榜的黄金广告位！\n\n</text>
+
+      <!-- <text class="content">点击左侧进入练习模式，系统会即时反馈正确与否并进行提示。</text>
+      <text class="content">点击右侧进入 VEX Tipping Point 规则知识竞赛</text> -->
+      <!-- <text class="content">目前关于新赛季的题目还在准备当中，因此练习和测验的功能将暂停使用。</text> -->
       </view>
-      <view class='row1' style="flex-direction:row;">
+      <view class='row1' >
         <navigator class="tool" id="t1" url='../rulePractice/rulePractice' open-type='navigate'>
           <button type="default" plain="true">练习</button>
         </navigator>
         <navigator class="tool" id="t2" url='../ruleQuiz/ruleQuiz' open-type='navigate'>
           <button type="default" plain="true">测验</button>
         </navigator>
+        <!-- <web-view src="https://mp.weixin.qq.com/s/bYdmUb3QGNTOHP-P2wsZsQ">微信</web-view> -->
       </view>
     </view>
   </van-tab>
   <van-tab title="{{leaderboard}}">
-    <view class="table_container">
-      <view style="margin:10rpx" class="{{showView?'header_view_show':'header_view_hide'}}"> 
-        <view class="table_header">
+  <view class="container">
+  
+  <view class="first-child"> 
+    
+      <cover-image style="width:70rpx;" src="icons/first_icon.png"> </cover-image>
+      <view>{{top_three[0]}}</view>
+      <view>得分：{{top_three_score[0]}}</view>
+      <view>{{top_quote}}</view>
+    
+  </view>
+  <view class="sec-child">
+        <cover-image style="width:60rpx;" src="icons/second_icon.png"> </cover-image>
+      <view>{{top_three[1]}}</view>
+      <view>得分：{{top_three_score[1]}}</view>
+    
+  </view>
+  
+  <view class="third-child">
+      <cover-image style="width:60rpx;" src="icons/third_icon.png"> </cover-image>
+      <view>{{top_three[2]}}</view>
+      <view>得分：{{top_three_score[2]}}</view>
+  </view>
+
+  <view style="margin-top: 170rpx;" >
+  <view wx:for="{{rank}}" wx:for-item="i" wx:for-index="idx" >
+    <view wx:if="{{idx>2}}" class="table_cell">
+    <view class="td td2">{{idx+1}}</view>
+      <view wx:if="{{username===i.name}}" style="text-decoration:underline;" class="td td1">{{i.name}}</view>
+      <view wx:else class="td td1">{{i.name}}</view>
+      <view class="td td2">{{i.score}}</view>
+    </view>
+  </view>
+  </view>
+      <!--<view class="table_container">
+        <view style="margin:10rpx" class="{{showView?'header_view_show':'header_view_hide'}}"> 
+
+
+
+         <view class="table_header">
           <view class="th th1">用户</view>
           <view class="th th2">得分</view>
           <view class="th th2">时间</view>
         </view>
-        <!-- <block> 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。 -->
         <block wx:for="{{rank}}" wx:for-item="i" >
           <view class="table_cell">
             <view wx:if="{{username===i.name}}" style="text-decoration:underline;" class="td td1">{{i.name}}</view>
@@ -40,9 +79,13 @@
             <view class="td td2">{{i.score}}</view>
             <view class="td td2">{{i.timeShow}}</view>
           </view>
-        </block>
-      </view> 
-    </view>
+        </block> 
+
+
+
+
+      </view>-->
+    </view> 
   </van-tab>
 </van-tabs>
 </view>

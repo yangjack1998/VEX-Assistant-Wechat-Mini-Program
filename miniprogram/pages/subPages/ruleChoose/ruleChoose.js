@@ -2,11 +2,12 @@ const app = getApp()
 const db = wx.cloud.database()
 const _ =db.command
 Component({
-
+  
   /**
    * 页面的初始数据
    */
   data: {
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     username:'',
     ruleQuiz: "规则测验",
     leaderboard: "查看排行",
@@ -26,7 +27,10 @@ Component({
       pagePath: "/pages/",
       icon: "setting-o",
       text: "设置"
-    }]
+    }],
+    top_three:["","",""],
+    top_three_score:["","",""],
+    top_quote:""
   },
   //   switchTab(e) {
   //     const data = e.currentTarget.dataset
@@ -58,6 +62,10 @@ Component({
       }
       this.printRank()
     }
+  },
+
+  bindGetUserInfo (e) {
+    console.log(e.detail.userInfo)
   },
 
 
@@ -110,11 +118,27 @@ Component({
       return value2 - value1;
   })
     console.log(all)
+    if(all.length>0){
+    this.data.top_three[0] = all[0].name;
+    this.data.top_three_score[0] = all[0].score;
+    this.data.top_quote = all[0].quote;}
+    if(all.length>1){
+    this.data.top_three[1] = all[1].name;
+    this.data.top_three_score[1] = all[1].score;}
+    if(all.length>2){
+    this.data.top_three[2] = all[2].name;
+    this.data.top_three_score[2] = all[2].score;}
+    
+    
+    
+    
     this.setData({
       rank:all,
       disable:true,
-      disInput:true
-
+      disInput:true,
+      top_three:this.data.top_three,
+      top_three_score:this.data.top_three_score,
+      top_quote:  this.data.top_quote
     })
   }
 }

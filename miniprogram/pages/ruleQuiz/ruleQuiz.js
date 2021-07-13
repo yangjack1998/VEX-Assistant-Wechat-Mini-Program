@@ -3,6 +3,7 @@ const db = wx.cloud.database()
 const _ =db.command
 const app = getApp()
 var intt
+var intt2
 Page({
   
   /**
@@ -12,8 +13,6 @@ Page({
     fileName:"no",
     result:"",
     index:0,
-    correct:1,
-    wrong:1,
     score:0,
     lookResult:0,
     questions:[],
@@ -22,9 +21,10 @@ Page({
     pictures:[],
     picPath:"cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/0.jpg",
     status:"",
+    time_rest:60,
     time:{
       hour: 0,
-      minute: 0,
+      minute: 1,
       second: 0,
       millisecond:0
     },
@@ -41,24 +41,25 @@ Page({
       icon:"loading",
       duration: 2000
     })
-    let quiz = await db.collection("qc")
-    .get()
 
-    let quiz2 = await db.collection("qc")
-    .skip(20)
-    .get()
-
-   
-
-    let quizData = quiz.data.concat(quiz2.data)
-    for (let i = 1; i < quizData.length; i++) {
-      const random = Math.floor(Math.random() * (i + 1));
-      [quizData[i], quizData[random]] = [quizData[random], quizData[i]];
+    const MAX_LIMIT = 20
+    const countResult = await db.collection('tp_quiz').count()
+    const total = countResult.total
+    // 计算需分几次取
+    const batchTimes = Math.ceil(total / 20)
+    let all = await (await db.collection('tp_quiz').get()).data
+    for (let i = 1; i < batchTimes; i++) {
+      const temp = db.collection('tp_quiz').skip(i * MAX_LIMIT).get()
+      all=all.concat((await temp).data)
     }
 
-    quizData = quizData.slice(0,20)
-    
-    quizData.forEach(element => {
+    for (let i = 1; i < all.length; i++) {
+      const random = Math.floor(Math.random() * (i + 1));
+      [all[i], all[random]] = [all[random], all[i]];
+    }
+
+
+    all.forEach(element => {
       this.setData({
         questions:this.data.questions.concat(element.question),
         options:this.data.options.concat(element.options),
@@ -67,6 +68,9 @@ Page({
       })
     });
 
+
+
+    //console.log(all);
     this.setData({
       fileName:this.data.pictures[this.data.index],
       picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
@@ -139,7 +143,7 @@ Page({
       fileName:this.data.pictures[this.data.index],
       picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/"+this.data.pictures[this.data.index]+".jpg"
     })
-    console.log(this.data.fileName)
+    //console.log(this.data.fileName)
   }
   },
 
@@ -194,11 +198,12 @@ Page({
 
   end(){
     clearInterval(intt);
+    clearInterval(intt2);
     let that = this
     console.log("end")
     app.globalData.score=that.data.score
-    app.globalData.time=that.data.time.millisecond
-    app.globalData.timeShow=that.data.timecount
+    app.globalData.time=Date.parse(new Date())
+    //app.globalData.timeShow=that.data.timecount
     wx.redirectTo({
       url: '../leaderboard/leaderboard'
       // events: {
@@ -219,16 +224,24 @@ Page({
     var that = this;
     //停止（暂停）
     clearInterval(intt);
+    clearInterval(intt2);
     //时间重置
     that.setData({
       time:{
       hour: 0,
-      minute: 0,
+      minute: 1,
       second: 0,
       millisecond: 0
       }
     })
-    intt = setInterval(function () { that.timer() }, 50);
+    intt = setInterval(function () { that.end() }, 60000);
+    intt2 = setInterval(function () { that.timer2() }, 1000);
+  },
+
+  timer2:function(){
+    this.setData({
+      time_rest:this.data.time_rest-1
+    })
   },
 
   timer: function () {
