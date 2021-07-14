@@ -4,7 +4,7 @@ The goal of this project is to develop a helpful tool for students and coaches w
 ## Features:
 ### Scoring Tool
 ![Image text](https://github.com/yangjack1998/VEX-Assistant-Wechat-Mini-Program/blob/cloud/Image/ScoringTool.jpg)  
-The system will calculate and display the score according to users' inputs(including numbers and status of game elements)
+The system will calculate and display the score according to users' inputs (including numbers and status of game elements)
 ### Document Upload/View
 ![Image text](https://github.com/yangjack1998/VEX-Assistant-Wechat-Mini-Program/blob/cloud/Image/DocTool1.jpg)
 ![Image text](https://github.com/yangjack1998/VEX-Assistant-Wechat-Mini-Program/blob/cloud/Image/DocTool2.jpg)  
@@ -13,5 +13,6 @@ The system allows user to view the competition related document in the applicati
 ![Image text](https://github.com/yangjack1998/VEX-Assistant-Wechat-Mini-Program/blob/cloud/Image/QuizTool1.jpg)
 ![Image text](https://github.com/yangjack1998/VEX-Assistant-Wechat-Mini-Program/blob/cloud/Image/QuizTool2.jpg)  
 The quiz system allows user to test their familiarity of the rule. Users can choose to either practice or quiz. 
+  
 ![Image text](https://github.com/yangjack1998/VEX-Assistant-Wechat-Mini-Program/blob/cloud/Image/QuizTool3.jpg)  
 A ranking system is also available so that users can learn how is their understanding compared to other people.
