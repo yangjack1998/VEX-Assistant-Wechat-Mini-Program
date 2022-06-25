@@ -1,0 +1,15 @@
+<view class="container">
+<view class="title">赛队查询(Beta)</view>
+<input type='text' auto-focus="true" bindinput="bindKeyInput" placeholder="队伍编号" maxlength="10" />
+<button style="  margin-left:auto;  margin-right:auto;  width:50%;" type="default" plain="true" bindtap="submit" disabled="{{disable}}">查询</button>
+
+<view style="margin: 40rpx 20rpx;" hidden="{{hide}}">
+<view class="line"><text  style="color: #55218f;">队伍编号: </text><text>{{team_num2}}</text></view>
+<view class="line"><text  style="color: #55218f;">队伍名称: </text><text>{{team_name}}</text></view>
+<view class="line"><text  style="color: #55218f;">机器人名称: </text><text>{{robot_name}}</text></view>
+<view class="line"><text  style="color: #55218f;">学校/组织: </text><text>{{org}}</text></view>
+<view class="line"><text  style="color: #55218f;">国家/地区: </text><text>{{region}}</text></view>
+<view class="line"><text  style="color: #55218f;">城市: </text><text>{{city}}</text></view>
+<view class="line"><text  style="color: #55218f;">组别: </text><text>{{grade}}</text></view>
+</view>
+</view>

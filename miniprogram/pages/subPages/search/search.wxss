@@ -1,0 +1,33 @@
+.title{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin:15rpx;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+
+input{
+  text-align: center;
+  margin: 20rpx;
+  border-bottom: solid;
+  border-width: thin;
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+}
+
+
+
+
+
+.line{
+  margin-top: 15rpx;
+}

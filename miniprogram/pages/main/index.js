@@ -18,11 +18,11 @@ Page({
         iconPath: "records",
         selected: false
       },
-      // {
-      //   name: "好听的名字",
-      //   iconPath: "setting-o",
-      //   selected: false
-      // }
+      {
+        name: "赛队查询(Beta)",
+        iconPath: "search",
+        selected: false
+      }
     ],
     activeIndex: 0,  // 选中的tab
     scrollTopArray: [], // 记录每个页面的滚动位置

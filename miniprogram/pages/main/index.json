@@ -4,6 +4,6 @@
     "van-tabbar-item": "../../miniprogram_npm/vant-weapp/tabbar-item/index",
     "page1":"../subPages/mainPage/main",
     "page2": "../subPages/ruleChoose/ruleChoose",
-    "page3": "../subPages/ins/ins"
+    "page3": "../subPages/search/search"
     }
 }

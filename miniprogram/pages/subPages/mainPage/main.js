@@ -86,7 +86,11 @@ Component({
         this.setData({
           ziliao:all.data
         })
+       
+        
+
     }
+    
   },
 
   methods:{
@@ -219,16 +223,16 @@ Component({
     let autoBlue = 0
     switch(this.data.autoWinner) {
       case "red":
-        autoRed = 20
+        autoRed = 6
         break;
       
       case "blue":
-        autoBlue = 20
+        autoBlue = 6
         break;
       
       case "both":
-        autoRed = 10
-        autoBlue = 10
+        autoRed = 3
+        autoBlue = 3
         break;
     }
     this.setData({

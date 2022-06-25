@@ -1,5 +1,5 @@
 {
-  "name": "checkString",
+  "name": "searchTeam",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wx-server-sdk": "~2.1.2"
+    "node-fetch": "^3.2.0",
+    "wx-server-sdk": "~2.5.3",
+    "axios": "latest"
   }
 }
