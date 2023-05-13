@@ -34,6 +34,8 @@ Component({
     activeKey: 0,
     ring:["高","中","低"],
     mobileGoal:["本方区","高抬"],
+    // robotlevel:["无","最高","第二","第三","第四"],
+    robotlevel:["-","A","B","C","D","E","F","G","H","I","J"],
     auto: [{
       name: 'red',
       value: '红胜'
@@ -49,26 +51,23 @@ Component({
     ],
     redScore: 0,
     blueScore: 0,
-    redHG:0,
-    blueHG:0,
-    discLimit:60,
-    redLG:0,
-    blueLG:0,
-    redRoller:0,
-    blueRoller:0,
-    redTile:0,
-    blueTile:0,
-    discLimit:60,
-    rollerLimit:4,
-    tileLimit:28,
-    autoPoint:10,
+    triballLimit:60,
+    levelLimit: 10,
+    redHG: 0,
+    redLG: 0,
+    blueHG: 0,
+    blueLG: 0,
+    redLevel1:0,
+    redLevel2:0,
+    blueLevel1: 0,
+    blueLevel2: 0,
+    autoPoint:8,
     autoBackRed:0.2,
     autoBackBlue:0.2,
     autoWinner:"none",
     path:[],
     disable:true,
-    check:true
-    ,
+    check:true,
     selected: 0,
     color: "rgba(200, 200, 200)",
     selectedColor: "#d02222",
@@ -119,7 +118,7 @@ Component({
 
   changeInput: function(e){
     let targetCase = e.currentTarget.id
-    let currentDisc = this.data.redHG+this.data.redLG+this.data.blueHG+this.data.blueLG
+    let currentTriball = this.data.redHG+this.data.redLG+this.data.blueHG+this.data.blueLG
     let value = parseInt(e.detail)
     switch(targetCase){
         case "redInputHG":
@@ -127,7 +126,7 @@ Component({
                 this.setData({
                     redHG:0
                 })
-            } else if(currentDisc+value-this.data.redHG>this.data.discLimit){
+            } else if(currentTriball+value-this.data.redHG>this.data.triballLimit){
                 this.setData({
                     redHG:0
                 })
@@ -144,7 +143,7 @@ Component({
                 this.setData({
                     blueHG:0
                 })
-            } else if(currentDisc+value-this.data.blueHG>this.data.discLimit){
+            } else if(currentTriball+value-this.data.blueHG>this.data.triballLimit){
                 this.setData({
                     blueHG:0
                 })
@@ -161,7 +160,7 @@ Component({
                 this.setData({
                     redLG:0
                 })
-            } else if(currentDisc+value-this.data.redLG>this.data.discLimit){
+            } else if(currentTriball+value-this.data.redLG>this.data.triballLimit){
                 this.setData({
                     redLG:0
                 })
@@ -178,7 +177,7 @@ Component({
                 this.setData({
                     blueLG:0
                 })
-            } else if(currentDisc+value-this.data.blueLG>this.data.discLimit){
+            } else if(currentTriball+value-this.data.blueLG>this.data.triballLimit){
                 this.setData({
                     blueLG:0
                 })
@@ -190,46 +189,13 @@ Component({
             }
             break;
               
-        case "redInputTile":
-            if(!this.isInt(value) || value<0){
-                this.setData({
-                    redTile:0
-                })
-            } else if(value>this.data.tileLimit){
-                this.setData({
-                    redTile:0
-                })
-                this.showExceed()
-            } else{
-                this.setData({
-                    redTile:value
-                })
-            }
-            break;
-
-        case "blueInputTile":
-            if(!this.isInt(value) || value<0){
-                this.setData({
-                    blueTile:0
-                })
-            } else if(value>this.data.tileLimit){
-                this.setData({
-                    blueTile:0
-                })
-                this.showExceed()
-            } else{
-                this.setData({
-                    blueTile:value
-                })
-            }
-            break;
     }  
     this.updateTotalScore()
   },
 
-  changeDisc: function (e){
+  changeTriball: function (e){
     let targetCase = e.currentTarget.id
-    let currentDisc = this.data.redHG+this.data.redLG+this.data.blueHG+this.data.blueLG
+    let currentTriball = this.data.redHG+this.data.redLG+this.data.blueHG+this.data.blueLG
     switch(targetCase) {
         case "redSubHG":
             if(this.data.redHG>0)
@@ -238,7 +204,7 @@ Component({
             })
             break;
         case "redAddHG":
-            if(currentDisc<this.data.discLimit)
+            if(currentTriball<this.data.triballLimit)
             this.setData({
                 redHG:this.data.redHG+1
             })
@@ -250,7 +216,7 @@ Component({
             })
             break;
         case "blueAddHG":
-            if(currentDisc<this.data.discLimit)
+            if(currentTriball<this.data.triballLimit)
             this.setData({
                 blueHG:this.data.blueHG+1
             })
@@ -262,7 +228,7 @@ Component({
             })
             break;
         case "redAddLG":
-            if(currentDisc<this.data.discLimit)
+            if(currentTriball<this.data.triballLimit)
             this.setData({
                 redLG:this.data.redLG+1
             })
@@ -274,7 +240,7 @@ Component({
             })
             break;
         case "blueAddLG":
-            if(currentDisc<this.data.discLimit)
+            if(currentTriball<this.data.triballLimit)
             this.setData({
                 blueLG:this.data.blueLG+1
             })
@@ -292,69 +258,19 @@ Component({
     console.log(e.detail)
 },
 
-  changeRoller: function (e){
-    let targetCase = e.currentTarget.id.substring(0)
-    let currentRoller = this.data.redRoller+this.data.blueRoller
-    switch(targetCase) {
-        case "redSub":
-            if(this.data.redRoller>0)
-            this.setData({
-                redRoller:this.data.redRoller-1
-            })
-            break;
-        case "redAdd":
-            if(currentRoller<this.data.rollerLimit)
-            this.setData({
-                redRoller:this.data.redRoller+1
-            })
-            break;
-        case "blueSub":
-            if(this.data.blueRoller>0)
-            this.setData({
-                blueRoller:this.data.blueRoller-1
-            })
-            break;
-        case "blueAdd":
-            if(currentRoller<this.data.rollerLimit)
-            this.setData({
-                blueRoller:this.data.blueRoller+1
-            })
-            break;
+changeLevel: function (e){
+    let id = e.currentTarget.id
+    let level = id.includes('Sub') ? -1 : 1
+    let color = id.includes('red') ? 'red' : 'blue'
+    let index = id.includes('1') ? '1' : '2'
+    let currentLevel = this.data[color + 'Level' + index]
+    if(currentLevel + level >= 0 && currentLevel + level <= this.data.levelLimit){
+        this.setData({
+            [color + 'Level' + index]: currentLevel + level
+        })
+        this.updateTotalScore()
     }
-    this.updateTotalScore()
-  },
-
-
-  changeTile: function (e){
-    let targetCase = e.currentTarget.id.substring(0)
-    switch(targetCase) {
-        case "redSub":
-            if(this.data.redTile>0)
-            this.setData({
-                redTile:this.data.redTile-1
-            })
-            break;
-        case "redAdd":
-            if(this.data.redTile<this.data.tileLimit)
-            this.setData({
-                redTile:this.data.redTile+1
-            })
-            break;
-        case "blueSub":
-            if(this.data.blueTile>0)
-            this.setData({
-                blueTile:this.data.blueTile-1
-            })
-            break;
-        case "blueAdd":
-            if(this.data.blueTile<this.data.tileLimit)
-            this.setData({
-                blueTile:this.data.blueTile+1
-            })
-            break;
-    }
-    this.updateTotalScore()
-  },
+},
 
   updateTotalScore(){
     let autoRed = 0
@@ -373,16 +289,100 @@ Component({
         autoBlue = this.data.autoPoint/2
         break;
     }
+
+    const allScores = [
+        this.data.redLevel1,
+        this.data.redLevel2,
+        this.data.blueLevel1,
+        this.data.blueLevel2
+      ].filter(score => score !== 0)
+      const sortedScores = allScores.sort((a, b) => b - a);
+      const ranks = {};
+      let i = 1;
+      sortedScores.forEach(score => {
+        if (ranks[score] === undefined) {
+          ranks[score] = i;
+          i+=1;
+        }
+      });
+    let redScore = 0;
+    let blueScore = 0;
+    if(this.data.redLevel1!==0){
+        switch (ranks[this.data.redLevel1]) {
+            case 1:
+            redScore += 20;
+            break;
+            case 2:
+            redScore += 15;
+            break;
+            case 3:
+            redScore += 10;
+            break;
+            case 4:
+            redScore += 5;
+            break;
+        }
+    }
+    if (this.data.redLevel2 !== 0) {
+        switch (ranks[this.data.redLevel2]) {
+          case 1:
+            redScore += 20;
+            break;
+          case 2:
+            redScore += 15;
+            break;
+          case 3:
+            redScore += 10;
+            break;
+          case 4:
+            redScore += 5;
+            break;
+        }
+      }
+      if (this.data.blueLevel1 !== 0) {
+        switch (ranks[this.data.blueLevel1]) {
+          case 1:
+            blueScore += 20;
+            break;
+          case 2:
+            blueScore += 15;
+            break;
+          case 3:
+            blueScore += 10;
+            break;
+          case 4:
+            blueScore += 5;
+            break;
+        }
+      }
+      
+      if (this.data.blueLevel2 !== 0) {
+        switch (ranks[this.data.blueLevel2]) {
+          case 1:
+            blueScore += 20;
+            break;
+          case 2:
+            blueScore += 15;
+            break;
+          case 3:
+            blueScore += 10;
+            break;
+          case 4:
+            blueScore += 5;
+            break;
+        }
+      }
+      
+
+
     this.setData({
       redScore:this.data.redHG*5 +
-      this.data.redLG+
-      this.data.redRoller*10 +
-      this.data.redTile*3 +
+      this.data.redLG*2+
+      redScore+
       autoRed,
       blueScore:this.data.blueHG*5 +
-      this.data.blueLG+
-      this.data.blueRoller*10 +
-      this.data.blueTile*3 +
+      this.data.blueLG*2+
+      blueScore+
       autoBlue,
     })
 
@@ -506,13 +506,13 @@ Component({
       blueScore: 0,
       redHG:0,
       blueHG:0,
-      discLimit:60,
+      triballLimit:60,
       redLG:0,
       blueLG:0,
-      redRoller:0,
-      blueRoller:0,
-      redTile:0,
-      blueTile:0,
+      redLevel1:0,
+      redLevel2:0,
+      blueLevel1: 0,
+      blueLevel2: 0,
       autoBackRed:0.2,
       autoBackBlue:0.2,
       autoWinner:"none",
