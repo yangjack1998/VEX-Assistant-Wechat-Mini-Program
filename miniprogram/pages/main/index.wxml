@@ -5,7 +5,7 @@
   <page3 wx:if='{{activeIndex == 2}}' onShow="{{tabbar[2].selected}}"></page3>
   <page4 wx:if='{{activeIndex == 3}}' onShow="{{tabbar[3].selected}}"></page4>
 </view>
-<van-tabbar active="{{ activeIndex }}" bind:change="onChange" active-color="#55218f" inactive-color="rgba(200, 200, 200)">
+<van-tabbar active="{{ activeIndex }}" bind:change="onChange" active-color="#F6BE00" inactive-color="rgba(200, 200, 200)">
   <van-tabbar-item wx:for="{{tabbar}}" wx:key="index" icon="{{item.iconPath}}">{{item.name}}
   </van-tabbar-item>
 </van-tabbar>

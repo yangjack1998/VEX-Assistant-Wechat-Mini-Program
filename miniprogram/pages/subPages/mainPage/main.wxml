@@ -2,7 +2,7 @@
   <view class='row1' style="flex-direction:row;">
     <navigator class="tool" id="t1" url='../scoreTool/scoreTool' open-type='navigate'> -->
 <view class="totalcontainer">
-<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#55218f" style="background-color:white;">
+<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#F6BE00" style="background-color:white;">
   <van-tab title="{{socringTool}}">
     <view class="container">
     <view class='row_0'>
@@ -12,7 +12,7 @@
       </view>
     </view>
 
-    <view class='row_0'>
+    <!-- <view class='row_0'>
       <view class="title" >
         <view >Ring</view>
       </view>
@@ -53,25 +53,128 @@
             <button class="sign_btn" bindtap="changeMG" id="bluAdd{{idx}}" size="mini"> + </button>
           </view>
         </view>
-      </view>  
+      </view>   -->
 
     <view class='row_0'>
       <view class="title" >
-        <view style = "margin-top:35rpx;">机器人</view>
+        <view class="subtitle">高筐</view>
       </view>
     </view>  
 
-     <view style = "margin-top:35rpx;">
-          <view style="display:flex; flex-direction:row;">
-            <button class="sign_btn" bindtap="changeRobot" id="redSub" size="mini"> - </button>
-            <button class="num_show" size="mini" hover-class="none">{{redRobot}}</button>
-            <button class="sign_btn" bindtap="changeRobot" id="redAdd" size="mini"> + </button>
-            <view style="width:180rpx; text-align: center;">高抬</view>
-            <button class="sign_btn" bindtap="changeRobot" id="bluSub" size="mini"> - </button>
-            <button class="num_show" size="mini" hover-class="none">{{blueRobot}}</button>
-            <button class="sign_btn" bindtap="changeRobot" id="bluAdd" size="mini"> + </button>
-          </view>
+     <view style = "margin-top:10rpx;">
+          <view style="display:flex; flex-direction:row;align-items: center;">
+            <button class="sign_btn" bindtap="changeDisc" id="redSubHG" size="mini"> - </button>
+            <van-field
+                value="{{ redHG }}"
+                border="{{ false }}"
+                type="number"
+                input-align="center"
+                maxlength="2"
+                class="num_show"
+                bind:input="changeInput"
+                id="redInputHG"
+            />
+            <button class="sign_btn" bindtap="changeDisc" id="redAddHG" size="mini"> + </button>
+            <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
+            <button class="sign_btn" bindtap="changeDisc" id="blueSubHG" size="mini"> - </button>
+            <van-field
+                value="{{ blueHG }}"
+                border="{{ true }}"
+                input-align="center"
+                maxlength="2"
+                class="num_show"
+                bind:input="changeInput"
+                id="blueInputHG"
+            />
+            <button class="sign_btn" bindtap="changeDisc" id="blueAddHG" size="mini"> + </button>
         </view>
+    </view>
+
+    <view class='row_0'>
+      <view class="title" >
+        <view class="subtitle">领地</view>
+      </view>
+    </view>  
+
+     <view style = "margin-top:10rpx;">
+          <view style="display:flex; flex-direction:row;">
+            <button class="sign_btn" bindtap="changeDisc" id="redSubLG" size="mini"> - </button>
+            <van-field
+                value="{{ redLG }}"
+                border="{{ true }}"
+                input-align="center"
+                maxlength="2"
+                class="num_show"
+                bind:input="changeInput"
+                id="redInputLG"
+            />
+            <button class="sign_btn" bindtap="changeDisc" id="redAddLG" size="mini"> + </button>
+            <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
+            <button class="sign_btn" bindtap="changeDisc" id="blueSubLG" size="mini"> - </button>
+            <van-field
+                value="{{ blueLG }}"
+                border="{{ true }}"
+                input-align="center"
+                maxlength="2"
+                class="num_show"
+                bind:input="changeInput"
+                id="blueInputLG"
+            />
+            <button class="sign_btn" bindtap="changeDisc" id="blueAddLG" size="mini"> + </button>
+        </view>
+    </view>
+
+    <view class='row_0'>
+      <view class="title" >
+        <view class="subtitle">双色筒</view>
+      </view>
+    </view>  
+
+     <view style = "margin-top:10rpx;">
+          <view style="display:flex; flex-direction:row;">
+            <button class="sign_btn" bindtap="changeRoller" id="redSub" size="mini"> - </button>
+            <button class="num_show" style="border: 1rpx solid rgba(0, 0, 0, 0.6);" size="mini" hover-class="none">{{redRoller}}</button>
+            <button class="sign_btn" bindtap="changeRoller" id="redAdd" size="mini"> + </button>
+            <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
+            <button class="sign_btn" bindtap="changeRoller" id="blueSub" size="mini"> - </button>
+            <button class="num_show" style="border: 1rpx solid rgba(0, 0, 0, 0.6);" size="mini" hover-class="none">{{blueRoller}}</button>
+            <button class="sign_btn" bindtap="changeRoller" id="blueAdd" size="mini"> + </button>
+        </view>
+    </view>
+
+    <view class='row_0'>
+      <view class="title" >
+        <view class="subtitle">泡沫垫</view>
+      </view>
+    </view>  
+
+     <view style = "margin-top:10rpx;">
+          <view style="display:flex; flex-direction:row;">
+            <button class="sign_btn" bindtap="changeTile" id="redSub" size="mini"> - </button>
+            <van-field
+                value="{{ redTile }}"
+                border="{{ true }}"
+                input-align="center"
+                maxlength="2"
+                class="num_show"
+                bind:input="changeInput"
+                id="redInputTile"
+            />
+            <button class="sign_btn" bindtap="changeTile" id="redAdd" size="mini"> + </button>
+            <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
+            <button class="sign_btn" bindtap="changeTile" id="blueSub" size="mini"> - </button>
+            <van-field
+                value="{{ blueTile }}"
+                border="{{ true }}"
+                input-align="center"
+                maxlength="2"
+                class="num_show"
+                bind:input="changeInput"
+                id="blueInputTile"
+            />
+            <button class="sign_btn" bindtap="changeTile" id="blueAdd" size="mini"> + </button>
+        </view>
+    </view>
 
       <view class='row_2' style="flex-direction:row;">
         <text wx:if="{{!skillMode}}" class='redScore'>{{redScore}}
@@ -85,8 +188,8 @@
         <button wx:if="{{!skillMode}}" style="background-color: rgba(255, 0, 0, {{autoBackRed}});" bindtap="addAuto" id="redAuto" class="auto">自动</button>
         <button wx:if="{{!skillMode}}" style="background-color: rgba(0, 0, 255, {{autoBackBlue}});" bindtap="addAuto" id="blueAuto" class="auto">自动</button>
       </view>
-      <button bindtap="refresh" class="refresh" >重置 <van-icon name="replay" /></button>
-      <switch id="skillMode" bindchange="switch1Change">技能赛计分</switch>
+      <button style="margin-top: 35rpx;" bindtap="refresh" class="refresh" >重置 <van-icon name="replay" /></button>
+      <!-- <switch id="skillMode" bindchange="switch1Change">技能赛计分</switch> -->
     </view>
     
   </van-tab>

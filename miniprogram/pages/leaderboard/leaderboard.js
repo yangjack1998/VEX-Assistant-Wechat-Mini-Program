@@ -12,7 +12,7 @@ Page({
     inputValue:"",
     quote:"",
     disable:true,
-    disInput:false,
+    disInput:true,
     old:false,
     id:'',
     recordID:"",
@@ -20,7 +20,7 @@ Page({
     time:0,
     timeShow:'',
     af:true,
-    chance:2
+    chance:4
   },
 
   /**
@@ -156,7 +156,7 @@ Page({
     let checkInput = await this.checkInput()
     if(checkInput) return
     let that = this
-    let old = await db.collection("rank").where({
+    let old = await db.collection("rank_spinup").where({
       name: this.data.inputValue
     }).get()
 
@@ -172,7 +172,7 @@ Page({
         })
         return
       }
-      await db.collection('rank')
+      await db.collection('rank_spinup')
         .add({
           data:
             {
@@ -181,7 +181,7 @@ Page({
             time:that.data.time,
             quote:that.data.quote,
             //timeShow:that.data.timeShow,
-            chance:2
+            chance:4
           },
           success:function(res) {
             wx.redirectTo({
@@ -190,7 +190,7 @@ Page({
         
         })
     } else if(this.data.old&&old.data[0].chance<=0){
-      await db.collection('rank').doc(this.data.recordID).update({
+      await db.collection('rank_spinup').doc(this.data.recordID).update({
         data:{
           chance:that.data.chance
         }
@@ -199,17 +199,17 @@ Page({
         url: '../main/index'})
     } else{
       //console.log("update: "+this.data.id)
-      let oldScore = await (await db.collection('rank').doc(this.data.recordID).get()).data.score
-      let oldTime = await (await db.collection('rank').doc(this.data.recordID).get()).data.time
+      let oldScore = await (await db.collection('rank_spinup').doc(this.data.recordID).get()).data.score
+      let oldTime = await (await db.collection('rank_spinup').doc(this.data.recordID).get()).data.time
       //console.log("oldScore: "+oldScore)
       
-      await db.collection('rank').doc(this.data.recordID).update({
+      await db.collection('rank_spinup').doc(this.data.recordID).update({
         data:{
           chance:that.data.chance
         }
       })
       if(this.data.score>oldScore||(this.data.score==oldScore&&this.data.time<oldTime)){
-        await db.collection('rank').doc(this.data.recordID).update({
+        await db.collection('rank_spinup').doc(this.data.recordID).update({
           data:{
             score:that.data.score,
             time:that.data.time,
@@ -244,13 +244,13 @@ Page({
    
     let that = this
     const MAX_LIMIT = 20
-    const countResult = await db.collection('rank').count()
+    const countResult = await db.collection('rank_spinup').count()
     const total = countResult.total
     // 计算需分几次取
     const batchTimes = Math.ceil(total / 20)
-    let all = await (await db.collection('rank').get()).data
+    let all = await (await db.collection('rank_spinup').get()).data
     for (let i = 1; i < batchTimes; i++) {
-      const temp = db.collection('rank').skip(i * MAX_LIMIT).get()
+      const temp = db.collection('rank_spinup').skip(i * MAX_LIMIT).get()
       all=all.concat((await temp).data)
     }
     console.log(all)
@@ -273,7 +273,7 @@ Page({
 
   checkOld: async function () {
     console.log("tt"+this.data.id)
-    let old = await db.collection("rank").where({
+    let old = await db.collection("rank_spinup").where({
       _openid: this.data.id
     }).get()
     
@@ -292,6 +292,10 @@ Page({
         this.submit()
       })
      
+    } else{
+        this.setData({
+            disInput:false,
+        })
     }
   },
 

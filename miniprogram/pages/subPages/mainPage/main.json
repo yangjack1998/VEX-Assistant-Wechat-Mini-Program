@@ -9,6 +9,7 @@
   "van-checkbox": "../../../miniprogram_npm/vant-weapp/checkbox/index",
   "van-checkbox-group": "../../../miniprogram_npm/vant-weapp/checkbox-group/index",
   "van-cell": "../../../miniprogram_npm/vant-weapp/cell/index",
-  "van-cell-group": "../../../miniprogram_npm/vant-weapp/cell-group/index"
+  "van-cell-group": "../../../miniprogram_npm/vant-weapp/cell-group/index",
+  "van-field": "../../../miniprogram_npm/vant-weapp/field/index"
   }
 }

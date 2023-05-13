@@ -7,12 +7,12 @@
 }
 
 .container {
-  margin-top: 40rpx;
+  margin-top: 30rpx;
   height: 100%;
   width: 100%;
   justify-content: center;
   padding: 0;
-  
+  margin-bottom: 200rpx;
 }
 .tabs{
   height: 100%;
@@ -90,13 +90,22 @@
 }
 
 .sign_btn {
+  font-weight: bold;
   background-color:white;
+
+  text-align: center;
+}
+
+.subtitle{
+    margin-top: 35rpx;
+    margin-bottom: 0;
 }
 
 .num_show{
+  margin: 0;
   background-color:white;
-  border-radius: 25rpx;
-  border: 1rpx solid rgba(0, 0, 0, 0.6);
+  width: 100rpx;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.6);
 }
 
 .new_cols {

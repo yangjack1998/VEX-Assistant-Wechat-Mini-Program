@@ -33,15 +33,18 @@ Page({
    */
   onLoad: async function (options) {
     
-    let quiz = await db.collection("tp_quiz_prac")
+    let quiz = await db.collection("spin_up_quiz")
     .get()
 
-    // let quiz2 = await db.collection("quiz")
-    // .skip(20)
-    // .get()
+    let quiz2 = await db.collection("spin_up_quiz")
+    .skip(20)
+    .get()
 
-    //let quizData = quiz.data.concat(quiz2.data)
-    let quizData = quiz.data
+    let quiz3 = await db.collection("spin_up_quiz")
+    .skip(40)
+    .get()
+
+    let quizData = quiz.data.concat(quiz2.data).concat(quiz3.data)
     quizData.forEach(element => {
       this.setData({
         questions:this.data.questions.concat(element.question),
@@ -125,7 +128,7 @@ Page({
     }else{
       this.setData({
         wrong:this.data.wrong+1,
-        status:this.data.hints[this.data.index]       
+        status:"回答错误"      
       })
       }
   },
@@ -139,7 +142,7 @@ Page({
     }else{
       this.setData({
         wrong:this.data.wrong+1,
-        status:this.data.hints[this.data.index]       
+        status:"回答错误"       
       })
       }
   },
@@ -153,7 +156,7 @@ Page({
     } else{
       this.setData({
         wrong:this.data.wrong+1,
-        status:this.data.hints[this.data.index]       
+        status:"回答错误"        
       })
       }
     
@@ -168,7 +171,7 @@ Page({
     }  else{
       this.setData({
         wrong:this.data.wrong+1,
-        status:this.data.hints[this.data.index]       
+        status:"回答错误"      
       })
       }
   },

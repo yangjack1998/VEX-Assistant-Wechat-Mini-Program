@@ -49,16 +49,19 @@ Component({
     ],
     redScore: 0,
     blueScore: 0,
-    redRing:[0,0,0],
-    blueRing:[0,0,0],
-    redMG:[0,0],
-    blueMG:[0,0],  
-    redRobot:0,
-    blueRobot:0,
-    totalRing:0,
-    totalMG:0,
-    ringLimit:72,
-    MGLimit:7,
+    redHG:0,
+    blueHG:0,
+    discLimit:60,
+    redLG:0,
+    blueLG:0,
+    redRoller:0,
+    blueRoller:0,
+    redTile:0,
+    blueTile:0,
+    discLimit:60,
+    rollerLimit:4,
+    tileLimit:28,
+    autoPoint:10,
     autoBackRed:0.2,
     autoBackBlue:0.2,
     autoWinner:"none",
@@ -114,106 +117,241 @@ Component({
     console.log(event.detail)
   },
 
-  changeRingNum: function (e){
-    let targetCase = e.currentTarget.id.substring(0,6)
-    let num = e.currentTarget.id.substring(6)
+  changeInput: function(e){
+    let targetCase = e.currentTarget.id
+    let currentDisc = this.data.redHG+this.data.redLG+this.data.blueHG+this.data.blueLG
+    let value = parseInt(e.detail)
+    switch(targetCase){
+        case "redInputHG":
+            if(!this.isInt(value) || value<0){
+                this.setData({
+                    redHG:0
+                })
+            } else if(currentDisc+value-this.data.redHG>this.data.discLimit){
+                this.setData({
+                    redHG:0
+                })
+                this.showExceed()
+            } else{
+                this.setData({
+                    redHG:value
+                })
+            }
+            break;
+        
+        case "blueInputHG":
+            if(!this.isInt(value) || value<0){
+                this.setData({
+                    blueHG:0
+                })
+            } else if(currentDisc+value-this.data.blueHG>this.data.discLimit){
+                this.setData({
+                    blueHG:0
+                })
+                this.showExceed()
+            } else{
+                this.setData({
+                    blueHG:value
+                })
+            }
+            break;
+
+        case "redInputLG":
+            if(!this.isInt(value) || value<0){
+                this.setData({
+                    redLG:0
+                })
+            } else if(currentDisc+value-this.data.redLG>this.data.discLimit){
+                this.setData({
+                    redLG:0
+                })
+                this.showExceed()
+            } else{
+                this.setData({
+                    redLG:value
+                })
+            }
+            break;
+
+        case "blueInputLG":
+            if(!this.isInt(value) || value<0){
+                this.setData({
+                    blueLG:0
+                })
+            } else if(currentDisc+value-this.data.blueLG>this.data.discLimit){
+                this.setData({
+                    blueLG:0
+                })
+                this.showExceed()
+            } else{
+                this.setData({
+                    blueLG:value
+                })
+            }
+            break;
+              
+        case "redInputTile":
+            if(!this.isInt(value) || value<0){
+                this.setData({
+                    redTile:0
+                })
+            } else if(value>this.data.tileLimit){
+                this.setData({
+                    redTile:0
+                })
+                this.showExceed()
+            } else{
+                this.setData({
+                    redTile:value
+                })
+            }
+            break;
+
+        case "blueInputTile":
+            if(!this.isInt(value) || value<0){
+                this.setData({
+                    blueTile:0
+                })
+            } else if(value>this.data.tileLimit){
+                this.setData({
+                    blueTile:0
+                })
+                this.showExceed()
+            } else{
+                this.setData({
+                    blueTile:value
+                })
+            }
+            break;
+    }  
+    this.updateTotalScore()
+  },
+
+  changeDisc: function (e){
+    let targetCase = e.currentTarget.id
+    let currentDisc = this.data.redHG+this.data.redLG+this.data.blueHG+this.data.blueLG
     switch(targetCase) {
-      case "redSub":
-        if(this.data.redRing[num]>0)
-        this.data.redRing[num] = this.data.redRing[num] - 1
-        this.setData({
-          redRing:this.data.redRing
-        })
-        break;
-      case "redAdd":
-        if(this.data.totalRing<this.data.ringLimit)
-        this.data.redRing[num] = this.data.redRing[num] + 1
-        this.setData({
-          redRing:this.data.redRing
-        })
-        break;
-      case "bluSub":
-        if(this.data.blueRing[num]>0)
-        this.data.blueRing[num] = this.data.blueRing[num] - 1
-        this.setData({
-          blueRing:this.data.blueRing
-        })
-        break;
-      case "bluAdd":
-        if(this.data.totalRing<this.data.ringLimit)
-        this.data.blueRing[num] = this.data.blueRing[num] + 1
-        this.setData({
-          blueRing:this.data.blueRing
-        })
-        break;
+        case "redSubHG":
+            if(this.data.redHG>0)
+            this.setData({
+                redHG:this.data.redHG-1
+            })
+            break;
+        case "redAddHG":
+            if(currentDisc<this.data.discLimit)
+            this.setData({
+                redHG:this.data.redHG+1
+            })
+            break;
+        case "blueSubHG":
+            if(this.data.blueHG>0)
+            this.setData({
+                blueHG:this.data.blueHG-1
+            })
+            break;
+        case "blueAddHG":
+            if(currentDisc<this.data.discLimit)
+            this.setData({
+                blueHG:this.data.blueHG+1
+            })
+            break;
+        case "redSubLG":
+            if(this.data.redLG>0)
+            this.setData({
+                redLG:this.data.redLG-1
+            })
+            break;
+        case "redAddLG":
+            if(currentDisc<this.data.discLimit)
+            this.setData({
+                redLG:this.data.redLG+1
+            })
+            break;
+        case "blueSubLG":
+            if(this.data.blueLG>0)
+            this.setData({
+                blueLG:this.data.blueLG-1
+            })
+            break;
+        case "blueAddLG":
+            if(currentDisc<this.data.discLimit)
+            this.setData({
+                blueLG:this.data.blueLG+1
+            })
+            break;
     }
     this.updateTotalScore()
   },
 
-  changeMG: function (e){
-    let targetCase = e.currentTarget.id.substring(0,6)
-    let num = e.currentTarget.id.substring(6)
+  isInt(value) {
+    var x;
+    return isNaN(value) ? !1 : (x = parseFloat(value), (0 | x) === x);
+  },
+
+  redInputHG(e){
+    console.log(e.detail)
+},
+
+  changeRoller: function (e){
+    let targetCase = e.currentTarget.id.substring(0)
+    let currentRoller = this.data.redRoller+this.data.blueRoller
     switch(targetCase) {
-      case "redSub":
-        if(this.data.redMG[num]>0)
-        this.data.redMG[num] = this.data.redMG[num] - 1
-        this.setData({
-          redMG:this.data.redMG
-        })
-        break;
-      case "redAdd":
-        if(this.data.totalMG<this.data.MGLimit && this.data.redMG[0]+this.data.redMG[1]<5)
-        this.data.redMG[num] = this.data.redMG[num] + 1
-        this.setData({
-          redMG:this.data.redMG
-        })
-        break;
-      case "bluSub":
-        if(this.data.blueMG[num]>0)
-        this.data.blueMG[num] = this.data.blueMG[num] - 1
-        this.setData({
-          blueMG:this.data.blueMG
-        })
-        break;
-      case "bluAdd":
-        if(this.data.totalMG<this.data.MGLimit && this.data.blueMG[0]+this.data.blueMG[1]<5)
-        this.data.blueMG[num] = this.data.blueMG[num] + 1
-        this.setData({
-          blueMG:this.data.blueMG
-        })
-        break;
+        case "redSub":
+            if(this.data.redRoller>0)
+            this.setData({
+                redRoller:this.data.redRoller-1
+            })
+            break;
+        case "redAdd":
+            if(currentRoller<this.data.rollerLimit)
+            this.setData({
+                redRoller:this.data.redRoller+1
+            })
+            break;
+        case "blueSub":
+            if(this.data.blueRoller>0)
+            this.setData({
+                blueRoller:this.data.blueRoller-1
+            })
+            break;
+        case "blueAdd":
+            if(currentRoller<this.data.rollerLimit)
+            this.setData({
+                blueRoller:this.data.blueRoller+1
+            })
+            break;
     }
     this.updateTotalScore()
   },
 
-  changeRobot: function (e){
-    let targetCase = e.currentTarget.id.substring(0,6)
 
+  changeTile: function (e){
+    let targetCase = e.currentTarget.id.substring(0)
     switch(targetCase) {
-      case "redSub":
-        if(this.data.redRobot>0)
-        this.setData({
-          redRobot:this.data.redRobot-1
-        })
-        break;
-      case "redAdd":
-        if(this.data.redRobot<2)
-        this.setData({
-          redRobot:this.data.redRobot+1
-        })
-        break;
-      case "bluSub":
-        if(this.data.blueRobot>0)
-        this.setData({
-          blueRobot:this.data.blueRobot-1
-        })
-        break;
-      case "bluAdd":
-        if(this.data.blueRobot<2)
-        this.setData({
-          blueRobot:this.data.blueRobot+1
-        })
-        break;
+        case "redSub":
+            if(this.data.redTile>0)
+            this.setData({
+                redTile:this.data.redTile-1
+            })
+            break;
+        case "redAdd":
+            if(this.data.redTile<this.data.tileLimit)
+            this.setData({
+                redTile:this.data.redTile+1
+            })
+            break;
+        case "blueSub":
+            if(this.data.blueTile>0)
+            this.setData({
+                blueTile:this.data.blueTile-1
+            })
+            break;
+        case "blueAdd":
+            if(this.data.blueTile<this.data.tileLimit)
+            this.setData({
+                blueTile:this.data.blueTile+1
+            })
+            break;
     }
     this.updateTotalScore()
   },
@@ -223,42 +361,29 @@ Component({
     let autoBlue = 0
     switch(this.data.autoWinner) {
       case "red":
-        autoRed = 6
+        autoRed = this.data.autoPoint
         break;
       
       case "blue":
-        autoBlue = 6
+        autoBlue = this.data.autoPoint
         break;
       
       case "both":
-        autoRed = 3
-        autoBlue = 3
+        autoRed = this.data.autoPoint/2
+        autoBlue = this.data.autoPoint/2
         break;
     }
     this.setData({
-      totalRing: this.data.redRing[0] + 
-      this.data.redRing[1] + 
-      this.data.redRing[2] +
-      this.data.blueRing[0] + 
-      this.data.blueRing[1] + 
-      this.data.blueRing[2],
-      totalMG: this.data.redMG[0] +
-      this.data.redMG[1] +
-      this.data.blueMG[0] +
-      this.data.blueMG[1],
-
-      redScore:this.data.redRing[0]*10 + 
-      this.data.redRing[1]*3 + 
-      this.data.redRing[2]*1 + 
-      this.data.redMG[0]*20 +
-      this.data.redMG[1]*40 +
-      this.data.redRobot*30+autoRed,
-      blueScore:this.data.blueRing[0]*10 + 
-      this.data.blueRing[1]*3 + 
-      this.data.blueRing[2]*1 + 
-      this.data.blueMG[0]*20 +
-      this.data.blueMG[1]*40 +
-      this.data.blueRobot*30+autoBlue
+      redScore:this.data.redHG*5 +
+      this.data.redLG+
+      this.data.redRoller*10 +
+      this.data.redTile*3 +
+      autoRed,
+      blueScore:this.data.blueHG*5 +
+      this.data.blueLG+
+      this.data.blueRoller*10 +
+      this.data.blueTile*3 +
+      autoBlue,
     })
 
   },
@@ -315,7 +440,7 @@ Component({
 
   open:async function(event){
     let downloadPath = 'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/'+ event.target.id;
-
+    // console.log(downloadPath)
     this.showBusy()
     wx.cloud.downloadFile({
       fileID: downloadPath,
@@ -359,6 +484,13 @@ Component({
     })
   },
 
+  showExceed:function(){
+    wx.showToast({
+      title: '得分物数量超过上限',
+      icon:"none",
+      duration: 2000
+    })
+  },
 
   switch1Change:function(e){
     console.log(e.detail.value)
@@ -372,14 +504,15 @@ Component({
     this.setData({
       redScore: 0,
       blueScore: 0,
-      redRing:[0,0,0],
-      blueRing:[0,0,0],
-      redMG:[0,0],
-      blueMG:[0,0],  
-      redRobot:0,
-      blueRobot:0,
-      totalRing:0,
-      totalMG:0,
+      redHG:0,
+      blueHG:0,
+      discLimit:60,
+      redLG:0,
+      blueLG:0,
+      redRoller:0,
+      blueRoller:0,
+      redTile:0,
+      blueTile:0,
       autoBackRed:0.2,
       autoBackBlue:0.2,
       autoWinner:"none",

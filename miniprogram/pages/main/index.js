@@ -127,13 +127,13 @@ Page({
   async addChance(){
 
     console.log(app.globalData.openid)
-    let old = await db.collection("rank").where({
+    let old = await db.collection("rank_spinup").where({
       _openid: app.globalData.openid
     }).get()
     let recordID = old.data[0]._id
     if(old.data.length>0){
       console.log(old.data[0].chance)
-      await db.collection('rank').doc(recordID).update({
+      await db.collection('rank_spinup').doc(recordID).update({
         data:{
           chance:old.data[0].chance+1
         }
