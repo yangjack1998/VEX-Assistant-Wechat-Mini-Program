@@ -4,12 +4,12 @@
 <button style="  margin-left:auto;  margin-right:auto;  width:50%;" type="default" plain="true" bindtap="submit" disabled="{{disable}}">查询</button>
 
 <view style="margin: 40rpx 20rpx;" hidden="{{hide}}">
-<view class="line"><text  style="color: #F6BE00;">队伍编号: </text><text>{{team_num2}}</text></view>
-<view class="line"><text  style="color: #F6BE00;">队伍名称: </text><text>{{team_name}}</text></view>
-<view class="line"><text  style="color: #F6BE00;">机器人名称: </text><text>{{robot_name}}</text></view>
-<view class="line"><text  style="color: #F6BE00;">学校/组织: </text><text>{{org}}</text></view>
-<view class="line"><text  style="color: #F6BE00;">国家/地区: </text><text>{{region}}</text></view>
-<view class="line"><text  style="color: #F6BE00;">城市: </text><text>{{city}}</text></view>
-<view class="line"><text  style="color: #F6BE00;">组别: </text><text>{{grade}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">队伍编号: </text><text>{{team_num2}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">队伍名称: </text><text>{{team_name}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">机器人名称: </text><text>{{robot_name}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">学校/组织: </text><text>{{org}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">国家/地区: </text><text>{{region}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">城市: </text><text>{{city}}</text></view>
+<view class="line"><text  style="color: #d92a2d;">组别: </text><text>{{grade}}</text></view>
 </view>
 </view>

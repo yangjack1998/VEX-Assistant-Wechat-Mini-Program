@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "latest",
     "node-fetch": "^3.2.0",
-    "wx-server-sdk": "~2.5.3",
-    "axios": "latest"
+    "robotevents-api": "^0.3.4",
+    "wx-server-sdk": "~2.5.3"
   }
 }

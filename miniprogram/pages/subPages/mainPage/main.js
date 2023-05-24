@@ -84,13 +84,11 @@ Component({
 
   lifetimes:{
     attached:async function(){
-        let all = await db.collection('ziliao').get()
+        let all = await db.collection('docs').get()
+        console.log(all)
         this.setData({
           ziliao:all.data
         })
-       
-        
-
     }
     
   },
@@ -439,7 +437,7 @@ changeLevel: function (e){
   },
 
   open:async function(event){
-    let downloadPath = 'cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/'+ event.target.id;
+    let downloadPath = event.target.id;
     // console.log(downloadPath)
     this.showBusy()
     wx.cloud.downloadFile({

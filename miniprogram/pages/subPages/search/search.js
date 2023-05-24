@@ -31,7 +31,9 @@ Component({
   methods:{
     submit(event){
       console.log("Search for team");
+      
       wx.cloud.callFunction({
+        config:{ env:'vex-assistant-4g9nkr8i0029c7fe'},
         // 云函数名称
         name: 'searchTeam',
         // 传给云函数的参数
@@ -40,8 +42,8 @@ Component({
         },
       })
       .then(res => {
-        console.log(res.result) // 3
-        let info = res.result.data;
+        console.log(res) // 3
+        let info = res.result;
         if(info.length<1){
           wx.showToast({
             title:'查询的队伍编号不存在，请重新输入',
@@ -55,13 +57,13 @@ Component({
         } else{
           this.setData({
             hide:false,
-            team_num2:this.data.team_num,
-            team_name:info[0].team_name,
-            robot_name:info[0].robot_name,
-            org:info[0].organization,
-            city:info[0].location.city,
-            region:info[0].location.country,
-            grade:info[0].grade,
+            team_num2:info.number,
+            team_name:info.team_name,
+            robot_name:info.robot_name,
+            org:info.organization,
+            city:info.location.city,
+            region:info.location.country,
+            grade:info.grade,
           })
           
         }

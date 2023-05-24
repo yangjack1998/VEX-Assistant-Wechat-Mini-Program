@@ -2,7 +2,7 @@
   <view class='row1' style="flex-direction:row;">
     <navigator class="tool" id="t1" url='../scoreTool/scoreTool' open-type='navigate'> -->
 <view class="totalcontainer">
-<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#F6BE00" style="background-color:white;">
+<van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#d92a2d" style="background-color:white;">
   <van-tab title="{{socringTool}}">
     <view class="container">
     <view class='row_0'>
@@ -57,13 +57,13 @@
 
     <view class='row_0'>
       <view class="title" >
-        <view class="subtitle">Triball In Goal</view>
+        <view class="subtitle">球门内粽球</view>
       </view>
     </view>  
 
      <view style = "margin-top:10rpx;">
           <view style="display:flex; flex-direction:row;align-items: center;">
-            <button class="sign_btn" bindtap="changeTriball" id="redSubHG" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeTriball" id="redSubHG" size="default"> - </button>
             <van-field
                 value="{{ redHG }}"
                 border="{{ false }}"
@@ -73,10 +73,11 @@
                 class="num_show"
                 bind:input="changeInput"
                 id="redInputHG"
+                size="large"
             />
-            <button class="sign_btn" bindtap="changeTriball" id="redAddHG" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeTriball" id="redAddHG" size="default"> + </button>
             <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
-            <button class="sign_btn" bindtap="changeTriball" id="blueSubHG" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeTriball" id="blueSubHG" size="default"> - </button>
             <van-field
                 value="{{ blueHG }}"
                 border="{{ true }}"
@@ -85,20 +86,21 @@
                 class="num_show"
                 bind:input="changeInput"
                 id="blueInputHG"
+                size="large"
             />
-            <button class="sign_btn" bindtap="changeTriball" id="blueAddHG" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeTriball" id="blueAddHG" size="default"> + </button>
         </view>
     </view>
 
     <view class='row_0'>
       <view class="title" >
-        <view class="subtitle">Triball In 进攻区</view>
+        <view class="subtitle">进攻区粽球</view>
       </view>
     </view>  
 
      <view style = "margin-top:10rpx;">
           <view style="display:flex; flex-direction:row;">
-            <button class="sign_btn" bindtap="changeTriball" id="redSubLG" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeTriball" id="redSubLG" size="default"> - </button>
             <van-field
                 value="{{ redLG }}"
                 border="{{ true }}"
@@ -107,10 +109,11 @@
                 class="num_show"
                 bind:input="changeInput"
                 id="redInputLG"
+                size="large"
             />
-            <button class="sign_btn" bindtap="changeTriball" id="redAddLG" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeTriball" id="redAddLG" size="default"> + </button>
             <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
-            <button class="sign_btn" bindtap="changeTriball" id="blueSubLG" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeTriball" id="blueSubLG" size="default"> - </button>
             <van-field
                 value="{{ blueLG }}"
                 border="{{ true }}"
@@ -119,8 +122,9 @@
                 class="num_show"
                 bind:input="changeInput"
                 id="blueInputLG"
+                size="large"
             />
-            <button class="sign_btn" bindtap="changeTriball" id="blueAddLG" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeTriball" id="blueAddLG" size="default"> + </button>
         </view>
     </view>
 
@@ -132,24 +136,24 @@
 
      <view style = "margin-top:10rpx;">
           <view style="display:flex; flex-direction:row;">
-            <button class="sign_btn" bindtap="changeLevel" id="redSub1" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeLevel" id="redSub1" size="default"> - </button>
             <button class="num_show" style="border: 1rpx solid rgba(0, 0, 0, 0.6);" size="default" hover-class="none">{{robotlevel[redLevel1]}}</button>
-            <button class="sign_btn" bindtap="changeLevel" id="redAdd1" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeLevel" id="redAdd1" size="default"> + </button>
             <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
-            <button class="sign_btn" bindtap="changeLevel" id="blueSub1" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeLevel" id="blueSub1" size="default"> - </button>
             <button class="num_show" style="border: 1rpx solid rgba(0, 0, 0, 0.6);" size="default" hover-class="none">{{robotlevel[blueLevel1]}}</button>
-            <button class="sign_btn" bindtap="changeLevel" id="blueAdd1" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeLevel" id="blueAdd1" size="default"> + </button>
         </view>
     </view>
     <view style = "margin-top:10rpx;">
           <view style="display:flex; flex-direction:row;">
-            <button class="sign_btn" bindtap="changeLevel" id="redSub2" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeLevel" id="redSub2" size="default"> - </button>
             <button class="num_show" style="border: 1rpx solid rgba(0, 0, 0, 0.6);" size="default" hover-class="none">{{robotlevel[redLevel2]}}</button>
-            <button class="sign_btn" bindtap="changeLevel" id="redAdd2" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeLevel" id="redAdd2" size="default"> + </button>
             <!-- <image style="height:auto;" mode="aspectFit" src="../../../images/highgoal.jpg"/> -->
-            <button class="sign_btn" bindtap="changeLevel" id="blueSub2" size="mini"> - </button>
+            <button class="sign_btn" bindtap="changeLevel" id="blueSub2" size="default"> - </button>
             <button class="num_show" style="border: 1rpx solid rgba(0, 0, 0, 0.6);" size="default" hover-class="none">{{robotlevel[blueLevel2]}}</button>
-            <button class="sign_btn" bindtap="changeLevel" id="blueAdd2" size="mini"> + </button>
+            <button class="sign_btn" bindtap="changeLevel" id="blueAdd2" size="default"> + </button>
         </view>
     </view>
 
