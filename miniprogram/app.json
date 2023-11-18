@@ -22,7 +22,7 @@
         "pages/openapi/cloudid/cloudid",
         "pages/im/im",
         "pages/im/room/room",
-        "pages/teamDigest"
+        "pages/teamDigest/teamDigest"
     ],
     "tabBar": {
         "custom": true,

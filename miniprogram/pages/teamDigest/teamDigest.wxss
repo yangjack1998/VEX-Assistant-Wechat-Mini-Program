@@ -1,1 +1,91 @@
-/* pages/teamDigest.wxss */
+.container {
+    padding: 20rpx;
+}
+
+.title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20rpx;
+}
+
+.input {
+    margin: 10rpx 0;
+}
+
+.submit-button {
+    width: 50%;
+    margin: 10rpx auto;
+}
+
+.team-info .line, .event-item, .match-item, .ranking-item, .award-item {
+    border-bottom: 1px solid #eee;
+    padding: 10rpx 0;
+}
+
+.label {
+    color: #d92a2d;
+    font-weight: bold;
+}
+
+.event-name, .match-name {
+    font-weight: bold;
+}
+
+.events, .matches-list, .rankings-list, .awards-list {
+    margin-top: 20rpx;
+}
+
+.ranking-item {
+    padding: 10rpx 0;
+    border-bottom: 1px solid #eee;
+}
+
+.ranking-detail {
+    margin-bottom: 5rpx;
+}
+
+.event-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0; /* 轻微的背景色 */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.event-name {
+    font-weight: bold; /* 加粗文字 */
+    color: #333; /* 文字颜色 */
+}
+
+.toggle-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease; /* 平滑的动画效果 */
+}
+
+/* 当事件展开时，箭头图标向上 */
+.event-expanded .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black; /* Change color as needed */
+    display: inline-block;
+    margin: 5px;
+  }
+
+  .arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid black; /* Change color as needed */
+    display: inline-block;
+    margin: 5px;
+  }
