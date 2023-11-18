@@ -131,7 +131,7 @@ Page({
 
   checkInput: async function (){
     const cloudRes = await wx.cloud.callFunction({
-     config:{ env:'vex-assistant-4g9nkr8i0029c7fe'},
+     config:{ env:'vex-assistant-1gwxsfv3ad6fda91'},
       name: 'checkString',
       data: {
         content:this.data.inputValue+this.data.quote

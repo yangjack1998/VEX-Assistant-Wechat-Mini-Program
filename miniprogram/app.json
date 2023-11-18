@@ -1,43 +1,47 @@
 {
-  "pages": [ 
-    "pages/main/index",
-    "pages/ziliao/ziliao",
-    "pages/mainPage/main",
-    "pages/ruleChoose/ruleChoose",
-    "pages/leaderboard/leaderboard",
-    "pages/ruleQuiz/ruleQuiz",
-    "pages/index/index",
-    "pages/rulePractice/rulePractice",
-    "pages/dataSet/dataSet",
-    "pages/test/test",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"    
-  ],
-  "tabBar": {
-    "custom": true,
-    "list": [{
-      "pagePath": "pages/mainPage/main",
-      "text": "组件"
-    }, {
-      "pagePath": "pages/ruleChoose/ruleChoose",
-      "text": "接口"
-    }]
-  },
-  "window": {
-    "backgroundColor": "#fff",
-    "navigationBarTitleText": "VEX Over Under 助手",
-    "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#d92a2d"
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/main/index",
+        "pages/ziliao/ziliao",
+        "pages/mainPage/main",
+        "pages/ruleChoose/ruleChoose",
+        "pages/leaderboard/leaderboard",
+        "pages/ruleQuiz/ruleQuiz",
+        "pages/index/index",
+        "pages/rulePractice/rulePractice",
+        "pages/dataSet/dataSet",
+        "pages/test/test",
+        "pages/userConsole/userConsole",
+        "pages/storageConsole/storageConsole",
+        "pages/databaseGuide/databaseGuide",
+        "pages/addFunction/addFunction",
+        "pages/deployFunctions/deployFunctions",
+        "pages/chooseLib/chooseLib",
+        "pages/openapi/openapi",
+        "pages/openapi/serverapi/serverapi",
+        "pages/openapi/callback/callback",
+        "pages/openapi/cloudid/cloudid",
+        "pages/im/im",
+        "pages/im/room/room",
+        "pages/teamDigest"
+    ],
+    "tabBar": {
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/mainPage/main",
+                "text": "组件"
+            },
+            {
+                "pagePath": "pages/ruleChoose/ruleChoose",
+                "text": "接口"
+            }
+        ]
+    },
+    "window": {
+        "backgroundColor": "#fff",
+        "navigationBarTitleText": "VEX Over Under 助手",
+        "navigationBarTextStyle": "white",
+        "navigationBarBackgroundColor": "#d92a2d"
+    },
+    "sitemapLocation": "sitemap.json"
 }

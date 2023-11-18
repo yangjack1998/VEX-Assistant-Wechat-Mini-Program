@@ -144,7 +144,7 @@ Page({
   onGetOpenid: function() {
     // 调用云函数
     wx.cloud.callFunction({
-      config:{ env:'vex-assistant-4g9nkr8i0029c7fe'},
+      config:{ env:'vex-assistant-1gwxsfv3ad6fda91'},
       name: 'login',
       data: {},
       success: res => {

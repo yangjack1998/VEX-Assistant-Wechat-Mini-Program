@@ -1,33 +1,46 @@
-.title{
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-  margin:15rpx;
-}
-
 .container {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  justify-content: flex-start;
-  padding: 0;
+    padding: 20rpx;
 }
 
-
-input{
-  text-align: center;
-  margin: 20rpx;
-  border-bottom: solid;
-  border-width: thin;
-  margin-left:auto;
-  margin-right:auto;
-  width:50%;
+.title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20rpx;
 }
 
+.input {
+    margin: 10rpx 0;
+}
 
+.submit-button {
+    width: 50%;
+    margin: 10rpx auto;
+}
 
+.team-info .line, .event-item, .match-item, .ranking-item, .award-item {
+    border-bottom: 1px solid #eee;
+    padding: 10rpx 0;
+}
 
+.label {
+    color: #d92a2d;
+    font-weight: bold;
+}
 
-.line{
-  margin-top: 15rpx;
+.event-name, .match-name {
+    font-weight: bold;
+}
+
+.events, .matches-list, .rankings-list, .awards-list {
+    margin-top: 20rpx;
+}
+
+.ranking-item {
+    padding: 10rpx 0;
+    border-bottom: 1px solid #eee;
+}
+
+.ranking-detail {
+    margin-bottom: 5rpx;
 }
