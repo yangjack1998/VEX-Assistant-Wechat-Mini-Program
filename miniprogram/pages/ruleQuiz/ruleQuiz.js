@@ -43,13 +43,13 @@ Page({
         })
 
         const MAX_LIMIT = 20
-        const countResult = await db.collection('spin_up_quiz').count()
+        const countResult = await db.collection('over_under_quiz').count()
         const total = countResult.total
         // 计算需分几次取
         const batchTimes = Math.ceil(total / 20)
-        let all = await (await db.collection('spin_up_quiz').get()).data
+        let all = await (await db.collection('over_under_quiz').get()).data
         for (let i = 1; i < batchTimes; i++) {
-            const temp = db.collection('spin_up_quiz').skip(i * MAX_LIMIT).get()
+            const temp = db.collection('over_under_quiz').skip(i * MAX_LIMIT).get()
             all = all.concat((await temp).data)
         }
 
@@ -70,7 +70,7 @@ Page({
 
 
 
-        //console.log(all);
+        console.log('[ALL]'+all);
         this.setData({
             fileName: this.data.pictures[this.data.index],
             picPath: "cloud://vexnews-f53mu.7665-vexnews-f53mu-1302123540/quizPics/" + this.data.pictures[this.data.index] + ".jpg"
@@ -155,20 +155,20 @@ Page({
             })
         } else {
             let question = this.data.questions[this.data.index]
-            let old = await db.collection("spinup_quiz_data").where({
+            let old = await db.collection("overunder_quiz_data").where({
                 question: question
             }).get()
             if (old.data.length > 0) {
                 this.setData({
                     recordID: old.data[0]._id,
                 })
-                db.collection("spinup_quiz_data").doc(this.data.recordID).update({
+                db.collection("overunder_quiz_data").doc(this.data.recordID).update({
                     data: {
                         count: _.inc(1)
                     }
                 })
             } else {
-                db.collection("spinup_quiz_data").add({
+                db.collection("overunder_quiz_data").add({
                     data:
                     {
                         question: question,
@@ -187,20 +187,20 @@ Page({
             })
         } else {
             let question = this.data.questions[this.data.index]
-            let old = await db.collection("spinup_quiz_data").where({
+            let old = await db.collection("overunder_quiz_data").where({
                 question: question
             }).get()
             if (old.data.length > 0) {
                 this.setData({
                     recordID: old.data[0]._id,
                 })
-                db.collection("spinup_quiz_data").doc(this.data.recordID).update({
+                db.collection("overunder_quiz_data").doc(this.data.recordID).update({
                     data: {
                         count: _.inc(1)
                     }
                 })
             } else {
-                db.collection("spinup_quiz_data").add({
+                db.collection("overunder_quiz_data").add({
                     data:
                     {
                         question: question,
@@ -219,20 +219,20 @@ Page({
             })
         } else {
             let question = this.data.questions[this.data.index]
-            let old = await db.collection("spinup_quiz_data").where({
+            let old = await db.collection("overunder_quiz_data").where({
                 question: question
             }).get()
             if (old.data.length > 0) {
                 this.setData({
                     recordID: old.data[0]._id,
                 })
-                db.collection("spinup_quiz_data").doc(this.data.recordID).update({
+                db.collection("overunder_quiz_data").doc(this.data.recordID).update({
                     data: {
                         count: _.inc(1)
                     }
                 })
             } else {
-                db.collection("spinup_quiz_data").add({
+                db.collection("overunder_quiz_data").add({
                     data:
                     {
                         question: question,
@@ -251,20 +251,20 @@ Page({
             })
         } else {
             let question = this.data.questions[this.data.index]
-            let old = await db.collection("spinup_quiz_data").where({
+            let old = await db.collection("overunder_quiz_data").where({
                 question: question
             }).get()
             if (old.data.length > 0) {
                 this.setData({
                     recordID: old.data[0]._id,
                 })
-                db.collection("spinup_quiz_data").doc(this.data.recordID).update({
+                db.collection("overunder_quiz_data").doc(this.data.recordID).update({
                     data: {
                         count: _.inc(1)
                     }
                 })
             } else {
-                db.collection("spinup_quiz_data").add({
+                db.collection("overunder_quiz_data").add({
                     data:
                     {
                         question: question,

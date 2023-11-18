@@ -51,7 +51,7 @@ Component({
         id:app.globalData.openid,
       })
       console.log(this.data.id)
-      let name = await db.collection("rank_spinup").where({
+      let name = await db.collection("rank_overunder").where({
         _openid: app.globalData.openid
       }).get()
       console.log(name)
@@ -95,13 +95,13 @@ Component({
    
     let that = this
     const MAX_LIMIT = 20
-    const countResult = await db.collection('rank_spinup').count()
+    const countResult = await db.collection('rank_overunder').count()
     const total = countResult.total
     // 计算需分几次取
     const batchTimes = Math.ceil(total / 20)
-    let all = await (await db.collection('rank_spinup').get()).data
+    let all = await (await db.collection('rank_overunder').get()).data
     for (let i = 1; i < batchTimes; i++) {
-      const temp = db.collection('rank_spinup').skip(i * MAX_LIMIT).get()
+      const temp = db.collection('rank_overunder').skip(i * MAX_LIMIT).get()
       all=all.concat((await temp).data)
     }
 

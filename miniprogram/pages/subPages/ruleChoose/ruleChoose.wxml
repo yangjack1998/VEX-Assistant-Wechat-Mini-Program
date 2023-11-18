@@ -5,10 +5,10 @@
 <van-tabs class="tabs" sticky swipeable animated bind:disabled="onClickDisabled" color="#d92a2d" style="background-color:white;">
   <van-tab class="tab" title="{{ruleQuiz}}">
     <view class="container">
-      <text class="title">VRC Spin Up 规则知识竞赛</text>
+      <text class="title">VRC Over Under 规则知识竞赛</text>
       <view class="tt">
         <text class="content" style="font-weight:bold">竞赛时间:\n</text>
-        <text class="content">2022年8月22日 - 2022年8月28日 \n</text>
+        <text class="content">2023年6月25日 - 2023年7月2日 \n</text>
         <text class="content" style="font-weight:bold">竞赛规则：\n</text>
         <text class="content">每次答题限时一分钟，答对一题得5分，答错不得分。排名将优先根据总得分排序。当多个用户的得分相同时，则会根据完成的先后顺序进行排名。每一用户初始有五次回答机会，分享小程序将获得额外机会，没有机会的情况下可以继续答题，但是分数不会被记入排行榜。\n\n</text>
         <text class="content">排名第一的同学将获得小程序排行榜的黄金广告位！\n\n</text>
@@ -19,10 +19,10 @@
       </view>
       <view class='row1' >
         <navigator class="tool" id="t1" url='../rulePractice/rulePractice' open-type='navigate'>
-          <button type="default" disabled="true" plain="true" >练习</button>
+          <button type="default" plain="true" >练习</button>
         </navigator>
         <navigator class="tool" id="t2" url='../ruleQuiz/ruleQuiz' open-type='navigate'>
-          <button type="default" disabled="true" plain="true">测验</button>
+          <button type="default" plain="true">测验</button>
         </navigator>
         <!-- <web-view src="https://mp.weixin.qq.com/s/bYdmUb3QGNTOHP-P2wsZsQ">微信</web-view> -->
       </view>

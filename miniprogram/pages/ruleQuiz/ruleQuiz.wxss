@@ -1,12 +1,12 @@
 /* ruleQuiz/ruleQuiz.wxss */
 button {
-  margin-top: 5%;
+  margin: 5%;font-size:medium;
 }
 
 .question{
   font-stretch: wider;
   width: 90%;
-  font-size: large;
+  font-size:medium;
   font-weight: bold;
   display:flex;
   justify-content:space-around;

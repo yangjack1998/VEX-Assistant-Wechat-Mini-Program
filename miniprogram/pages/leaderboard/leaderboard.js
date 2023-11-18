@@ -131,6 +131,7 @@ Page({
 
   checkInput: async function (){
     const cloudRes = await wx.cloud.callFunction({
+     config:{ env:'vex-assistant-4g9nkr8i0029c7fe'},
       name: 'checkString',
       data: {
         content:this.data.inputValue+this.data.quote
@@ -156,7 +157,7 @@ Page({
     let checkInput = await this.checkInput()
     if(checkInput) return
     let that = this
-    let old = await db.collection("rank_spinup").where({
+    let old = await db.collection("rank_overunder").where({
       name: this.data.inputValue
     }).get()
 
@@ -172,7 +173,7 @@ Page({
         })
         return
       }
-      await db.collection('rank_spinup')
+      await db.collection('rank_overunder')
         .add({
           data:
             {
@@ -189,48 +190,55 @@ Page({
           }
         
         })
-    } else if(this.data.old&&old.data[0].chance<=0){
-      await db.collection('rank_spinup').doc(this.data.recordID).update({
-        data:{
-          chance:that.data.chance
-        }
-      })
-      wx.redirectTo({
-        url: '../main/index'})
-    } else{
-      //console.log("update: "+this.data.id)
-      let oldScore = await (await db.collection('rank_spinup').doc(this.data.recordID).get()).data.score
-      let oldTime = await (await db.collection('rank_spinup').doc(this.data.recordID).get()).data.time
-      //console.log("oldScore: "+oldScore)
-      
-      await db.collection('rank_spinup').doc(this.data.recordID).update({
-        data:{
-          chance:that.data.chance
-        }
-      })
-      if(this.data.score>oldScore||(this.data.score==oldScore&&this.data.time<oldTime)){
-        await db.collection('rank_spinup').doc(this.data.recordID).update({
-          data:{
-            score:that.data.score,
-            time:that.data.time,
-            //timeShow:that.data.timeShow,
-           
-          },
-          success: function(res) {
-            //console.log(res.data)
-            wx.redirectTo({
-              url: '../main/index'})
-          },
-          fail: function(res){
-            console.log("fail")
+    } else if (this.data.old && old.data[0].chance <= 0) {
+        await db.collection('rank_overunder').doc(this.data.recordID).update({
+          data: {
+            chance: that.data.chance
           }
-
-        })
-      }  else{
-        wx.redirectTo({
-          url: '../main/index'})
+        });
+      
+        setTimeout(function() {
+          wx.redirectTo({
+            url: '../main/index'
+          });
+        }, 3500);
+      } else {
+        let oldScore = await (await db.collection('rank_overunder').doc(this.data.recordID).get()).data.score;
+        let oldTime = await (await db.collection('rank_overunder').doc(this.data.recordID).get()).data.time;
+      
+        await db.collection('rank_overunder').doc(this.data.recordID).update({
+          data: {
+            chance: that.data.chance
+          }
+        });
+      
+        if (this.data.score > oldScore || (this.data.score == oldScore && this.data.time < oldTime)) {
+          await db.collection('rank_overunder').doc(this.data.recordID).update({
+            data: {
+              score: that.data.score,
+              time: that.data.time,
+              //timeShow: that.data.timeShow,
+            },
+            success: function(res) {
+              setTimeout(function() {
+                wx.redirectTo({
+                  url: '../main/index'
+                });
+              }, 3500);
+            },
+            fail: function(res) {
+              console.log("fail");
+            }
+          });
+        } else {
+          setTimeout(function() {
+            wx.redirectTo({
+              url: '../main/index'
+            });
+          }, 3500);
+        }
       }
-    }
+      
   },
 
 
@@ -244,13 +252,13 @@ Page({
    
     let that = this
     const MAX_LIMIT = 20
-    const countResult = await db.collection('rank_spinup').count()
+    const countResult = await db.collection('rank_overunder').count()
     const total = countResult.total
     // 计算需分几次取
     const batchTimes = Math.ceil(total / 20)
-    let all = await (await db.collection('rank_spinup').get()).data
+    let all = await (await db.collection('rank_overunder').get()).data
     for (let i = 1; i < batchTimes; i++) {
-      const temp = db.collection('rank_spinup').skip(i * MAX_LIMIT).get()
+      const temp = db.collection('rank_overunder').skip(i * MAX_LIMIT).get()
       all=all.concat((await temp).data)
     }
     console.log(all)
@@ -273,7 +281,7 @@ Page({
 
   checkOld: async function () {
     console.log("tt"+this.data.id)
-    let old = await db.collection("rank_spinup").where({
+    let old = await db.collection("rank_overunder").where({
       _openid: this.data.id
     }).get()
     

@@ -33,14 +33,14 @@ Page({
    */
   onLoad: async function (options) {
     
-    let quiz = await db.collection("spin_up_quiz")
+    let quiz = await db.collection("over_under_quiz")
     .get()
 
-    let quiz2 = await db.collection("spin_up_quiz")
+    let quiz2 = await db.collection("over_under_quiz")
     .skip(20)
     .get()
 
-    let quiz3 = await db.collection("spin_up_quiz")
+    let quiz3 = await db.collection("over_under_quiz")
     .skip(40)
     .get()
 

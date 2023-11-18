@@ -19,7 +19,7 @@ Page({
         selected: false
       },
       {
-        name: "赛队查询(Beta)",
+        name: "赛队查询",
         iconPath: "search",
         selected: false
       }
@@ -37,7 +37,7 @@ Page({
       this.data.scrollTopArray[index] = 0;
       // item.isFirstLoad = true
     })
-
+    this.onGetOpenid()
   },
   /**
    * 生命周期函数--监听页面显示
@@ -127,18 +127,34 @@ Page({
   async addChance(){
 
     console.log(app.globalData.openid)
-    let old = await db.collection("rank_spinup").where({
+    let old = await db.collection("rank_overunder").where({
       _openid: app.globalData.openid
     }).get()
     let recordID = old.data[0]._id
     if(old.data.length>0){
       console.log(old.data[0].chance)
-      await db.collection('rank_spinup').doc(recordID).update({
+      await db.collection('rank_overunder').doc(recordID).update({
         data:{
           chance:old.data[0].chance+1
         }
       })
     }
-  }
+  },
+
+  onGetOpenid: function() {
+    // 调用云函数
+    wx.cloud.callFunction({
+      config:{ env:'vex-assistant-4g9nkr8i0029c7fe'},
+      name: 'login',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        app.globalData.openid = res.result.openid
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
+  },
 
 })
