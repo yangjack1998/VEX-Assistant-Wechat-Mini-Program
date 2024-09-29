@@ -84,7 +84,7 @@ Component({
 
   lifetimes:{
     attached:async function(){
-        let all = await db.collection('docs').get()
+        let all = await db.collection('ziliao').get()
         console.log(all)
         this.setData({
           ziliao:all.data

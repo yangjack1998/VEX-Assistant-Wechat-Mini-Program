@@ -89,3 +89,18 @@
     display: inline-block;
     margin: 5px;
   }
+
+  .no-data {
+    text-align: center;
+    color: #888;
+    padding: 20rpx;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+

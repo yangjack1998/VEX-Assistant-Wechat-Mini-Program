@@ -123,54 +123,65 @@ Page({
   },
 
 
-  chooseFile:async function(){
+  chooseFile: async function() {
     let checkInput = await this.checkInput()
-    if(checkInput) return
+    if (checkInput) return
 
     let that = this
-    wx.choose
     wx.chooseMessageFile({
-      count:1,
-      type:'file',
-      success:function(res){
-        wx.showLoading({
-          title: '上传中',
-        })
-        let filePath = res.tempFiles[0].path
-        
-        const cloudPath = 'ziliao/'+that.data.fileName + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-            db.collection('ziliao').add({
-                data: 
-                  {
-                    name: that.data.fileName,
-                    type: that.data.fileType,
-                    description:that.data.fileDescription,
-                    reviewd:false,
-                    cloudPath: cloudPath
-                  },
-                
-              })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
+        count: 1,
+        type: 'file',
+        success: function(res) {
+            wx.showLoading({
+                title: '上传中',
             })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-      },
-      fail: e => {
-        console.error(e)
-      }
+            let filePath = res.tempFiles[0].path
+            
+            const cloudPath = 'ziliao/' + that.data.fileName + filePath.match(/\.[^.]+?$/)[0]
+            wx.cloud.uploadFile({
+                cloudPath,
+                filePath,
+                success: res => {
+                    console.log('[上传文件] 成功：', res)
+                    db.collection('ziliao').add({
+                        data: {
+                            name: that.data.fileName,
+                            type: that.data.fileType,
+                            description: that.data.fileDescription,
+                            reviewed: false,
+                            cloudPath: cloudPath
+                        },
+                    })
+                    // 显示上传成功信息
+                    wx.showToast({
+                        icon: 'none',
+                        title: '上传成功，请等待管理员审核',
+                        duration:4000
+                    })
+                },
+                fail: e => {
+                    console.error('[上传文件] 失败：', e)
+                    // 显示上传失败信息
+                    wx.showToast({
+                        icon: 'none',
+                        title: '上传失败，请稍后再试',
+                        duration:4000
+                    })
+                },
+                complete: () => {
+                    wx.hideLoading()
+                }
+            })
+        },
+        fail: e => {
+            console.error(e)
+            // 可以选择在这里也显示一个错误信息
+            wx.showToast({
+                icon: 'none',
+                title: '选择文件失败'
+            })
+        }
     })
-  }
+}
+
 })

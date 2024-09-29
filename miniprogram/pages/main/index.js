@@ -13,11 +13,11 @@ Page({
         iconPath: "home-o",
         selected: true
       },
-      {
-        name: "规则测验",
-        iconPath: "records",
-        selected: false
-      },
+    //   {
+    //     name: "规则测验",
+    //     iconPath: "records",
+    //     selected: false
+    //   },
       {
         name: "赛队查询",
         iconPath: "search",

@@ -1,5 +1,5 @@
 <view class="container">
-    <view class="title">赛队查询</view>
+    <view class="title">2023-2024: VRC Over Under</view>
     <view class="team-info">
         <!-- 省略了队伍信息的展示部分 -->
     </view>
@@ -14,39 +14,52 @@
 
                 <!-- 使用 wx:if 来控制内容的显示 -->
                 <view wx:if="{{event.expanded}}">
-                    <!-- 排名列表 -->
-                    <view class="rankings-list">
-                        <block wx:for="{{event.rankings}}" wx:key="rankingId" wx:for-item="ranking">
-                            <view class="ranking-item">
-                                <view class="ranking-detail"><text>资格赛排名：{{ranking.rank}}</text></view>
-                                <view class="ranking-detail"><text>胜-平-负：{{ranking.wins}}-{{ranking.ties}}-{{ranking.losses}}</text></view>
-                                <view class="ranking-detail"><text>WP：{{ranking.wp}}</text></view>
-                                <view class="ranking-detail"><text>平均得分：{{ranking.average_points}}</text></view>
-                            </view>
-                        </block>
+                    <!-- 检查是否有数据 -->
+                    <view wx:if="{{event.rankings.length == 0 && event.awards.length == 0 && event.matches.length == 0}}">
+                        <view class="no-data">暂无比赛数据</view>
                     </view>
+                    <!-- 以下是有数据时显示的内容 -->
+                    <view wx:else>
+                        <!-- 排名列表 -->
+                        <view class="rankings-list">
+                            <block wx:for="{{event.rankings}}" wx:key="rankingId" wx:for-item="ranking">
+                                <view class="ranking-item">
+                                    <view class="ranking-detail"><text>资格赛排名：{{ranking.rank}}</text></view>
+                                    <view class="ranking-detail"><text>{{ranking.wins}}胜 - {{ranking.ties}}平 - {{ranking.losses}}负</text></view>
+                                    <view class="ranking-detail"><text>获胜分（WP）：{{ranking.wp}}</text></view>
+                                    <view class="ranking-detail"><text>平均得分：{{ranking.average_points}}</text></view>
+                                </view>
+                            </block>
+                        </view>
 
-                    <!-- 奖项列表 -->
-                    <view class="awards-list">
-                        <block wx:for="{{event.awards}}" wx:key="awardId" wx:for-item="award">
-                            <view class="award-item">
-                                <text>奖项：{{award.title}}</text>
-                            </view>
-                        </block>
-                    </view>
+                        <!-- 奖项列表 -->
+                        <view class="awards-list">
+                            <block wx:for="{{event.awards}}" wx:key="awardId" wx:for-item="award">
+                                <view class="award-item">
+                                    <text>奖项：{{award.title}}</text>
+                                </view>
+                            </block>
+                        </view>
 
-                    <!-- 比赛列表 -->
-                    <view class="matches-list">
-                        <block wx:for="{{event.matches}}" wx:key="name" wx:for-item="match">
-                            <view class="match-item">
-                                <text class="match-name">{{match.name}}</text>
-                                <block wx:for="{{match.alliances}}" wx:key="color" wx:for-item="alliance">
-                                    <view class="alliance">
-                                        <text>{{alliance.color === 'red' ? '红方' : '蓝方'}}：{{alliance.teams[0].team.name}}，{{alliance.teams[1].team.name}}，得分：{{alliance.score}}</text>
-                                    </view>
-                                </block>
-                            </view>
-                        </block>
+                        <!-- 比赛列表 -->
+                        <view class="matches-list">
+                            <block wx:for="{{event.matches}}" wx:key="name" wx:for-item="match">
+                                <view class="match-item">
+                                    <text class="match-name">{{match.name}}</text>
+                                    <block wx:for="{{match.alliances}}" wx:key="color" wx:for-item="alliance">
+                                        <view class="alliance">
+                                            <block wx:if="{{alliance.color === 'red'}}">
+                                                <text class="red">红方</text>
+                                            </block>
+                                            <block wx:else>
+                                                <text class="blue">蓝方</text>
+                                            </block>
+                                            ：{{alliance.teams[0].team.name}}，{{alliance.teams[1].team.name}}，得分：{{alliance.score}}
+                                        </view>
+                                    </block>
+                                </view>
+                            </block>
+                        </view>
                     </view>
                 </view>
             </view>

@@ -1,5 +1,5 @@
 <view class="container">
     <view class="title">赛队查询</view>
-    <input class="input" type='text' auto-focus="true" bindinput="bindKeyInput" placeholder="队伍编号" maxlength="10" />
-    <button class="submit-button" type="default" plain="true" bindtap="submit" disabled="{{disable}}">查询</button>
+    <input class="input" type='text' auto-focus="true" bindinput="bindKeyInput" placeholder="请输入队伍编号" maxlength="10" />
+    <button class="submit-button" type="default" bindtap="submit" disabled="{{disable}}">查询</button>
 </view>
