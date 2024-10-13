@@ -194,3 +194,7 @@ switch{
 .value-class {
   flex: none !important;
 }
+
+.button-blue {
+    color: Blue;
+}
