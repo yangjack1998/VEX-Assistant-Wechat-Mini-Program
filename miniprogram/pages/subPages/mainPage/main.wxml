@@ -7,7 +7,7 @@
     <view class="container">
     <view class='row_0'>
       <view class="title" >
-        <view style="color: rgba(250, 0, 0, 0.6)">红方</view>
+        <view style="color: rgba(250, 0, 0, 0.6)">红方123</view>
         <view style="color: rgba(0, 0, 250, 0.6)">蓝方</view>
       </view>
     </view>
